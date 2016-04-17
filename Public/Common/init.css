@@ -1,0 +1,88 @@
+@charset "utf-8";
+/*公共样式public*/
+body{
+	margin:0; padding:0; border:0; 
+	color: #333;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 14px;
+	line-height: 1.42857;
+	width: 100%;
+	height: 100%;
+}
+ul,ol{list-style:none;margin:0; padding:0;}
+
+a{text-decoration:none;color: #337ab7;}
+a:hover{color: blue;color: #23527c;text-decoration:underline;}
+
+.l{float:left;}
+.r{float:right;}
+.p5,.p10{
+	margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.p5{
+	height: 5px;
+}
+.p10{
+	height: 10px;
+}
+
+.w50{
+	width: 50px;
+}
+
+.h50{
+	height: 50px;
+}
+
+.lh50{
+	line-height: 50px;
+}
+
+.h300{
+	height: 300px;
+}
+
+.ncpy{
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	-khtml-user-select: none;
+	user-select: none; 
+}
+
+.hand{
+	cursor: pointer;
+}
+
+.deny{
+    cursor: not-allowed;
+}
+
+.hd {
+	overflow: hidden;
+}
+.at {
+	overflow: auto;
+}
+.atx {
+	overflow-x: auto;
+	overflow-y: hidden;
+}
+.aty {
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+.ds{
+	display: none;
+}
+.clear{
+	clear: both;
+}
+.red{
+	color: red;
+}
+.txt-center{
+	text-align:center;
+}

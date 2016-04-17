@@ -1,0 +1,57 @@
+@charset "utf-8";
+/*头部*/
+.boxheader{
+	background: rgba(0, 0, 0, 0) url("images/header.jpg") repeat-x scroll 0 -1px;
+	height: 50px;
+    overflow: hidden;
+}
+.logo {
+    left: 15px;
+    line-height: 24px;
+    position: absolute;
+    top: 14px;
+}
+.logo a{
+   	color: #333;
+    font-family: "微软雅黑","Helvetica Neue",​Helvetica,​Arial,​sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+
+}
+.logo a:hover{text-decoration:none;}
+.tonav {
+    line-height: 28px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.tonav a{
+	margin: 0 5px;
+}
+/*主体*/
+.boxman{
+
+}
+/*主体左边*/
+.boxsidebar {
+    width: 130px;
+    border-right: 1px solid #adadad;
+}
+.boxsidebarhide{
+    height: 20px;
+     line-height: 16px;
+    background: #e6e6e6 none repeat scroll 0 0;
+    border-bottom: 1px solid #adadad;
+    text-align: center;
+}
+
+.boxsidebartree{
+
+}
+/*主体右边iframe容器*/
+.boxcontent{
+    
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}

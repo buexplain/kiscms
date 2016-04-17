@@ -1,0 +1,77 @@
+/*固定在上面的头部*/
+.ifheader{
+	position: fixed;
+	background: #fff;
+	width: 100%;
+	padding-right: 30px;
+}
+.ifheader table {
+	margin:0;
+}
+/*搜索栏容器*/
+.boxsearch{
+
+}
+.rowoption{
+	margin: 10px 5px 0 0; 
+}
+/*操作栏容器*/
+.boxoperation{
+	
+}
+.boxoperation a{
+    margin-left: 5px;
+}
+/*表头容器*/
+.boxtablehead{
+position: fixed;
+background: #fff;
+margin: 0;
+}
+/*操作按钮*/
+.handle a{
+    margin-right: 10px;
+}
+
+/*分页*/
+.page{
+
+}
+.pagenum{
+    height: 28px;
+    line-height: 28px;
+    margin-left: 10px;
+
+
+}
+.pagenum span.current,.pagenum a:hover {
+ 	background-color: #e6e6e6;
+    border-color: #adadad;
+    color: #333;
+
+}
+.pagenum a, .pagenum span {
+ 	border: 1px solid #adadad;
+    padding: 6px 10px;
+    text-align: center;
+     color: #555;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+.pagenum .end{
+    border-radius: 0 3px 3px 0;	
+}
+.pagesize,.pagetotal{
+	margin: 0 0 0 5px;
+	height: 28px;
+    line-height: 28px;
+}
+
+/*bootstarp*/
+.inline{
+    display: inline;
+    width: 50%;
+}
+/*树形下拉*/
+.tree-select{
+background:#eee;overflow-y: auto;margin-top:1px;border:1px solid #ccc;max-height: 350px;border-radius:3px;min-width: 210px;
+}

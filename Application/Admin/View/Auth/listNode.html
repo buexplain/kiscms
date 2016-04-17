@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<include file="Common:meta" />
+<include file="Common:css" />
+</head>
+<body>
+	<!--整个大容器-->
+	<div class="container-fluid" id="backtop">
+		<!--固定在顶部的容器-->
+		<div class="ifheader" id="ifheader">
+			<!--右侧的操作按钮栏-->
+			<include file="Common:btn" />
+		</div>
+		<!--内容容器-->
+		<div class="ifman clear" id="ifman">
+			<ul id="nodetree" class="ztree"></ul>
+		</div>
+	</div>
+	<include file="Common:javascript" />
+	<include file="Common:javascriptController" />
+	<script type="text/javascript">
+		<!--
+			var zNodes = {$result};
+			/**
+			 * 绑定 树形
+			 */
+			$(document).ready(function() {
+			    $.fn.zTree.init($("#nodetree"), setting, zNodes);
+			});
+		//-->
+	</script>
+</body>
+</html>

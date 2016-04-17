@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        上传表单
+    </title>
+    <script type="text/javascript" src="__PUBLIC__/Common/jquery.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Common/jquery.json.js"></script>
+    <script src="__PUBLIC__/Common/plupload/js/plupload.full.min.js"></script>
+    <style>
+        body,p{
+            padding: 5px;
+            margin: 0;
+            border: 0;
+            font-size: 12px;
+        }
+        a{text-decoration:none;}
+        .btn {
+            padding: 5px 10px;
+            border-radius:4px;
+            background-color: #fff;
+            border: 1px solid #adadad;
+            cursor: pointer;
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap;
+            font-size: 12px;
+            font-weight: 400px;
+        }
+        .btn:hover{
+            background-color: #e6e6e6;
+        }
+        .info{width: 100%;max-height: 230px;overflow: auto;}
+        table.gridtable {
+            font-family:verdana,arial,sans-serif;
+            font-size:12px;
+            color:#333333;
+            border-collapse:collapse;
+            width: 100%;
+        }
+        table.gridtable tr{
+            border-bottom: 1px solid #ccc;
+        }
+        table.gridtable td,table.gridtable th {
+            padding:8px;
+        }
+        .success{
+            color: rgb(20, 111, 56);
+        }
+        .error{
+            color: red;
+        }
+        .desc{
+            padding-left: 10px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" class="btn" id="browse" value="选择文件">
+    <input type="button" class="btn" id="upload-btn" value="开始上传">
+    <span class="desc"><notempty name="sizeFile">文件大小限制: {$sizeFile}</notempty></span>
+    <div class="info">
+        <table class="gridtable" id="file-list">
+        </table>
+    </div>
+    <script>
+        //实例化一个plupload上传对象
+        var uploader = new plupload.Uploader({
+            browse_button: 'browse',
+            url: '{$fileUploadUrl}',
+            flash_swf_url: '__PUBLIC__/Common/plupload/js/Moxie.swf',
+            silverlight_xap_url: '__PUBLIC__/Common/plupload/js/Moxie.xap',
+            multi_selection:{$moreFile},
+            filters: {
+                <notempty name="sizeFile">max_file_size:'{$sizeFile}',</notempty>
+                <notempty name="ext">
+                    mime_types:[
+                        {title :"files",extensions:"{$ext}"}
+                    ],
+                </notempty>
+                prevent_duplicates : true //不允许队列中存在重复文件
+            },
+            file_data_name:'plFile', //默认是 file
+            multipart_params:{
+                'fileKey': 'plFile' //指定$_FILES 中的key值
+            }
+        });
+        //初始化
+        uploader.init();
+        //选择文件后给添加到上传队列时触发的事件
+        uploader.bind('FilesAdded',function(up, files) {
+            var o = $('#file-list');
+            if(!{$moreFile}) {
+               o.html('');
+            }
+            for (var i = 0,len = files.length; i<len; i++) {
+                var file = files[i];
+                var html = '';
+                html += '<tr id="'+file.id+'">';
+                html += '    <td>'+file.name+'</td>';
+                html += '    <td>'+plupload.formatSize(file.size)+'</td>';
+                html += '    <td class="success"></td>';
+                html += '    <td><a href="javascript:;" onclick="removeFile(\''+file.id+'\')">移除</a></td>';
+                html += '</tr>';
+                o.append(html);
+            }
+            //console.log(up);
+        });
+        //上传过程中触发的事件
+        uploader.bind('UploadProgress',function(up,file) {
+            $("#"+file.id).find('td').eq(2).html(file.percent+'%').removeClass('error'); //显示进度
+        });
+        //单个文件上传完毕后触发的事件
+        uploader.bind('FileUploaded',function(up,file,responseObject){
+            //console.log(responseObject);
+            try{ //可能出错的代码
+                var result = $.json_decode(responseObject.response);
+                if(result.code == 0) {
+                    $("#"+file.id).find('td').eq(3).html('');
+                    parent.window.{$callBack}(result.data);
+                }else{
+                    showErr(file.id,result.msg);
+                }
+            }catch(error){ //出错后执行的代码
+                alert(error.name+': '+error.message);
+            }finally{ //有错没错都执行的代码
+
+            }
+        });
+        //错误提示
+        uploader.bind('Error',function(up, error) {
+            var file = error.file;
+            var html = 'code：'+error.code+'<br>HTTPStatus：'+error.status+'<br>message：'+error.message;
+            showErr(file.id,html);
+        });
+        //移除文件后触发的事件
+        uploader.bind('FilesRemoved',function(up,files){
+            var file = files[0];
+            $("#"+file.id).remove();
+        });
+        //上传按钮
+        $('#upload-btn').click(function() {
+            uploader.start(); //开始上传
+        });
+        //移除上传队列中的文件
+        function removeFile(id) {
+            uploader.removeFile(id);
+        }
+        //清空上传列表
+        function clearFileList() {
+            $("#file-list").find('tr').each(function(){
+                removeFile($(this).attr('id'));
+            });
+        }
+        //显示错误
+        function showErr(id,html) {
+            $("#"+id).find('td').eq(2).html(html).addClass('error');
+        }
+    </script>
+</body>
+</html>

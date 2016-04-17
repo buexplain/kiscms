@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<include file="Common:meta" />
+<include file="Common:css" />
+</head>
+<body>
+    <div class="container bg">
+        <include file="Common:nav" />
+        <div class="row clearfix">
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <foreach name="result" item="v">
+                    <h4>{$v.title}</h4>
+                    {$v.content}
+                </foreach>
+                <empty name="result"><p class="h20"></p><p class="text-muted">暂无数据</p></empty>
+            </div>
+            <include file="Common:sider" />
+        </div>
+    </div>
+    <include file="Common:footer" />
+    <include file="Common:javascript" />
+    <include file="Common:javascriptSyntaxHighlighter" />
+</body>
+</html>

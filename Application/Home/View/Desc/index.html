@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<include file="Common:meta" />
+<include file="Common:css" />
+</head>
+<body>
+    <div class="container bg">
+        <include file="Common:nav" />
+        <div class="row clearfix">
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <p class="h20"></p>
+				<h4>{$result.title}</h4>
+                <foreach name="result['ext_data']" item="v">
+                    <if condition="$v['field_name'] eq 'original_url'">
+                        <p class="text-muted">{$v.field_desc}：<a target="_blank" href="{$v.form_value_def}">{$v.form_value_def}</a></p>
+                    <else/>
+                        <p class="text-muted">{$v.field_desc}：{$v.form_value_def}</p>
+                    </if>
+                </foreach>
+                {$result.content}
+            </div>
+            <include file="Common:sider" />
+        </div>
+    </div>
+    <include file="Common:footer" />
+    <include file="Common:javascript" />
+    <include file="Common:javascriptSyntaxHighlighter" />
+</body>
+</html>

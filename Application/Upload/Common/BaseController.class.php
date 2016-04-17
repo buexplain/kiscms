@@ -1,0 +1,66 @@
+<?php
+namespace Upload\Common;
+use Think\Controller;
+use \Org\Tool\Tool;
+/**
+ * 后台基础类
+ * @author buexplain
+ */
+class BaseController extends Controller{
+    public function _initialize(){
+        if(!Tool::isAdminLogin()) {
+            $result = array('error'=>1,'message'=>'缺省错误');
+            echo json_encode($result);
+            exit;
+        }
+    }
+    /**
+     * 操作错误跳转的快捷方法
+     */
+    protected function error($msg='error',$data='',$code=1) {
+        if(IS_AJAX) {
+            $tmp = $this->ajaxData($code,$msg,$data);
+            $this->ajaxReturn($tmp);
+        }
+        parent::error($msg,$data);
+    }
+    /**
+     * 操作成功跳转的快捷方法
+     * 第三个参数不用 无效
+     */
+    protected function success($data='',$msg='success',$void='') {
+        if(IS_AJAX) {
+            $tmp = $this->ajaxData(0,$msg,$data);
+            $this->ajaxReturn($tmp);
+        }
+        parent::success($msg,$data);
+    }
+    /**
+     * 封装ajax返回格式
+     */
+    protected function ajaxData($code,$msg,$data) {
+        return array(
+            'code'=> $code,
+            'msg' => $msg,
+            'data'=> $data
+        );
+    }
+    /**
+     * 开启事务
+     */
+    protected function startTrans() {
+        M()->startTrans();
+    }
+    /**
+     * 回滚事务
+     */
+    protected function rollback() {
+        M()->rollback();
+    }
+    /**
+     * 提交事务
+     */
+    protected function commit() {
+        M()->commit();
+    }
+}

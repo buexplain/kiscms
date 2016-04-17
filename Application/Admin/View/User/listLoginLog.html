@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<include file="Common:meta" />
+<include file="Common:css" />
+</head>
+<body>
+	<!--整个大容器-->
+	<div class="container-fluid" id="backtop">
+		<!--固定在顶部的容器-->
+		<div class="ifheader" id="ifheader">
+			<!--右侧的操作按钮栏-->
+			<include file="Common:btn" />
+		</div>
+		<!--内容容器-->
+		<div class="ifman clear" id="ifman">
+			<table class="table table-hover table-condensed fixedboxtablehead">
+				<tr>
+				    <th>
+				        登录IP
+				    </th>
+				    <th>
+				        登录时间
+				    </th>
+				    <th>
+				        登录接口
+				    </th>
+				</tr>
+				<foreach name='result' item='v'>
+				    <tr>
+					    <td>{$v.sign_ip}</td>
+					    <td>{$v.sign_time}</td>
+					    <td>{$sign_api[$v['sign_api']]}</td>
+				    </tr>
+			    </foreach>
+			</table>
+			<!--分页容器-->
+			<include file="Common:page" />
+		</div>
+	</div>
+	<include file="Common:javascript" />
+</body>
+</html>

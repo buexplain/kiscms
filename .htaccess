@@ -1,0 +1,12 @@
+<IfModule expires_module>
+	ExpiresActive On
+	<FilesMatch "\.(gif|jpg|png|js|css)$">
+	    ExpiresDefault "access plus 30 days"
+	</FilesMatch>
+</IfModule>
+<IfModule mod_rewrite.c>
+	 RewriteEngine on
+	 RewriteCond %{REQUEST_FILENAME} !-d
+	 RewriteCond %{REQUEST_FILENAME} !-f
+	 RewriteRule ^(.*)$ index.php?s=$1 [QSA,PT,L]
+</IfModule>

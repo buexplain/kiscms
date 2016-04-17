@@ -1,0 +1,15 @@
+<div class="col-xs-12 col-sm-6 col-md-8">
+    <foreach name="result" item="v">
+        <div class="column">
+            <h3>
+                <a target="_blank" href="/Home/Desc/index/doc_id/{$v.doc_id}.html" title="{$v.title}">{$v.title}</a>
+            </h3>
+            <div class="desc">
+                {$v.content|strip_tags}
+            </div>
+            <p class="text-muted">posted {$v.createtime}</p>
+        </div>
+    </foreach>
+    <empty name="result"><p class="h20"></p><p class="text-muted">暂无数据</p></empty>
+    <include file="Common:page" />
+</div>

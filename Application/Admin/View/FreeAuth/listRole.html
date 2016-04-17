@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<include file="Common:meta" />
+<include file="Common:css" />
+</head>
+<body>
+	<!--整个大容器-->
+	<div class="container-fluid" id="backtop">
+		<!--固定在顶部的容器-->
+		<div class="ifheader" id="ifheader">
+			<!--左侧的查找栏-->
+			<div class="boxsearch l h50 lh50">
+				<form action="" method="get">
+					<div class="rowoption l">
+						<select class="form-control input-sm l" name="search_type">
+							{$search_arr|htmlSelectOption=$search_type,###}
+						</select>
+					</div>
+					<div class="rowoption l">
+						<input type="text" class="form-control input-sm l" name="search_keywrod" placeholder="请输入关键词" value="{$search_keywrod}">
+					</div>
+					<div class="lh50 l">
+						<button type="submit" class="btn btn-default btn-sm">搜索</button>
+					</div>
+				</form>
+			</div>
+			<!--右侧的操作按钮栏-->
+			<include file="Common:btn" />
+		</div>
+		<!--内容容器-->
+		<div class="ifman clear" id="ifman">
+			<div class="h300 aty">
+				<table class="table table-hover table-condensed fixedboxtablehead">
+					<tr>
+						<th>
+					        <input type="checkbox" class="hand checkbox-all">
+					    </th>
+					    <th>
+					        ID
+					    </th>
+					    <th>
+					        角色名
+					    </th>
+					    <th>
+					        是否禁止
+					    </th>
+					    <th>
+					        备注
+					    </th>
+					</tr>
+					<foreach name='result' item='v'>
+					    <tr>
+				    		<if condition="$super_role_id eq $v['role_id']">
+				    			<td>
+				    				<input type="checkbox" disabled="disabled" value="{$v.role_id}">
+				    			</td>
+				    		<else/>
+				    			<td class="hand checkbox-one">
+				    				<input type="checkbox" {$v.checked} value="{$v.role_id}" role_name="{$v.role_name}">
+				    			</td>
+				    		</if>
+						    <td>{$v.role_id}</td>
+						    <td>{$v.role_name}</td>
+						    <td>{$v.ban_txt}</td>
+						    <td>{$v.remark}</td>
+					    </tr>
+				    </foreach>
+				</table>
+				<!--分页容器-->
+				<include file="Common:page" />
+			</div>
+			<!--提交按钮-->
+			<p class="clear p10"></p>
+			<a role="button" href="javascript:return_pop_layer_checked();" class="btn btn-default btn-sm">提交</a>
+		</div>
+	</div>
+	<include file="Common:javascript" />
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<include file="Common:meta" />
+<include file="Common:css" />
+</head>
+<body>
+	<!--整个大容器-->
+	<div class="container-fluid" id="backtop">
+		<!--固定在顶部的容器-->
+		<div class="ifheader" id="ifheader">
+			<!--右侧的操作按钮栏-->
+			<include file="Common:btn" />
+		</div>
+		<!--内容容器-->
+		<div class="ifman clear" id="ifman">
+			<table class="table table-hover table-condensed fixedboxtablehead">
+				<tr>
+				    <th>
+				        ID
+				    </th>
+				    <th>
+				        字段英文名
+				    </th>
+				    <th>
+				        字段中文名
+				    </th>
+				    <th>
+				    	默认值
+				    </th>
+				    <th>
+				    	表单类型
+				    </th>
+				    <th>
+				    	排序
+				    </th>
+				    <th>
+				        操作
+				    </th>
+				</tr>
+				<foreach name='result' item='v'>
+				    <tr>
+					    <td>{$v.doc_ext_field_id}</td>
+					    <td>{$v.field_name}</td>
+					    <td>{$v.field_desc}</td>
+					    <td>{$v.form_value}</td>
+					    <td>{$form_type[$v['form_type']]}</td>
+					    <td>{$v.sort}</td>
+					    <td class="handle">{$v.handle}</td>
+				    </tr>
+			    </foreach>
+			</table>
+		</div>
+	</div>
+	<include file="Common:javascript" />
+</body>
+</html>

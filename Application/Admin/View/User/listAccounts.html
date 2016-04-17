@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<include file="Common:meta" />
+<include file="Common:css" />
+</head>
+<body>
+	<!--整个大容器-->
+	<div class="container-fluid" id="backtop">
+		<!--固定在顶部的容器-->
+		<div class="ifheader" id="ifheader">
+			<!--左侧的查找栏-->
+			<div class="boxsearch l h50 lh50">
+				<form action="" method="get">
+					<!--关键词检索-->
+					<div class="rowoption l">
+						<select class="form-control input-sm l" name="search_type">
+							{$search_arr|htmlSelectOption=$search_type,###}
+						</select>
+					</div>
+					<div class="rowoption l">
+						<input type="text" class="form-control input-sm l" name="search_keywrod" placeholder="请输入关键词" value="{$search_keywrod}">
+					</div>
+					<!--注册时间检索-->
+					<div class="rowoption l">
+						<input type="text" class="form-control input-sm l laydatebox" name="search_start_time" placeholder="开始注册时间" value="{$search_start_time}" readonly="readonly">
+					</div>
+					<div class="rowoption l">
+						<input type="text" class="form-control input-sm l laydatebox" name="search_end_time" placeholder="结束注册时间" value="{$search_end_time}" readonly="readonly">
+					</div>
+					<!--用户状态检索-->
+					<div class="rowoption l">
+						<select class="form-control input-sm l" name="search_ban">
+							{$search_ban_arr|htmlSelectOption=$search_ban,###}
+						</select>
+					</div>
+					<div class="lh50 l">
+						<button type="submit" class="btn btn-default btn-sm">搜索</button>
+					</div>
+				</form>
+			</div>
+			<!--右侧的操作按钮栏-->
+			<include file="Common:btn" />
+		</div>
+		<!--内容容器-->
+		<div class="ifman clear" id="ifman">
+			<table class="table table-hover table-condensed fixedboxtablehead">
+				<tr>
+				    <th>
+				        ID
+				    </th>
+				    <th>
+				        邮箱
+				    </th>
+				    <th>
+				        注册时间
+				    </th>
+				    <th>
+				        注册IP
+				    </th>
+				    <th>
+				        状态
+				    </th>
+				    <th>
+				        操作
+				    </th>
+				</tr>
+				<foreach name='result' item='v'>
+				    <tr>
+					    <td>{$v.uid}</td>
+					    <td>{$v.email}</td>
+					    <td>{$v.regtime}</td>
+					    <td>{$v.regip}</td>
+					    <td>{$user_ban[$v['ban']]}</td>
+					    <td class="handle">{$v.handle}</td>
+				    </tr>
+			    </foreach>
+			</table>
+			<!--分页容器-->
+			<include file="Common:page" />
+		</div>
+	</div>
+	<include file="Common:javascript" />
+</body>
+</html>

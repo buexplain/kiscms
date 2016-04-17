@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<include file="Common:meta" />
+<include file="Common:css" />
+</head>
+<body>
+	<!--整个大容器-->
+	<div class="container-fluid" id="backtop">
+		<!--固定在顶部的容器-->
+		<div class="ifheader" id="ifheader">
+			<!--右侧的操作按钮栏-->
+			<include file="Common:btn" />
+		</div>
+		<!--内容容器-->
+		<div class="ifman clear" id="ifman">
+			<form action="/Admin/Doc/addDoc" method="post" id="set">
+				<ul class="nav nav-tabs">
+				    <li class="active">
+				        <a href="#article" data-toggle="tab">
+				            主体
+				        </a>
+				    </li>
+				    <li>
+				        <a href="#other" data-toggle="tab">
+				            其它
+				        </a>
+				    </li>
+				</ul>
+				<div class="tab-content">
+				    <div class="tab-pane active" id="article">
+				        <div class="form-group">
+				        	<p class="p5"></p>
+					        <textarea name="content" id="content">{$result.content}</textarea>
+					    </div>
+				    </div>
+				    <div class="tab-pane" id="other">
+				        <div class="form-group">
+					        <label>
+					            <span class="red">*&nbsp;&nbsp;</span>分类
+					        </label>
+					        <input type="text" class="form-control input-sm" placeholder="分类" id="cid_txt" required="required" readonly="readonly" value="{$result.cid_txt}" onclick="showCid();">
+					        <input type="hidden" value="{$result.cid}" name="cid">
+					        <div id="cidContent" style="display:none; position: fixed;">
+								<ul id="cidTree" class="ztree tree-select"></ul>
+							</div>
+					    </div>
+					    <div class="form-group">
+					        <label>
+					            <span class="red">*&nbsp;&nbsp;</span>标题
+					        </label>
+					        <input type="text" class="form-control input-sm" placeholder="标题" name="title" required="required" value="{$result.title}" autofocus="autofocus" autocomplete="off">
+					    </div>
+						<div class="form-group">
+						    <label>
+						        图片
+						    </label>
+						    <a class="btn btn-default btn-sm" href="javascript:void(0);" id="insertfile" role="button">
+						        选择图片
+						    </a>
+						    <input type="text" value="{$result.image}" name="image" id="image" placeholder="图片地址" class="form-control input-sm inline" autocomplete="off">
+						</div>
+						<div class="form-group">
+					        <label>
+					            关键词
+					        </label>
+					        <input type="text" class="form-control input-sm" placeholder="SEO关键词" name="keywords" value="{$result.keywords}" autocomplete="off">
+					    </div>
+				    </div>
+				</div>
+				<button type="submit" class="btn btn-default btn-sm">
+			        提交
+			    </button>
+			    <input type="hidden" name="doc_id" value="{$result.doc_id}">
+			</form>
+		</div>
+	</div>
+	<include file="Common:javascript" />
+	<include file="Common:javascriptEditor" />
+	<include file="Common:javascriptAction" />
+	<script type="text/javascript">
+		/*初始化分类树形*/
+		var zNodes = {$result.cid_tree};
+		$(document).ready(function(){
+			$.fn.zTree.init($("#cidTree"), setting, zNodes);
+		});
+		/*单图上传*/
+		var fileFormUrl = "{$fileFormUrl}";
+		var layerIndex = 0;
+		$('#insertfile').on('click',function(){
+			layerIndex = layer.open({
+				type: 2,
+				shade: false,
+				title: '上传图片',
+				area: ['480px', '160px'],
+				content: fileFormUrl+'?callBack=callBackImage&moreFile=0&ext=jpg,png,jpeg,gif,bmp'
+			});
+		});
+		function callBackImage (data) {
+			$("#image").val(data.url);
+			layer.close(layerIndex);
+		}
+		/*编辑器*/
+		var fileBrowseUrl = "{$fileBrowseUrl}";
+		CKEDITOR.editorConfig = function( config ) {
+		    config.height = 260;
+		    config.width = 'auto';
+		    config.extraPlugins = customPlug+','+codeHighLight;
+		    config.removeButtons = getCkeditorRemoveButtons();
+		    config.codeSnippet_theme = 'monokai_sublime';
+		    config.fileFormUrl = fileFormUrl;
+		    config.filebrowserBrowseUrl = fileBrowseUrl;
+		};
+        var editor = CKEDITOR.replace('content');
+		/*自定义提交数据方法*/
+		require.data_set = function(id) {
+		    var data = form.get(id);
+		    data.content = editor.getHtml();
+		    return data;
+		}
+	</script>
+</body>
+</html>

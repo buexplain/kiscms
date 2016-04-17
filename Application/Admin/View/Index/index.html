@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<meta name="renderer" content="webkit">
+<meta name="Generator" content="EditPlus®">
+<meta name="Author" content="buexplain">
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+<title>后台管理 - {$site.name}</title>
+<include file="Common:css" />
+<link rel="stylesheet" href="__PUBLIC__/{$Think.MODULE_NAME}/css/frame.css" /> 
+</head>
+<body>
+	<!--头部-->
+	<div class="boxheader hd">
+		<!--左侧logo-->
+		<div class="logo l">
+			<a href="" class="ncpy">Keep it simple</a>
+		</div>
+		<!--右侧按钮-->
+		<div class="tonav r">
+			<foreach name="right_top_menu" item="v">
+				<a href="{$v.1}" target="{$v.2}">{$v.0}</a>
+			</foreach>
+		</div>
+	</div>
+	<!--上下间隔p标签-->
+	<p class="p5" style="border-bottom: 1px solid #dedede;"></p>
+	<!--主体-->
+	<div class="boxman hd" id="boxman">
+		<!--左侧菜单-->
+		<div class="boxsidebar hd l" id="boxsidebar">
+			<!--上边三条杠杠-->
+			<div class="boxsidebarhide hd ncpy" id="boxsidebarhide">
+				|&nbsp;|&nbsp;|
+			</div>
+			<!--下边菜单容器-->
+			<div class="boxsidebartree aty" id="boxsidebartree">
+				<ul id="sidebartree" class="ztree"></ul>
+			</div>
+		</div>
+		<!--右侧内容-->
+		<iframe frameborder="0" src="{$main_url}" name="boxcontent" id="boxcontent" class="boxcontent l hd"></iframe>
+	</div>
+	<include file="Common:javascript" />
+	<script type="text/javascript" src="__PUBLIC__/{$Think.MODULE_NAME}/js/frame.js"></script>
+	<include file="Common:javascriptController" />
+	<script type="text/javascript">
+		<!--
+		zNodes = {$sidebartree};
+		$(document).ready(function(){
+			$.fn.zTree.init($("#sidebartree"), setting, zNodes);
+		});
+		//-->
+	</script>
+</body>
+</html>

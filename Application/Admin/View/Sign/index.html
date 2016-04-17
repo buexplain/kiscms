@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<meta name="renderer" content="webkit">
+<meta name="Generator" content="EditPlus®">
+<meta name="Author" content="buexplain">
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+<title>登录 - {$site.name}</title>
+<include file="Common:css" />
+<include file="Common:cssController" />
+</head>
+<body>
+	<!--整个大容器-->
+	<div class="container">
+		<!--登录表单-->
+		<form class="form-signin" action="/Admin/Sign/index" method="post" id="set">
+		    <h2 class="form-signin-heading">
+		        请登录
+		    </h2>
+		    <p class="p10"></p>
+		    <input type="text" name="email" value="" class="form-control" placeholder="邮箱" required="required" autofocus="autofocus">
+		    <p class="p10"></p>
+		    <input type="password" name="passwd" value="" class="form-control" placeholder="密码" required="required">
+		    <p class="p10"></p>
+		    <div>
+		    	<input type="text" name="verification" value="" class="form-control l" placeholder="验证码" required="required" autocomplete="off">
+		    	<img title="看不清,换一张" alt="验证码" class="r hand" id="verification_img" onclick="refresh_verification('/Admin/Sign/verify.html')" src="/Admin/Sign/verify.html">
+		    </div>
+		   	<p class="p10 clear"></p>
+		    <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="require.set(this); return false;">
+		        提交
+		    </button>
+		</form>
+		<p class="text-muted txt-center">Copyright © {:date('Y')} kiscms Powered by buexplain</p>
+	</div>
+	<include file="Common:javascript" />
+	<include file="Common:javascriptController" />
+</body>
+</html>

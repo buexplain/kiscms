@@ -1,0 +1,49 @@
+<div class="col-xs-6 col-md-4">
+    <div class="sider-block">
+        <h4 class="h-divider">检索</h4>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search" id="search">
+        </div>
+        <button type="submit" class="btn btn-default" onclick="baidusearch.init()">
+            Submit
+        </button>
+    </div>
+    <notempty name="tag">
+        <div class="sider-block">
+            <h4 class="h-divider">标签</h4>
+            <div class="tag">
+                <foreach name="tag" item="v">
+                    <a class="btn btn-default" href="/Home/List/index/cid/{$v.cid}.html" role="button">{$v.cname}</a>
+                </foreach>
+            </div>
+        </div>
+    </notempty>
+    <notempty name="timeFile">
+        <div class="sider-block">
+            <h4 class="h-divider">归档</h4>
+            <div class="tag">
+                <foreach name="timeFile" item="v">
+                    <p class="text-muted">
+                        <a href="/Home/TimeFile/index/time/{$v.t}.html">
+                            {$v.t}
+                        </a>
+                    </p>
+                </foreach>
+            </div>
+        </div>
+    </notempty>
+    <notempty name="friend">
+        <div class="sider-block">
+            <h4 class="h-divider">友链</h4>
+            <div class="tag">
+                <foreach name="friend" item="v">
+                    <p class="text-muted">
+                        <a target="_blank" href="{$v.url}">
+                            {$v.name}
+                        </a>
+                    </p>
+                </foreach>
+            </div>
+        </div>
+    </notempty>
+</div>

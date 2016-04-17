@@ -1,0 +1,35 @@
+<div class="header">
+    <h1><a href="/">{$site.name}</a></h1>
+    <notempty name="site['one_desc']">
+        <p class="text-muted">{$site.one_desc}</p>    
+    </notempty>
+</div>
+<div class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+            <span class="sr-only">
+                切换导航
+            </span>
+            <span class="icon-bar">
+            </span>
+            <span class="icon-bar">
+            </span>
+            <span class="icon-bar">
+            </span>
+        </button>
+        <a class="navbar-brand" href="/">
+            首页
+        </a>
+    </div>
+    <div class="collapse navbar-collapse" id="example-navbar-collapse">
+        <ul class="nav navbar-nav">
+            <foreach name="nav" item="v">
+                <li class="<if condition="$v['cid'] eq $cid">active</if>">
+                    <a href="/Home/{$v.route}/index/cid/{$v.cid}.html">
+                        {$v.cname}
+                    </a>
+                </li>    
+            </foreach>
+        </ul>
+    </div>
+</div>
