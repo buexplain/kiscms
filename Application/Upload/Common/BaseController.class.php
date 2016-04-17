@@ -9,9 +9,7 @@ use \Org\Tool\Tool;
 class BaseController extends Controller{
     public function _initialize(){
         if(!Tool::isAdminLogin()) {
-            $result = array('error'=>1,'message'=>'缺省错误');
-            echo json_encode($result);
-            exit;
+            die('Please login first');
         }
     }
     /**
