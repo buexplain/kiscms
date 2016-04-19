@@ -101,17 +101,21 @@
 			layer.close(layerIndex);
 		}
 		/*编辑器*/
-		var fileBrowseUrl = "{$fileBrowseUrl}";
-		CKEDITOR.editorConfig = function( config ) {
-		    config.height = 260;
-		    config.width = 'auto';
-		    config.extraPlugins = customPlug+','+codeHighLight;
-		    config.removeButtons = getCkeditorRemoveButtons();
-		    config.codeSnippet_theme = 'monokai_sublime';
-		    config.fileFormUrl = fileFormUrl;
-		    config.filebrowserBrowseUrl = fileBrowseUrl;
-		};
-        var editor = CKEDITOR.replace('content');
+		$(function(){
+			var iframe_h = parent.window.$("#boxcontent").height();
+			var editor_h = iframe_h - $("#ifheader").height() - $(".nav-tabs").eq(0).height() - $("button[type='submit']").height() - 150;
+			fileBrowseUrl = "{$fileBrowseUrl}";
+			CKEDITOR.editorConfig = function( config ) {
+			    config.height = editor_h;
+			    config.width = 'auto';
+			    config.extraPlugins = customPlug+','+codeHighLight;
+			    config.removeButtons = getCkeditorRemoveButtons();
+			    config.codeSnippet_theme = 'monokai_sublime';
+			    config.fileFormUrl = fileFormUrl;
+			    config.filebrowserBrowseUrl = fileBrowseUrl;
+			};
+			editor = CKEDITOR.replace('content');
+		});
 		/*自定义提交数据方法*/
 		require.data_set = function(id) {
 		    var data = form.get(id);
