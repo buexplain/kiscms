@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50547
 File Encoding         : 65001
 
-Date: 2016-04-17 16:45:40
+Date: 2016-04-24 15:28:27
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,17 +31,18 @@ CREATE TABLE `kis_doc` (
   `createtime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `edittime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '更新时间',
   `pushtime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '发布时间',
+  `views` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '浏览量',
   PRIMARY KEY (`doc_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='文档表';
 
 -- ----------------------------
 -- Records of kis_doc
 -- ----------------------------
-INSERT INTO `kis_doc` VALUES ('1', '2', '0', '2', 'kiscms是什么?', '', '', '&lt;p style=&quot;text-indent:2em;&quot;&gt;\n	Keep it simple！这个是一个简单的便于二次开发的web内容管理系统。大多数情况下，它不能满足您的需求。\n&lt;/p&gt;\n&lt;p style=&quot;text-indent:2em;&quot;&gt;\n	kiscms适合二次开发。它具备基本的模块：\n&lt;/p&gt;\n&lt;p style=&quot;text-indent:2em;&quot;&gt;\n	1、用户模块\n&lt;/p&gt;\n&lt;p style=&quot;text-indent:2em;&quot;&gt;\n	2、权限模块\n&lt;/p&gt;\n&lt;p style=&quot;text-indent:2em;&quot;&gt;\n	3、文档模块\n&lt;/p&gt;', '2016-02-24 15:48:35', '2016-03-06 20:02:44', '2016-02-24 15:48:46');
-INSERT INTO `kis_doc` VALUES ('2', '2', '0', '2', '我们为什么需要它?', '', '', '&lt;p style=&quot;text-indent:2em;&quot;&gt;\n	网站的开发需要做大量的工作，为了加快项目进度，我们通常会用上框架技术，甚至是一些现成的项目，进行二次开发。\n&lt;/p&gt;\n&lt;p style=&quot;text-indent:2em;&quot;&gt;\n	kiscms是一个工作进度介于框架与现成项目之间的产品。用它做二次开发，可以减少我们搭建框架、编写基本模块的工作量，加快项目进度。\n&lt;/p&gt;', '2016-02-24 16:32:50', '2016-02-29 16:24:28', '2016-02-24 16:33:02');
-INSERT INTO `kis_doc` VALUES ('3', '2', '0', '2', '它有什么优势?', '', '', '&lt;p style=&quot;text-indent:2em;&quot;&gt;\n	1、kiscms采用了ThinkPHP、Bootstrap、Layer、Laydate、Jquery、Ckeditor、Plupload等优秀的框架与库，它们可以极大的提高我们的项目质量。\n&lt;/p&gt;\n&lt;p style=&quot;text-indent:2em;&quot;&gt;\n	2、简明规范的数据库表设计，方便我们在二次开发的时候进行大刀阔斧的增改。\n&lt;/p&gt;\n&lt;p style=&quot;text-indent:2em;&quot;&gt;\n	3、简洁的后台界面，就一个字“高颜值”！\n&lt;/p&gt;', '2016-02-24 16:35:21', '2016-04-16 23:05:13', '2016-02-26 23:49:23');
-INSERT INTO `kis_doc` VALUES ('4', '1', '0', '2', '如何获取它?', '', '', '&lt;p style=&quot;text-indent:2em;&quot;&gt;\n	kiscms程序完全遵循MIT（The MIT License）开源协议。&lt;a href=&quot;https://github.com/buexplain/kiscms/archive/master.zip&quot;&gt;下载&lt;/a&gt; \n&lt;/p&gt;', '2016-02-28 19:53:25', '2016-03-13 14:56:28', '2016-02-28 19:53:39');
-INSERT INTO `kis_doc` VALUES ('5', '1', '0', '2', '其它', '', '', '&lt;p style=&quot;text-indent:2em;&quot;&gt;\n	kiscms QQ交流群：89292141\n&lt;/p&gt;\n&lt;p style=&quot;text-indent:2em;&quot;&gt;\n	建议安装环境： Linux + Apache + PHP or Linux + Nginx + PHP\n&lt;/p&gt;\n&lt;p style=&quot;text-indent:2em;&quot;&gt;\n	安装步骤：\n&lt;/p&gt;\n&lt;p style=&quot;text-indent:2em;&quot;&gt;\n	1、导入（工具：phpmyadmin） kiscms.sql\n&lt;/p&gt;\n&lt;p style=&quot;text-indent:2em;&quot;&gt;\n	2、配置数据库连接文件 Application/Common/Conf/db.php\n&lt;/p&gt;\n&lt;p style=&quot;text-indent:2em;&quot;&gt;\n	3、配置网站根目录到 www\n&lt;/p&gt;\n&lt;p style=&quot;text-indent:2em;&quot;&gt;\n	4、进入后台更改密码，后台地址：http://域名/Admin/Sign/index.html\n&lt;/p&gt;\n&lt;p style=&quot;text-indent:2em;&quot;&gt;\n	后台登录帐号，将其中的#去掉：\n&lt;/p&gt;\n&lt;p style=&quot;text-indent:2em;&quot;&gt;\n	admin#@admin.c#om&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 12345678\n&lt;/p&gt;\n&lt;p style=&quot;text-indent:2em;&quot;&gt;\n	buexplain#@163.c#om&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 12345678\n&lt;/p&gt;\n&lt;p style=&quot;text-indent:2em;&quot;&gt;\n	guest#@guest.c#om&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 12345678\n&lt;/p&gt;\n&lt;p style=&quot;text-indent:2em;&quot;&gt;\n	&lt;br /&gt;\n&lt;/p&gt;', '2016-02-28 19:54:15', '2016-03-13 14:49:19', '2016-02-28 19:54:22');
+INSERT INTO `kis_doc` VALUES ('1', '2', '0', '2', 'kiscms是什么?', '', '', '&lt;p&gt;Keep it simple!这个是一个简单的便于二次开发的web内容管理系统。大多数情况下，它不能满足您的需求。&lt;/p&gt;\n\n&lt;p&gt;kiscms适合二次开发。它具备基本的模块：&lt;/p&gt;\n\n&lt;p&gt;1、用户模块&lt;/p&gt;\n\n&lt;p&gt;2、权限模块&lt;/p&gt;\n\n&lt;p&gt;3、文档模块&lt;/p&gt;\n', '2016-02-24 15:48:35', '2016-04-24 15:18:21', '2016-02-24 15:48:46', '0');
+INSERT INTO `kis_doc` VALUES ('2', '2', '0', '2', '我们为什么需要它?', '', '', '&lt;p&gt;网站的开发需要做大量的工作，为了加快项目进度，我们通常会用上框架技术，甚至是一些现成的项目，进行二次开发。&lt;/p&gt;\n\n&lt;p&gt;kiscms是一个工作进度介于框架与现成项目之间的产品。用它做二次开发，可以减少我们搭建框架、编写基本模块的工作量，加快项目进度。&lt;/p&gt;\n', '2016-02-24 16:32:50', '2016-04-24 15:18:34', '2016-02-24 16:33:02', '1');
+INSERT INTO `kis_doc` VALUES ('3', '2', '0', '2', '它有什么优势?', '', '', '&lt;p&gt;1、kiscms采用了ThinkPHP、Bootstrap、Layer、Laydate、Jquery、Ckeditor、Webuploader等优秀的框架与库，它们可以极大的提高我们的项目质量。&lt;/p&gt;\n\n&lt;p&gt;2、简明规范的数据库表设计，方便我们在二次开发的时候进行大刀阔斧的增改。&lt;/p&gt;\n\n&lt;p&gt;3、简洁的后台界面，就一个字&amp;ldquo;高颜值&amp;rdquo;!&lt;/p&gt;\n', '2016-02-24 16:35:21', '2016-04-24 15:18:48', '2016-02-26 23:49:23', '1');
+INSERT INTO `kis_doc` VALUES ('4', '1', '0', '2', '如何获取它?', '', '', '&lt;p&gt;kiscms程序完全遵循MIT(The MIT License)开源协议。&lt;a href=&quot;https://github.com/buexplain/kiscms/archive/master.zip&quot; target=&quot;_blank&quot;&gt;下载&lt;/a&gt;&lt;/p&gt;\r\n', '2016-02-28 19:53:25', '2016-04-23 18:46:41', '2016-02-28 19:53:39', '0');
+INSERT INTO `kis_doc` VALUES ('5', '1', '0', '2', '其它', '', '', '&lt;p&gt;kiscms QQ交流群：89292141&lt;/p&gt;\n\n&lt;p&gt;建议安装环境： Linux + Apache + PHP or Linux + Nginx + PHP&lt;/p&gt;\n\n&lt;p&gt;安装步骤：&lt;/p&gt;\n\n&lt;p&gt;1、导入(工具：phpmyadmin) kiscms.sql&lt;/p&gt;\n\n&lt;p&gt;2、配置数据库连接文件 Application/Common/Conf/db.php&lt;/p&gt;\n\n&lt;p&gt;3、配置网站根目录到 www&lt;/p&gt;\n\n&lt;p&gt;4、进入后台更改密码，后台地址：http://域名/Admin/Sign/index.html&lt;/p&gt;\n\n&lt;p&gt;后台登录帐号，将其中的#去掉：&lt;/p&gt;\n\n&lt;p&gt;admin#@admin.c#om 12345678&lt;/p&gt;\n\n&lt;p&gt;buexplain#@163.c#om 12345678&lt;/p&gt;\n\n&lt;p&gt;guest#@guest.c#om 12345678&lt;/p&gt;\n', '2016-02-28 19:54:15', '2016-04-24 15:18:06', '2016-04-23 23:06:53', '5');
 
 -- ----------------------------
 -- Table structure for kis_doc_category
@@ -102,11 +103,12 @@ CREATE TABLE `kis_doc_ext` (
   `ext_name` varchar(50) NOT NULL DEFAULT '' COMMENT '扩展名',
   `sort` smallint(6) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   PRIMARY KEY (`doc_ext_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文档扩展表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='文档扩展表';
 
 -- ----------------------------
 -- Records of kis_doc_ext
 -- ----------------------------
+INSERT INTO `kis_doc_ext` VALUES ('1', '文章', '0');
 
 -- ----------------------------
 -- Table structure for kis_doc_ext_field
@@ -121,11 +123,12 @@ CREATE TABLE `kis_doc_ext_field` (
   `form_type` varchar(50) NOT NULL DEFAULT '' COMMENT '表单类型 select=下拉框 checkbox=多选框 radio=单选框 date=日期框 text=文本框 textarea=文本域',
   `sort` smallint(6) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   PRIMARY KEY (`doc_ext_field_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文档扩展字段表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='文档扩展字段表';
 
 -- ----------------------------
 -- Records of kis_doc_ext_field
 -- ----------------------------
+INSERT INTO `kis_doc_ext_field` VALUES ('1', '1', 'ourl', 'article url', '', 'text', '0');
 
 -- ----------------------------
 -- Table structure for kis_doc_ext_value
@@ -142,6 +145,24 @@ CREATE TABLE `kis_doc_ext_value` (
 
 -- ----------------------------
 -- Records of kis_doc_ext_value
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for kis_file
+-- ----------------------------
+DROP TABLE IF EXISTS `kis_file`;
+CREATE TABLE `kis_file` (
+  `md5` char(32) NOT NULL DEFAULT '' COMMENT '文件md5值',
+  `oname` varchar(50) NOT NULL DEFAULT '' COMMENT '文件原始名称',
+  `dir` varchar(200) NOT NULL DEFAULT '' COMMENT '文件磁盘路径',
+  `ext` char(5) NOT NULL DEFAULT '' COMMENT '文件格式',
+  `size` int(10) unsigned NOT NULL COMMENT '文件大小',
+  `createtime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  PRIMARY KEY (`md5`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文件登记表';
+
+-- ----------------------------
+-- Records of kis_file
 -- ----------------------------
 
 -- ----------------------------
@@ -385,7 +406,7 @@ CREATE TABLE `kis_usign` (
   `sign_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '登录时间',
   `sign_api` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '登录入口 1=管理后台',
   PRIMARY KEY (`usign_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='用户登录日志';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='用户登录日志';
 
 -- ----------------------------
 -- Records of kis_usign
@@ -395,3 +416,10 @@ INSERT INTO `kis_usign` VALUES ('2', '1', '127.0.0.1', '2016-03-26 11:41:42', '1
 INSERT INTO `kis_usign` VALUES ('3', '1', '127.0.0.1', '2016-04-04 15:37:17', '1');
 INSERT INTO `kis_usign` VALUES ('4', '1', '127.0.0.1', '2016-04-16 23:04:27', '1');
 INSERT INTO `kis_usign` VALUES ('5', '1', '127.0.0.1', '2016-04-17 16:36:38', '1');
+INSERT INTO `kis_usign` VALUES ('6', '1', '127.0.0.1', '2016-04-17 17:08:47', '1');
+INSERT INTO `kis_usign` VALUES ('7', '1', '127.0.0.1', '2016-04-18 20:45:03', '1');
+INSERT INTO `kis_usign` VALUES ('8', '1', '127.0.0.1', '2016-04-19 19:40:45', '1');
+INSERT INTO `kis_usign` VALUES ('9', '2', '127.0.0.1', '2016-04-20 19:39:05', '1');
+INSERT INTO `kis_usign` VALUES ('10', '1', '127.0.0.1', '2016-04-21 21:14:19', '1');
+INSERT INTO `kis_usign` VALUES ('11', '1', '127.0.0.1', '2016-04-22 19:35:24', '1');
+INSERT INTO `kis_usign` VALUES ('12', '1', '127.0.0.1', '2016-04-22 23:01:42', '1');
