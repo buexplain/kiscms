@@ -1,7 +1,7 @@
 <div class="header">
-    <h1><a href="/">{$site.name}</a></h1>
+    <p class="text-muted title">{$site.name}</p>
     <notempty name="site['one_desc']">
-        <p class="text-muted">{$site.one_desc}</p>    
+        <p class="text-muted">{$site.one_desc}</p>
     </notempty>
 </div>
 <div class="navbar navbar-default" role="navigation">
@@ -17,7 +17,7 @@
             <span class="icon-bar">
             </span>
         </button>
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand <if condition="0 eq $cid && 0 eq $doc_id && $time eq ''">active</if>" href="/">
             首页
         </a>
     </div>
@@ -28,7 +28,7 @@
                     <a href="/Home/{$v.route}/index/cid/{$v.cid}.html">
                         {$v.cname}
                     </a>
-                </li>    
+                </li>
             </foreach>
         </ul>
     </div>

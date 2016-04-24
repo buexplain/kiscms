@@ -92,8 +92,8 @@
 				type: 2,
 				shade: false,
 				title: '上传图片',
-				area: ['480px', '160px'],
-				content: fileFormUrl+'?callBack=callBackImage&moreFile=0&ext=jpg,png,jpeg,gif,bmp'
+				area: ['480px', '180px'],
+				content: fileFormUrl+'?callBack=callBackImage&multiple=0&extensions=image,jpg,png,jpeg,gif,bmp'
 			});
 		});
 		function callBackImage (data) {
@@ -101,6 +101,7 @@
 			layer.close(layerIndex);
 		}
 		/*编辑器*/
+		var editor;
 		$(function(){
 			var iframe_h = parent.window.$("#boxcontent").height();
 			var editor_h = iframe_h - $("#ifheader").height() - $(".nav-tabs").eq(0).height() - $("button[type='submit']").height() - 150;
@@ -115,13 +116,13 @@
 			    config.filebrowserBrowseUrl = fileBrowseUrl;
 			};
 			editor = CKEDITOR.replace('content');
+			/*自定义提交数据方法*/
+			require.data_set = function(id) {
+			    var data = form.get(id);
+			    data.content = editor.getData();
+			    return data;
+			}
 		});
-		/*自定义提交数据方法*/
-		require.data_set = function(id) {
-		    var data = form.get(id);
-		    data.content = editor.getHtml();
-		    return data;
-		}
 	</script>
 </body>
 </html>

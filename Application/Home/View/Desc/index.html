@@ -8,16 +8,15 @@
     <div class="container bg">
         <include file="Common:nav" />
         <div class="row clearfix">
-            <div class="col-xs-12 col-sm-6 col-md-8">
-                <p class="h20"></p>
-				<h4>{$result.title}</h4>
-                <foreach name="result['ext_data']" item="v">
-                    <if condition="$v['field_name'] eq 'original_url'">
-                        <p class="text-muted">{$v.field_desc}：<a target="_blank" href="{$v.form_value_def}">{$v.form_value_def}</a></p>
-                    <else/>
+            <div class="col-xs-12 col-sm-6 col-md-8 article">
+                <div class="post-meta">
+    				<h1>{$result.title}</h1>
+                    <p class="text-muted ">views：{$result.views}</p>
+                    <p class="text-muted ">posted：{$result.createtime}</p>
+                    <foreach name="result['ext_data']" item="v">
                         <p class="text-muted">{$v.field_desc}：{$v.form_value_def}</p>
-                    </if>
-                </foreach>
+                    </foreach>
+                </div>
                 {$result.content}
             </div>
             <include file="Common:sider" />

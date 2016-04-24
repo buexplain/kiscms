@@ -1,7 +1,6 @@
 <?php
 namespace Home\Common;
 use Common\Controller\BaseController;
-use \Org\Tool\Tool;
 /**
  * Home基础控制器
  * @author buexplain
@@ -13,8 +12,9 @@ class HomeController extends BaseController{
         $this->assign('tag',$this->tag());
         $this->assign('friend',$this->friend());
         $this->assign('cid',I('get.cid',0,'intval'));
+        $this->assign('doc_id',I('get.doc_id',0,'intval'));
+        $this->assign('time',I('get.time',''));
         $this->assign('timeFile',$this->timeFile());
-        $this->assign('visit_dev',Tool::visit_dev());
     }
     /**
      * 生成导航数组

@@ -13,7 +13,7 @@ class TimeFileController extends HomeController {
         $where['state'] = 2;
         $where['createtime'] = array('between',array($time,$time_end));
         $counter = D('Doc')->where($where)->count();
-        $page_size = C('site.page_size') * 3;
+        $page_size = C('site.page_size') * 5;
         $page = new Page($counter,$page_size);
         $field = 'doc_id,title,createtime';
         $result  = D('Doc')->field()->limit($page->firstRow.','.$page->listRows)->order('createtime desc')->where($where)->select();

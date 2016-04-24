@@ -2,6 +2,22 @@
 <script type="text/javascript" src="__PUBLIC__/Common/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
 <script>
     $(function(){
+        var article_w = $('.article').eq(0).width();
+        if(article_w) {
+            //修正表格宽度
+            $('table').each(function(){
+                var o = $(this);
+                if(o.width() == article_w) {
+                    o.addClass('table table-bordered ');
+                }
+            });
+            //修正图片宽度
+            $('.row').eq(0).find('img').each(function(){
+                var o = $(this);
+                if(o.width() > article_w) o.css('width','100%');
+            });
+        }
+        //渲染代码块
         hljs.initHighlightingOnLoad();
     });
 </script>

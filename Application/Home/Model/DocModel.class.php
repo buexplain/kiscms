@@ -2,6 +2,7 @@
 namespace Home\Model;
 use Common\Model\BaseModel;
 class DocModel extends BaseModel{
+    private $expire = 86400;
     private $state = 2; //文档已通过状态
     /**
      * 获取文档详情
@@ -10,7 +11,9 @@ class DocModel extends BaseModel{
         $result = $this->where(array('state'=>$this->state,'doc_id'=>$doc_id))->find();
         if(!empty($result)) {
             if(isset($result['content'])) $result['content'] = htmlspecialchars_decode($result['content']);
-            if($ext) $result['ext_data'] = $this->getExt($doc_id);
+            if($ext) {
+                $result['ext_data'] = $this->getExt($doc_id);
+            }
         }
         return $result;
     }
@@ -41,6 +44,18 @@ class DocModel extends BaseModel{
      * 归档
      */
     public function timeFile() {
-        return $this->field("from_unixtime(unix_timestamp(createtime),'%Y-%m-%d') as t")->order('createtime desc')->group('t')->select();
+        $cacheKey = "Doc-timeFile";
+        $result = S($cacheKey);
+        if(empty($result)) {
+            $result = $this->field("from_unixtime(unix_timestamp(createtime),'%Y-%m-%d') as t")->order('createtime desc')->group('t')->select();
+            S($cacheKey,$result,$this->expire*20);
+        }
+        return $result;
+    }
+    /**
+     * 更新浏览数
+     */
+    public function upViews($doc_id) {
+        return $this->where(array('doc_id'=>$doc_id))->setInc('views',1);
     }
 }

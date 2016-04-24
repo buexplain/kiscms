@@ -13,11 +13,11 @@
 
 }
 .rowoption{
-	margin: 10px 5px 0 0; 
+	margin: 10px 5px 0 0;
 }
 /*操作栏容器*/
 .boxoperation{
-	
+
 }
 .boxoperation a{
     margin-left: 5px;
@@ -56,9 +56,10 @@ margin: 0;
     text-align: center;
      color: #555;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    margin-right:5px;
 }
 .pagenum .end{
-    border-radius: 0 3px 3px 0;	
+    border-radius: 0 3px 3px 0;
 }
 .pagesize,.pagetotal{
 	margin: 0 0 0 5px;

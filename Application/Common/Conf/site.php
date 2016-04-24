@@ -16,6 +16,7 @@ $result = array(
         'friend_url'=>array(),
         'page_size'=>10,
         'staticUrl'=>'/', //静态文件地址 必须以斜杠结尾
+        'fileHasUrl'=>'/Upload/FileUpload/has.html', //判断文件是否存在
         'fileUploadUrl'=>'/Upload/FileUpload/index.html', //上传地址
         'fileBrowseUrl'=>'/Upload/FileManager/index.html', //浏览地址
         'fileFormUrl'=>'/Upload/FileForm/index.html', //上传表单

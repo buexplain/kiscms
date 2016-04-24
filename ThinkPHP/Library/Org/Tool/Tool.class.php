@@ -59,6 +59,43 @@ class Tool {
         return $result;
     }
     /**
+     * 字节转换
+     */
+    public static function formatSize($size, $dec=2){
+        $a = array('B', 'K', 'M', 'G', 'TB', 'PB');
+        $pos = 0;
+        while ($size >= 1024) {
+            $size /= 1024;
+            $pos++;
+        }
+        return round($size,$dec).$a[$pos];
+    }
+    /**
+     * 带单位的大小转换成字节
+     */
+    public static function parseSize($str) {
+        if(!is_string($str)) return $str;
+
+        $muls = array(
+            't'=> 1099511627776,
+            'g'=> 1073741824,
+            'm'=> 1048576,
+            'k'=> 1024,
+            'b'=> 1
+        );
+
+        $str = strtolower($str);
+        $size = intval($str);
+
+        $pattern = "#[tgmkb]#";
+        preg_match($pattern, $str,$arr);
+        if(isset($arr[0]) && isset($muls[$arr[0]])) {
+            $size *= $muls[$arr[0]];
+        }
+
+        return $size;
+    }
+    /**
      * 输出文件
      * @param $filename 文件名称 用于浏览器对话框
      * @param $fileurl 文件路径
@@ -97,7 +134,7 @@ class Tool {
      * 根据UserAgent检查用户浏览设备
      * @return pc 默认为PC，wap 手机  wx 微信
      */
-    public static function visit_dev() {
+    public static function visitDev() {
         static $dev;
         if(!empty($dev)) return $dev;
         $regex_match = "/(nokia|iphone|android|motorola|^mot\-|softbank|foma|docomo|kddi|up\.browser|up\.link|";

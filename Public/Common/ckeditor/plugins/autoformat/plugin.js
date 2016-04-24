@@ -239,7 +239,7 @@ function processFormatText(textContext) {
 			if(tmp!="")
 				html += "<p align=\"center\">" + tmp + "</p>\n"
 		}else{
-			html += "<p>　　" + tmp + "</p>\n";
+			html += "<p>" + tmp + "</p>\n";
     	}
 	  }
     }
