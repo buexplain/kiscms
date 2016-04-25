@@ -165,7 +165,11 @@
                 if(json.code == 0) {
                     upSuccess(file.id,json.data);
                 }else{
-                    showErr(file.id,json.msg);
+                    var msg = json.msg;
+                    if(!msg) {
+                        msg = $.json_encode(data);
+                    }
+                    showErr(file.id,msg);
                 }
             }catch(error){
                 alert(error.name+': '+error.message);
@@ -222,7 +226,7 @@
         }
         //更新进度条
         function progress(id,p) {
-            $("#"+id).find('td').eq(2).html(100*p+'%').removeClass('error');
+            $("#"+id).find('td').eq(2).html(parseInt(100*p)+'%').removeClass('error');
         }
         //移除上传队列中的文件
         function removeFile(id,obj) {

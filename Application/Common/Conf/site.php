@@ -20,6 +20,7 @@ $result = array(
         'fileUploadUrl'=>'/Upload/FileUpload/index.html', //上传地址
         'fileBrowseUrl'=>'/Upload/FileManager/index.html', //浏览地址
         'fileFormUrl'=>'/Upload/FileForm/index.html', //上传表单
+        'fileUploadExt'=>'gif,jpg,jpeg,png,bmp,pdf,txt',//文件上传类型限制
 	),
 );
 //友情链接配置

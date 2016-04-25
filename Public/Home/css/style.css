@@ -236,6 +236,22 @@ a:hover {
     margin-top: 11px;
 }
 /*--*/
+.back-top{
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    background-image:url('../image/back-top.png');
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    border-radius: 3px;
+}
+.back-top:hover{
+    background-position: -35px 0;
+}
+/*--*/
 @media (max-width: 480px) {
     .bg{margin-top: 0;}
     .page .pagetotal,

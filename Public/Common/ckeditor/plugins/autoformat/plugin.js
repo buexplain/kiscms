@@ -152,7 +152,11 @@ function FormatText(editor) {
             if(pres != null && pres.length > 0) {
                 for(var j = 0; j < pres.length; j++) {
                     temppre[temppre.length] = pres[j].innerHTML;
-                    pres[j].outerHTML = "#FormatPreID_" + j + "#";
+                }
+                var formatPreCount = 0;
+                for (var j = 0; j < pres.length;) {
+                    pres[j].outerHTML = "#FormatPreID_" + formatPreCount + "#";
+                    formatPreCount++;
                 }
             }
 

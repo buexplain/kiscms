@@ -5,6 +5,19 @@ class DocModel extends BaseModel{
     private $expire = 86400;
     private $state = 2; //文档已通过状态
     /**
+     * 获取首页列表
+     */
+    public function getIndexList() {
+        $cacheKey = 'DocCategory-getIndexList';
+        $result = S($cacheKey);
+        if(empty($result)) {
+            $field = 'doc_id,title,createtime';
+            $result = D('Doc')->field($field)->order('createtime desc')->where(array('state'=>$this->state))->limit(0,C('site.page_size'))->select();
+            S($cacheKey,$result,$this->expire/8);
+        }
+        return $result;
+    }
+    /**
      * 获取文档详情
      */
     public function get($doc_id,$ext=false) {
