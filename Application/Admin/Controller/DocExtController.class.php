@@ -34,16 +34,16 @@ class DocExtController extends BaseController {
         $result  = D('DocExt')->limit($page->firstRow.','.$page->listRows)->order('sort asc')->where($where)->select();
         //echo D('DocExt')->getLastSql();
         foreach ($result as $key => $value) {
-            $result[$key]['handle'] = '<a href="'.U('/Admin/DocExt/listField',array('doc_ext_id'=>$value['doc_ext_id'])).'">字段</a>';
-            $result[$key]['handle'] .= '<a href="'.U('/Admin/DocExt/addDocExt',array('doc_ext_id'=>$value['doc_ext_id'])).'">编辑</a>';
-            $result[$key]['handle'] .= '<a href="javascript:;" data-url="'.U('/Admin/DocExt/delDocExt',array('doc_ext_id'=>$value['doc_ext_id'])).'" class="deltips">删除</a>';
+            $result[$key]['handle'] = '<a href="'.U('DocExt/listField',array('doc_ext_id'=>$value['doc_ext_id'])).'">字段</a>';
+            $result[$key]['handle'] .= '<a href="'.U('DocExt/addDocExt',array('doc_ext_id'=>$value['doc_ext_id'])).'">编辑</a>';
+            $result[$key]['handle'] .= '<a href="javascript:;" data-url="'.U('DocExt/delDocExt',array('doc_ext_id'=>$value['doc_ext_id'])).'" class="deltips">删除</a>';
         }
-        
+
         $this->assignPage($page,$page_size);
         $this->assign('result',$result);
 
         $btn_arr = array();
-        $btn_arr[] = array('添加扩展',U('/Admin/DocExt/addDocExt'));
+        $btn_arr[] = array('添加扩展',U('DocExt/addDocExt'));
         $this->assign('btn_arr',$btn_arr);
 
     	$this->display();
@@ -57,10 +57,10 @@ class DocExtController extends BaseController {
             $DocExt = D('DocExt');
             if(!$DocExt->create()) $this->error($DocExt->getError());
             if($doc_ext_id) {
-                $url = U('/Admin/DocExt/listDocExt');
+                $url = U('DocExt/listDocExt');
                 $result = $DocExt->save();
             }else{
-                $url = U('/Admin/DocExt/addDocExt');
+                $url = U('DocExt/addDocExt');
                 $result = $DocExt->add();
             }
             if($result === false) {
@@ -106,13 +106,13 @@ class DocExtController extends BaseController {
         $doc_ext_id = I('get.doc_ext_id',0,'intval');
         $result = $DocExtField->getBydocExtId($doc_ext_id);
         foreach ($result as $key => $value) {
-            $result[$key]['handle'] = '<a href="'.U('/Admin/DocExt/addField',array('doc_ext_field_id'=>$value['doc_ext_field_id'])).'">编辑</a>';
-            $result[$key]['handle'] .= '<a href="javascript:void(0)" class="deltips" data-url="'.U('/Admin/DocExt/delField',array('doc_ext_field_id'=>$value['doc_ext_field_id'])).'">删除</a>';
+            $result[$key]['handle'] = '<a href="'.U('DocExt/addField',array('doc_ext_field_id'=>$value['doc_ext_field_id'])).'">编辑</a>';
+            $result[$key]['handle'] .= '<a href="javascript:void(0)" class="deltips" data-url="'.U('DocExt/delField',array('doc_ext_field_id'=>$value['doc_ext_field_id'])).'">删除</a>';
         }
         $this->assign('result',$result);
         $this->assign('form_type',C('form_type'));
         $btn_arr = array();
-        $btn_arr[] = array('添加字段',U('/Admin/DocExt/addField',array('doc_ext_id'=>$doc_ext_id)));
+        $btn_arr[] = array('添加字段',U('DocExt/addField',array('doc_ext_id'=>$doc_ext_id)));
         $this->assign('btn_arr',$btn_arr);
 
         $this->display();
@@ -135,10 +135,10 @@ class DocExtController extends BaseController {
 
             if(!$DocExtField->validate($rules)->create()) $this->error($DocExtField->getError());
             if($doc_ext_field_id) {
-                $url = U('/Admin/DocExt/listField',array('doc_ext_id'=>I('post.doc_ext_id',0,'intval')));
+                $url = U('DocExt/listField',array('doc_ext_id'=>I('post.doc_ext_id',0,'intval')));
                 $result = $DocExtField->save();
             }else{
-                $url = U('/Admin/DocExt/addField',array('doc_ext_id'=>I('post.doc_ext_id',0,'intval')));
+                $url = U('DocExt/addField',array('doc_ext_id'=>I('post.doc_ext_id',0,'intval')));
                 $result = $DocExtField->add();
             }
             if($result === false) {

@@ -35,4 +35,23 @@ class UinfoModel extends BaseModel{
         if(empty($uid)) return true;
         return false;
     }
+    /**
+     * 根据uid获取用户昵称
+     */
+    public function getUinfoByUid($uid) {
+        static $uinfoArr;
+        if(!isset($uinfoArr[$uid])) {
+            $uinfoArr[$uid] = $this->get($uid);
+        }
+        return $uinfoArr[$uid];
+    }
+    /**
+     * 根据真实姓名获取uid
+     */
+    public function getUidByRealname($realname) {
+        $tmp = $this->where(array('realname'=>$realname))->field('uid')->find();
+        if(empty($tmp)) $uid = 0;
+        $uid = $tmp['uid'];
+        return $uid;
+    }
 }

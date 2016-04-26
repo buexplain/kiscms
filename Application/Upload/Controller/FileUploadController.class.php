@@ -28,12 +28,13 @@ class FileUploadController extends BaseController {
 
         $return = array(
             'url'=>C('site.staticUrl').$dir,
-            'oname'=>substr($result['name'],0,0-strlen($result['ext'])-1),
+            'oname'=>trim(substr($result['name'],0,0-strlen($result['ext'])-1)),
             'ext'=>$result['ext'],
         );
 
         $fileArr = array(
             'md5'=>$result['md5'],
+            'uid'=>session(C('USER_AUTH_KEY')),
             'oname'=>$return['oname'],
             'dir'=>$dir,
             'ext'=>$result['ext'],

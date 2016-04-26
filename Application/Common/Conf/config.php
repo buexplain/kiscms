@@ -21,4 +21,6 @@ return array(
     'SESSION_AUTO_START'=>false,
     /*数据缓存设置*/
     'DATA_CACHE_TIME'=>1,
+    /*模块映射，保护后台*/
+    'URL_MODULE_MAP'=>array('admin'=>'admin'),
 );

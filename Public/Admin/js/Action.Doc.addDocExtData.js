@@ -21,7 +21,7 @@ function add_ext(obj) {
     panes += '<div id="'+id+'" data-formid="'+formid+'" class="tab-pane">';
     var data = {};
     data.doc_ext_id = value;
-    $.post('/Admin/Doc/createExtForm',data,function(json){
+    $.post(realModule+'/Doc/createExtForm',data,function(json){
         if(json.code == 0) {
             panes += '<form id="'+formid+'">';
             panes += json.data;
@@ -59,7 +59,7 @@ function del_ext(obj) {
         var data = {};
         data.doc_id = doc_id;
         data.doc_ext_id = obj.data('value');
-        $.post('/Admin/Doc/delDocExtData',data,function(json){
+        $.post(realModule+'/Doc/delDocExtData',data,function(json){
             layer.close(index);
             if(json.code == 0) {
                 obj.parent().parent().remove();

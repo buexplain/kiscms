@@ -22,7 +22,7 @@ a{
     text-decoration:none;
     color:#337ab7;
 }
-a:hover {
+a:hover,a:active {
     color:#999;
     text-decoration:none;
 }

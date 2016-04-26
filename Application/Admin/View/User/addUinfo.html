@@ -14,7 +14,7 @@
 		</div>
 		<!--内容容器-->
 		<div class="ifman clear" id="ifman">
-			<form action="/Admin/User/addUinfo" method="post" id="set">
+			<form action="{:U('User/addUinfo')}" method="post" id="set">
 			    <div class="form-group">
 			        <label>
 			            昵称
@@ -64,7 +64,7 @@
 			        <label>
 			            角色
 			        </label>
-			        <a role="button" href="javascript:void(0);" class="btn btn-default btn-sm openiframe" data-url="{:U('/Admin/FreeAuth/listRole',array('role_ids'=>$role_ids))}" data-callback="set_role_id" data-all-attr="1">弹出角色列表</a>
+			        <a role="button" href="javascript:void(0);" class="btn btn-default btn-sm openiframe" data-url="{:U('FreeAuth/listRole',array('role_ids'=>$role_ids))}" data-callback="set_role_id" data-all-attr="1">弹出角色列表</a>
 		        	<input type="text" class="form-control input-sm inline" placeholder="角色列表" name="role_names" required="required" value="{$role_names}" readonly="readonly">
 		        	<input type="hidden" name="role_ids" value="{$role_ids}">
 			    </div>

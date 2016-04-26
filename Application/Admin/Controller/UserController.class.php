@@ -56,7 +56,7 @@ class UserController extends BaseController {
         if($search_ban) {
             $where['ban'] = $search_ban;
         }
-        
+
         $counter = D('Ucenter')->where($where)->count();
         $page_size = pageSize();
         $page = new Page($counter,$page_size);
@@ -64,17 +64,17 @@ class UserController extends BaseController {
         $result  = D('Ucenter')->limit($page->firstRow.','.$page->listRows)->where($where)->select();
         //echo D('Ucenter')->getLastSql();
         foreach ($result as $key => $value) {
-            $result[$key]['handle'] = '<a href="javascript:;" data-url="'.U('/Admin/User/setBan',array('uid'=>$value['uid'])).'" class="deltips">状态</a>';
-            $result[$key]['handle'] .= '<a href="'.U('/Admin/User/setPasswd',array('uid'=>$value['uid'])).'">密码</a>';
-            $result[$key]['handle'] .= '<a href="'.U('/Admin/User/listLoginLog',array('uid'=>$value['uid'])).'">日志</a>';
+            $result[$key]['handle'] = '<a href="javascript:;" data-url="'.U('User/setBan',array('uid'=>$value['uid'])).'" class="deltips">状态</a>';
+            $result[$key]['handle'] .= '<a href="'.U('User/setPasswd',array('uid'=>$value['uid'])).'">密码</a>';
+            $result[$key]['handle'] .= '<a href="'.U('User/listLoginLog',array('uid'=>$value['uid'])).'">日志</a>';
         }
-        
+
         $this->assignPage($page,$page_size);
         $this->assign('result',$result);
         $this->assign('user_ban',C('user_ban'));
 
         $btn_arr = array();
-        $btn_arr[] = array('添加帐号',U('/Admin/User/addAccounts'));
+        $btn_arr[] = array('添加帐号',U('User/addAccounts'));
         $this->assign('btn_arr',$btn_arr);
         $this->display();
     }
@@ -103,8 +103,8 @@ class UserController extends BaseController {
             if(!$data) $this->error(D('Ucenter')->getError());
             $result = D('Ucenter')->addUser($data['email'],$data['passwd'],$data['ban']);
             if($result === false) $this->error();
-            $url = U('/Admin/User/addAccounts');
-            $this->success($url); 
+            $url = U('User/addAccounts');
+            $this->success($url);
         }else{
             $this->assign('user_ban',C('user_ban'));
             $this->display();
@@ -123,7 +123,7 @@ class UserController extends BaseController {
             if($result === false) {
                 $this->error();
             }
-            $url = '/Admin/User/listAccounts';
+            $url = U('User/listAccounts');
             $this->success($url);
         }else{
             $uid = I('get.uid',0,'intval');
@@ -183,7 +183,7 @@ class UserController extends BaseController {
         if($search_utype) {
             $where['utype'] = $search_utype;
         }
-        
+
         $counter = D('Uinfo')->where($where)->count();
         $page_size = pageSize();
         $page = new Page($counter,$page_size);
@@ -191,7 +191,7 @@ class UserController extends BaseController {
         $result  = D('Uinfo')->limit($page->firstRow.','.$page->listRows)->where($where)->select();
         //echo D('Uinfo')->getLastSql();
         foreach ($result as $key => $value) {
-            $result[$key]['handle'] = '<a href="'.U('/Admin/User/addUinfo',array('uid'=>$value['uid'])).'">编辑</a>';
+            $result[$key]['handle'] = '<a href="'.U('User/addUinfo',array('uid'=>$value['uid'])).'">编辑</a>';
         }
         $this->assignPage($page,$page_size);
         $this->assign('result',$result);
@@ -223,7 +223,7 @@ class UserController extends BaseController {
                 $this->error();
             }
             $this->commit();
-            $this->success(U('/Admin/User/listUinfo'));
+            $this->success(U('User/listUinfo'));
         }else{
             $uid = I('get.uid',0,'intval');
             $result = D('Uinfo')->get($uid);
@@ -237,5 +237,5 @@ class UserController extends BaseController {
             $this->display();
         }
     }
-    
+
 }

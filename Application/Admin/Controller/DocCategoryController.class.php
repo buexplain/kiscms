@@ -5,7 +5,7 @@ class DocCategoryController extends BaseController {
     public function listDocCategory() {
         $this->assign('result',D('DocCategory')->getCategoryZtree());
         $btn_arr = array();
-        $btn_arr[] = array('添加顶级',U('/Admin/DocCategory/addDocCategory'));
+        $btn_arr[] = array('添加顶级',U('DocCategory/addDocCategory'));
         $this->assign('btn_arr',$btn_arr);
 
     	$this->display();
@@ -20,9 +20,9 @@ class DocCategoryController extends BaseController {
             if(!$DocCategory->create()) $this->error($DocCategory->getError());
             if($cid) {
                 $result = $DocCategory->save();
-                $url = U('/Admin/DocCategory/listDocCategory');
+                $url = U('DocCategory/listDocCategory');
             }else{
-                $url = U('/Admin/DocCategory/addDocCategory',I('post.'));
+                $url = U('DocCategory/addDocCategory',I('post.'));
                 $DocCategory->depth = $DocCategory->getDepthByPid($DocCategory->pid);
                 if($DocCategory->depth > 5) $this->error('分类层级不能大于五级');
                 $result = $DocCategory->add();
@@ -60,6 +60,6 @@ class DocCategoryController extends BaseController {
             $this->error();
         }
         $this->commit();
-        $this->success(); 
+        $this->success();
     }
 }

@@ -18,7 +18,7 @@
 	<!--整个大容器-->
 	<div class="container">
 		<!--登录表单-->
-		<form class="form-signin" action="/Admin/Sign/index" method="post" id="set">
+		<form class="form-signin" action="{:U('Sign/index')}" method="post" id="set">
 		    <h2 class="form-signin-heading">
 		        请登录
 		    </h2>
@@ -29,7 +29,7 @@
 		    <p class="p10"></p>
 		    <div>
 		    	<input type="text" name="verification" value="" class="form-control l" placeholder="验证码" required="required" autocomplete="off">
-		    	<img title="看不清,换一张" alt="验证码" class="r hand" id="verification_img" onclick="refresh_verification('/Admin/Sign/verify.html')" src="/Admin/Sign/verify.html">
+		    	<img title="看不清,换一张" alt="验证码" class="r hand" id="verification_img" onclick="refresh_verification('{:U('Sign/verify')}')" src="{:U('Sign/verify')}">
 		    </div>
 		   	<p class="p10 clear"></p>
 		    <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="require.set(this); return false;">

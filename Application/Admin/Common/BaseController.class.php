@@ -9,8 +9,9 @@ use \Org\Tool\Tool;
  */
 class BaseController extends Controller{
     private $tVar = array();
+    protected $realModule = 'Admin';
     public function _initialize() {
-        if(!Tool::isAdminLogin()) $this->redirect('Admin/Sign/index');
+        if(!Tool::isAdminLogin()) $this->redirect('Sign/index');
         /*检查权限*/
         if(!Rbac::checking()) $this->error('权限不够 '.MODULE_NAME.'-->'.CONTROLLER_NAME.'-->'.ACTION_NAME);
         /*iframe页面右侧顶部默认菜单*/
@@ -24,6 +25,12 @@ class BaseController extends Controller{
         $this->assign('site',C('site'));
         $this->assign('controller_name',CONTROLLER_NAME);
         $this->assign('action_name',ACTION_NAME);
+        /*读取映射模块名*/
+        $tmp = array_flip(C('URL_MODULE_MAP'));
+        if(!empty($tmp) && isset($tmp[strtolower(MODULE_NAME)])) {
+            $this->realModule = ucwords($tmp[strtolower(MODULE_NAME)]);
+        }
+        $this->assign('realModule',$this->realModule);
     }
     /**
      * 操作错误跳转的快捷方法
@@ -53,7 +60,7 @@ class BaseController extends Controller{
         return array(
             'code'=> $code,
             'msg' => $msg,
-            'data'=> $data 
+            'data'=> $data
         );
     }
     /**
@@ -107,7 +114,7 @@ class BaseController extends Controller{
      * 给系统配置文件添加配置文件扩展
      */
     private function addConfig($filename) {
-        //读取 config.php 
+        //读取 config.php
         $config = file_get_contents(CONF_PATH.'config.php');
         preg_match_all("~LOAD_EXT_CONFIG'.*?'(.*?)'~", $config, $matches);
         if(!isset($matches[1][0])) return false;
@@ -120,5 +127,5 @@ class BaseController extends Controller{
         C(load_config(CONF_PATH.$filename.'.php'));
         return true;
     }
-     
+
 }

@@ -5,13 +5,13 @@ use Org\Arrayhelps\CategoryArray;
 class IndexController extends BaseController {
     public function index() {
     	//系统首页
-    	$this->assign('main_url',U('Admin/Index/main'));
+    	$this->assign('main_url',U('Index/main'));
     	//系统右上角菜单
     	$right_top_menu = array();
         $callname = session('callname');
         if($callname) $right_top_menu[] = array("welcome：{$callname}",'','_self');
     	$right_top_menu[] = array('首页',C('site.http_host'),'_blank');
-    	$right_top_menu[] = array('退出','/Admin/Sign/loginOut','_self');
+    	$right_top_menu[] = array('退出',U('Sign/loginOut'),'_self');
     	$this->assign('right_top_menu',$right_top_menu);
         //获取菜单导航
         $this->sidebarTree();
@@ -23,7 +23,7 @@ class IndexController extends BaseController {
     public function sidebarTree() {
         $uid = session(C('USER_AUTH_KEY'));
         $role_ids = D('RoleUser')->getRoleIdByUid($uid,true);
-        if(empty($role_ids)) $this->error('你的帐号没有角色！请联系管理员','/Admin/Sign/loginOut');
+        if(empty($role_ids)) $this->error('你的帐号没有角色！请联系管理员',U('Sign/loginOut'));
         $result = D('Node')->getNodeByRoleId($role_ids,array('is_nav'=>1),'en_name,zh_name,pid');
         $result = CategoryArray::child($result,2,'node_id'); //只支持单个模块的菜单显示
         $new_result = array();
@@ -40,7 +40,7 @@ class IndexController extends BaseController {
                     $tmp['id'] = $value2['node_id'];
                     $tmp['pId'] = $value2['pid'];
                     $tmp['name'] = $value2['zh_name'];
-                    $tmp['url'] = '/'.MODULE_NAME.'/'.$value['en_name'].'/'.$value2['en_name'];
+                    $tmp['url'] = U($value['en_name'].'/'.$value2['en_name']);
                     $tmp['target'] = 'boxcontent';
                     $new_result[] = $tmp;
                 }

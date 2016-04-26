@@ -14,7 +14,7 @@
 		</div>
 		<!--内容容器-->
 		<div class="ifman clear" id="ifman">
-			<form action="/Admin/DocCategory/addDocCategory" method="post" id="set">
+			<form action="{:U('DocCategory/addDocCategory')}" method="post" id="set">
 			    <div class="form-group">
 			        <label>
 			            <span class="red">*&nbsp;&nbsp;</span>分类名
@@ -27,7 +27,7 @@
 			        </label>
 			        <input type="text" class="form-control input-sm" placeholder="路由" name="route" value="{$result.route}" autocomplete="off">
 			    </div>
-			    
+
 			    <div class="form-group">
 			        <label>
 			        	排序

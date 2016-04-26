@@ -95,17 +95,17 @@ class DocController extends BaseController {
         $result  = D('Doc')->join($join)->field($field)->limit($page->firstRow.','.$page->listRows)->where($where)->select();
         //echo D('Doc')->getLastSql();
         foreach ($result as $key => $value) {
-            $result[$key]['handle'] = '<a href="javascript:;" data-url="'.U('/Admin/Doc/setState',array('doc_id'=>$value['doc_id'])).'" class="deltips">状态</a>';
-            $result[$key]['handle'] .= '<a href="'.U('/Admin/Doc/addDoc',array('doc_id'=>$value['doc_id'])).'">编辑</a>';
-            $result[$key]['handle'] .= '<a href="'.U('/Admin/Doc/addDocExtData',array('doc_id'=>$value['doc_id'])).'">扩展</a>';
-            $result[$key]['handle'] .= '<a href="javascript:;" data-url="'.U('/Admin/Doc/delDoc',array('doc_id'=>$value['doc_id'])).'" class="deltips">删除</a>';
+            $result[$key]['handle'] = '<a href="javascript:;" data-url="'.U('Doc/setState',array('doc_id'=>$value['doc_id'])).'" class="deltips">状态</a>';
+            $result[$key]['handle'] .= '<a href="'.U('Doc/addDoc',array('doc_id'=>$value['doc_id'])).'">编辑</a>';
+            $result[$key]['handle'] .= '<a href="'.U('Doc/addDocExtData',array('doc_id'=>$value['doc_id'])).'">扩展</a>';
+            $result[$key]['handle'] .= '<a href="javascript:;" data-url="'.U('Doc/delDoc',array('doc_id'=>$value['doc_id'])).'" class="deltips">删除</a>';
         }
 
         $this->assignPage($page,$page_size);
         $this->assign('result',$result);
 
         $btn_arr = array();
-        $btn_arr[] = array('添加文档',U('/Admin/Doc/addDoc'));
+        $btn_arr[] = array('添加文档',U('Doc/addDoc'));
         $this->assign('btn_arr',$btn_arr);
         $this->assign('doc_state',C('doc_state'));
         $this->display();
@@ -125,12 +125,12 @@ class DocController extends BaseController {
             if($doc_id) {
                 $Doc->edittime = date('Y-m-d H:i:s');
                 $result = $Doc->save();
-                $url = U('/Admin/Doc/listDoc');
+                $url = U('Doc/listDoc');
             }else{
                 $Doc->edittime = $Doc->createtime= date('Y-m-d H:i:s');
                 $Doc->create_id = session(C('USER_AUTH_KEY'));
                 $result = $doc_id = $Doc->add();
-                $url = U('/Admin/Doc/addDoc');
+                $url = U('Doc/addDoc');
             }
             if($result !== false) {
                 $result = D('DocCategoryRelation')->setCidByDocId($doc_id,explode(',', $cid));
@@ -185,7 +185,7 @@ class DocController extends BaseController {
         $doc_id = I('get.doc_id',0);
         $result = D('Doc')->setState($doc_id);
         if($result === false) $this->error();
-        $this->success(U('/Admin/Doc/listDoc',I('get.')));
+        $this->success(U('Doc/listDoc',I('get.')));
     }
     /**
      * 添加文档的扩展数据
@@ -205,7 +205,7 @@ class DocController extends BaseController {
             //print_r($post);exit;
             $result = D('DocExtValue')->addAll($data,array(),true);
             if($result === false) $this->error();
-            $this->success(U('/Admin/Doc/listDoc'));
+            $this->success(U('Doc/listDoc'));
         }else{
             $doc_id = I('get.doc_id',0,'intval');
             $this->assign('doc_id',$doc_id);

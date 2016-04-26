@@ -20,7 +20,7 @@ class SignController extends BaseController {
 	}
     public function index(){
     	//如果已经登录 直接跳转到后台页面
-    	if(Tool::isLogin()) $this->redirect('/Admin/Index/index');
+    	if(Tool::isLogin()) $this->redirect('Index/index');
     	if(IS_POST) {
     		$email = I('post.email','');
     		$passwd = I('post.passwd','');
@@ -50,7 +50,7 @@ class SignController extends BaseController {
             $this->setLoginInfo($ucenter);
             Hook::listen($this->sign_log,$this->sign_api);
             //跳转到后台首页
-            $this->success('/Admin/Index/index');
+            $this->success(U('Index/index'));
     	}else{
     		$this->assign('site',C('site'));
             $this->display();
@@ -103,7 +103,7 @@ class SignController extends BaseController {
     public function loginOut() {
     	setcookie(session_name(), '', time() - 3600, '/');
         session_destroy();
-        $this->success(U('/Admin/Sign/index'));
+        $this->success(U('Sign/index'));
     }
     /**
      * 验证码生成

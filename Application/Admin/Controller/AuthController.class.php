@@ -10,13 +10,13 @@ class AuthController extends BaseController {
         $result = D('Node')->order('pid asc,node_id asc')->select();
         $new_result = array();
         foreach ($result as $key => $value) {
-            
+
             $tmp = array(
                 'id'=>$value['node_id'],
                 'pId'=>$value['pid'],'name'=>$value['zh_name'].'（'.$value['en_name'].'）',
                 'open'=>'true'
             );
-            
+
             if($value['node_id'] > 1) {
                 $str = '';
                 switch ($value['type']) {
@@ -63,21 +63,21 @@ class AuthController extends BaseController {
             $this->startTrans();
             $node_id = I('post.node_id',0,'intval');
             if(empty($node_id)) {
-                $url = U('/Admin/Auth/addNode',I('post.'));
+                $url = U('Auth/addNode',I('post.'));
                 $result = $node->add();
                 if($result !== false) {
                     $result = D('RoleNode')->data(array('node_id'=>$result,'role_id'=>C('super_role_id')))->add();
                 }
             }else{
-                $url = U('/Admin/Auth/listNode');
-                $result = $node->save(); 
+                $url = U('Auth/listNode');
+                $result = $node->save();
             }
             if($result === false) {
                 $this->rollback();
                 $this->error();
             }
             $this->commit();
-            $this->success($url); 
+            $this->success($url);
         }else{
             $node_id = I('get.node_id',0,'intval');
             $pid = I('get.pid',1,'intval');
@@ -145,9 +145,9 @@ class AuthController extends BaseController {
         $result = D('Role')->limit($page->firstRow.','.$page->listRows)->where($where)->select();
         //echo D('Role')->getLastSql();
         foreach ($result as $key => $value) {
-            $result[$key]['handle'] = '<a href="'.U('/Admin/Auth/addRole',array('role_id'=>$value['role_id'])).'">编辑</a>';
-            $result[$key]['handle'] .= '<a href="'.U('/Admin/Auth/setRoleNode',array('role_id'=>$value['role_id'])).'">权限</a>';
-            $result[$key]['handle'] .= '<a href="javascript:void(0)" class="deltips" data-url="'.U('/Admin/Auth/delRole',array('role_id'=>$value['role_id'])).'">删除</a>';
+            $result[$key]['handle'] = '<a href="'.U('Auth/addRole',array('role_id'=>$value['role_id'])).'">编辑</a>';
+            $result[$key]['handle'] .= '<a href="'.U('Auth/setRoleNode',array('role_id'=>$value['role_id'])).'">权限</a>';
+            $result[$key]['handle'] .= '<a href="javascript:void(0)" class="deltips" data-url="'.U('Auth/delRole',array('role_id'=>$value['role_id'])).'">删除</a>';
             $result[$key]['ban_txt'] = $value['ban'] ? '是' : '否';
 
             /*超级管理员禁止操作*/
@@ -159,7 +159,7 @@ class AuthController extends BaseController {
         $this->assign('result',$result);
         $this->assignPage($page,$page_size);
         $btn_arr = array();
-        $btn_arr[] = array('添加角色',U('/Admin/Auth/addRole'));
+        $btn_arr[] = array('添加角色',U('Auth/addRole'));
         $this->assign('btn_arr',$btn_arr);
         $this->display();
     }
@@ -172,12 +172,12 @@ class AuthController extends BaseController {
             if(!$role->create()) $this->error($role->getError());
             $role_id = I('post.role_id',0,'intval');
             if(empty($role_id)) {
-                $url = '/Admin/Auth/addRole';
+                $url = U('Auth/addRole');
                 $result = $role->add();
             }else{
-                $url = '/Admin/Auth/listRole';
+                $url = U('Auth/listRole');
                 if($role_id == C('super_role_id')) $this->error('超级管理员禁止操作');
-                $result = $role->save();  
+                $result = $role->save();
             }
             if($result === false) $this->error();
             $this->success($url);
@@ -235,7 +235,7 @@ class AuthController extends BaseController {
                 }
             }
             $this->commit();
-            $this->success('/Admin/Auth/listRole');
+            $this->success(U('Auth/listRole'));
         }else{
             $role_id = I('get.role_id',0,'intval');
             if(empty($role_id) || $role_id == C('super_role_id')) $this->error();
@@ -256,7 +256,7 @@ class AuthController extends BaseController {
             }
             $new_result = json_encode($new_result);
             $this->assign('result',$new_result);
-            $this->display();   
+            $this->display();
         }
     }
 }
