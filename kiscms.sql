@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50547
 File Encoding         : 65001
 
-Date: 2016-04-26 21:34:55
+Date: 2016-04-26 22:01:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -42,7 +42,7 @@ INSERT INTO `kis_doc` VALUES ('1', '2', '0', '2', 'kiscms是什么?', '', '', '&
 INSERT INTO `kis_doc` VALUES ('2', '2', '0', '2', '我们为什么需要它?', '', '', '&lt;p&gt;网站的开发需要做大量的工作，为了加快项目进度，我们通常会用上框架技术，甚至是一些现成的项目，进行二次开发。&lt;/p&gt;\n\n&lt;p&gt;kiscms是一个工作进度介于框架与现成项目之间的产品。用它做二次开发，可以减少我们搭建框架、编写基本模块的工作量，加快项目进度。&lt;/p&gt;\n', '2016-02-24 16:32:50', '2016-04-24 15:18:34', '2016-02-24 16:33:02', '1');
 INSERT INTO `kis_doc` VALUES ('3', '2', '0', '2', '它有什么优势?', '', '', '&lt;p&gt;1、kiscms采用了ThinkPHP、Bootstrap、Layer、Laydate、Jquery、Ckeditor、Webuploader等优秀的框架与库，它们可以极大的提高我们的项目质量。&lt;/p&gt;\n\n&lt;p&gt;2、简明规范的数据库表设计，方便我们在二次开发的时候进行大刀阔斧的增改。&lt;/p&gt;\n\n&lt;p&gt;3、简洁的后台界面，就一个字&amp;ldquo;高颜值&amp;rdquo;!&lt;/p&gt;\n', '2016-02-24 16:35:21', '2016-04-24 15:18:48', '2016-02-26 23:49:23', '1');
 INSERT INTO `kis_doc` VALUES ('4', '1', '0', '2', '如何获取它?', '', '', '&lt;p&gt;kiscms程序完全遵循MIT(The MIT License)开源协议。&lt;a href=&quot;https://github.com/buexplain/kiscms/archive/master.zip&quot; target=&quot;_blank&quot;&gt;下载&lt;/a&gt; or &lt;a href=&quot;https://github.com/buexplain/kiscms&quot; target=&quot;_blank&quot;&gt;github&lt;/a&gt;&lt;/p&gt;\n', '2016-02-28 19:53:25', '2016-04-26 21:33:27', '2016-02-28 19:53:39', '2');
-INSERT INTO `kis_doc` VALUES ('5', '1', '0', '2', '其它', '', '', '&lt;p&gt;kiscms QQ交流群：89292141&lt;/p&gt;\n\n&lt;p&gt;建议安装环境： Linux + Apache + PHP or Linux + Nginx + PHP&lt;/p&gt;\n\n&lt;p&gt;安装步骤：&lt;/p&gt;\n\n&lt;ol&gt;\n	&lt;li&gt;导入(工具：phpmyadmin) kiscms.sql&lt;/li&gt;\n	&lt;li&gt;配置数据库连接文件 Application/Common/Conf/db.php&lt;/li&gt;\n	&lt;li&gt;配置网站根目录到 www&lt;/li&gt;\n	&lt;li&gt;进入后台更改密码，后台地址：http://域名/admin/Sign/index.html&lt;/li&gt;\n	&lt;li&gt;&lt;span style=&quot;color:#008000&quot;&gt;如果要保护后台地址，可以更改 Application/Common/Conf/config.php 中的 URL_MODULE_MAP 进行模块映射&lt;/span&gt;&lt;/li&gt;\n&lt;/ol&gt;\n\n&lt;p&gt;后台登录帐号，将其中的#去掉：&lt;/p&gt;\n\n&lt;p&gt;admin#@admin.c#om 12345678&lt;/p&gt;\n\n&lt;p&gt;buexplain#@163.c#om 12345678&lt;/p&gt;\n\n&lt;p&gt;guest#@guest.c#om 12345678&lt;/p&gt;\n', '2016-02-28 19:54:15', '2016-04-26 21:31:26', '2016-04-23 23:06:53', '5');
+INSERT INTO `kis_doc` VALUES ('5', '1', '0', '2', '其它', '', '', '&lt;p&gt;kiscms QQ交流群：89292141&lt;/p&gt;\n\n&lt;p&gt;建议安装环境： Linux + Apache + PHP or Linux + Nginx + PHP&lt;/p&gt;\n\n&lt;p&gt;安装步骤：&lt;/p&gt;\n\n&lt;ol&gt;\n	&lt;li&gt;导入(工具：phpmyadmin) kiscms.sql&lt;/li&gt;\n	&lt;li&gt;配置数据库连接文件 Application/Common/Conf/db.php&lt;/li&gt;\n	&lt;li&gt;配置网站根目录到 www&lt;/li&gt;\n	&lt;li&gt;进入后台更改密码，后台地址：http://域名/admin/Sign/index.html&lt;/li&gt;\n	&lt;li&gt;&lt;span style=&quot;color:#008000&quot;&gt;如果要保护后台地址，可以更改 Application/Common/Conf/config.php 中的 URL_MODULE_MAP 进行模块映射&lt;/span&gt;&lt;/li&gt;\n	&lt;li&gt;&lt;span style=&quot;color:#008000&quot;&gt;同时修改一下 Application/Common/Conf/site.php 的 fileBrowseUrl地址，将其改为 URL_MODULE_MAP 的key值&lt;/span&gt;&lt;/li&gt;\n&lt;/ol&gt;\n\n&lt;p&gt;后台登录帐号，将其中的#去掉：&lt;/p&gt;\n\n&lt;p&gt;admin#@admin.c#om 12345678&lt;/p&gt;\n\n&lt;p&gt;buexplain#@163.c#om 12345678&lt;/p&gt;\n\n&lt;p&gt;guest#@guest.c#om 12345678&lt;/p&gt;\n', '2016-02-28 19:54:15', '2016-04-26 22:00:21', '2016-04-23 23:06:53', '5');
 
 -- ----------------------------
 -- Table structure for kis_doc_category
@@ -407,7 +407,7 @@ CREATE TABLE `kis_usign` (
   `sign_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '登录时间',
   `sign_api` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '登录入口 1=管理后台',
   PRIMARY KEY (`usign_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='用户登录日志';
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='用户登录日志';
 
 -- ----------------------------
 -- Records of kis_usign
@@ -427,3 +427,4 @@ INSERT INTO `kis_usign` VALUES ('12', '1', '127.0.0.1', '2016-04-22 23:01:42', '
 INSERT INTO `kis_usign` VALUES ('13', '2', '127.0.0.1', '2016-04-25 19:48:15', '1');
 INSERT INTO `kis_usign` VALUES ('14', '2', '127.0.0.1', '2016-04-26 19:24:54', '1');
 INSERT INTO `kis_usign` VALUES ('15', '2', '127.0.0.1', '2016-04-26 21:27:48', '1');
+INSERT INTO `kis_usign` VALUES ('16', '2', '127.0.0.1', '2016-04-26 21:54:37', '1');

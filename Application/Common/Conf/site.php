@@ -18,7 +18,7 @@ $result = array(
         'staticUrl'=>'/', //静态文件地址 必须以斜杠结尾
         'fileHasUrl'=>'/Upload/FileUpload/has.html', //判断文件是否存在
         'fileUploadUrl'=>'/Upload/FileUpload/index.html', //上传地址
-        'fileBrowseUrl'=>'/Admin/FreeAuth/listFile.html', //浏览地址
+        'fileBrowseUrl'=>'/admin/FreeAuth/listFile.html', //浏览地址
         'fileFormUrl'=>'/Upload/FileForm/index.html', //上传表单
         'fileUploadExt'=>'gif,jpg,jpeg,png,bmp,pdf,txt',//文件上传类型限制
 	),

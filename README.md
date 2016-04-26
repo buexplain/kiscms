@@ -7,6 +7,7 @@ Keep it simple！这个是一个简单的便于二次开发的web内容管理系
 2、配置数据库连接文件 Application/Common/Conf/db.php<br/>
 3、进入后台更改密码，后台地址：http://域名/admin/Sign/index.html<br/>
 4、如果要保护后台地址，可以更改 Application/Common/Conf/config.php 中的 URL_MODULE_MAP 进行模块映射<br/>
+5、同时修改一下 Application/Common/Conf/site.php 的 fileBrowseUrl地址，将其改为 URL_MODULE_MAP 的key值<br/>
 
 后台初始化登录帐号，将其中的#去掉：<br/>
 > admin#@admin.c#om    12345678 <br/>
