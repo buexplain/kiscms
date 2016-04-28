@@ -18,100 +18,85 @@
 	<div class="container-fluid" id="backtop">
 		<!--固定在顶部的容器-->
 		<div class="ifheader" id="ifheader">
-			<!--左侧的查找栏-->
-			<div class="boxsearch l h50 lh50">
-				<form action="" method="get">
-					<div class="lh50 l">
-						状态：
-					</div>
-					<div class="rowoption l">
-						<select class="form-control input-sm l">
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-							<option>5</option>
-						</select>
-					</div>
-					<div class="lh50 l">
-						关键词：
-					</div>
-					<div class="rowoption l">
-						<input type="text" class="form-control input-sm l" placeholder="Text input">
-					</div>
-					<div class="lh50 l">
-						<button type="submit" class="btn btn-default btn-sm">Submit</button>
-					</div>
-				</form>
-			</div>
 			<!--右侧的操作按钮栏-->
 			<include file="Common:btn" />
 		</div>
 		<!--内容容器-->
 		<div class="ifman clear" id="ifman">
-			<?php 
-				$max_i = 10;
-				$max_j= 5;
-			?>
-			<table class="table table-hover table-condensed fixedboxtablehead">
-				<tr>
-					<?php for($j=0;$j<$max_j;$j++) {?>
-				    <th>
-				        测试表头<?php echo $j;?>
-				    </th>
-				    <?php } ?>
-				</tr>
-				<?php for($i=0;$i<$max_i;$i++) {?>
-			    <tr>
-			        <?php for($j=0;$j<$max_j;$j++) {?>
-				    <td>
-				    	<?php if(($j+1) == $max_j) { ?>
-							<a href="">详情</a>
-							<a href="">编辑</a>
-							<a href="">删除</a>
-				    	<?php }else{ ?>
-				        	测试内容<?php echo $i;?>
-				        <?php } ?>
-				    </td>
-				    <?php } ?>
-			    </tr>
-			    <?php } ?>
-			</table>
-			<!--分页容器-->
-			<div class="page r">
-				<div class="pagesize l">
-					每页条数：
-				</div>
-				<div class="l">
-					<select class="form-control input-sm l">
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
-					</select>
-				</div>
-				<div class="pagenum l">
-				    <div>
-				        
-				        <a href="2.html" class="num">
-				            1
-				        </a>
-				        <span class="current">
-				            2
-				        </span>
-				        <a href="3.html" class="num">
-				            3
-				        </a>
-				        <a href="2.html" class="next">
-				            &gt;&gt;
-				        </a>
-				        <a href="98.html" class="end">
-				            5
-				        </a>
-				    </div>
-				</div>
-				<div class="pagetotal l">共2919条数据</div>
+			<!-- 产品团队 -->
+			<div class="panel panel-default">
+			<div class="panel-heading">产品信息</div>
+				<table class="table">
+					<tr>
+						<th>
+							作者
+						</th>
+						<th>
+							官网
+						</th>
+						<th>
+							反馈
+						</th>
+					</tr>
+					<tr>
+						<td>
+							梦想星辰大海
+						</td>
+						<td>
+							<a href="http://www.kiscms.com" target="_blank">kiscms</a>
+						</td>
+						<td>
+							<a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=214e1227886ce939fd3eef7fd25832aca06bb90c1135a0481bec340f28ab5133"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="kiscms交流群" title="kiscms交流群"></a>
+							</a>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<!-- 运行环境 -->
+			<div class="panel panel-default">
+			<div class="panel-heading">运行环境</div>
+				<table class="table">
+					<tr>
+						<th>
+							操作系统
+						</th>
+						<th>
+							web服务器
+						</th>
+						<th>
+							Mysql
+						</th>
+						<th>
+							PHP
+						</th>
+						<th>
+							通信协议
+						</th>
+						<th>
+							空间
+						</th>
+					</tr>
+					<tr>
+						<td>
+							{:php_uname('s')}
+						</td>
+						<td>
+							{$Think.server.SERVER_SOFTWARE}
+						</td>
+						<td>
+							{$mysqlVersion}
+						</td>
+						<td>
+							{$Think.const.PHP_VERSION}
+						</td>
+						<td>
+							{$Think.server.SERVER_PROTOCOL}
+						</td>
+						<td>
+							{$diskFreeSpace} 可用，共 {$diskTotalSpace}
+						</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</div>

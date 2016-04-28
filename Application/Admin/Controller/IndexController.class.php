@@ -2,6 +2,7 @@
 namespace Admin\Controller;
 use Admin\Common\BaseController;
 use Org\Arrayhelps\CategoryArray;
+use Org\Tool\Tool;
 class IndexController extends BaseController {
     public function index() {
     	//系统首页
@@ -52,6 +53,31 @@ class IndexController extends BaseController {
      * 后台主页
      */
     public function main() {
-        //$this->display();
+        //读取mysql版本
+        $tmp = M()->query('select VERSION() as version');
+        if(!empty($tmp) && isset($tmp[0]['version'])) {
+            $mysqlVersion = $tmp[0]['version'];
+        }else{
+            $mysqlVersion = '未知';
+        }
+        $this->assign('mysqlVersion',$mysqlVersion);
+
+        //计算空间大小
+        $diskFreeSpace = disk_free_space(ENTRY);
+        if($diskFreeSpace) {
+            $diskFreeSpace = Tool::formatSize($diskFreeSpace);
+        }else{
+            $diskFreeSpace = '未知';
+        }
+        $diskTotalSpace = disk_total_space(ENTRY);
+        if($diskTotalSpace) {
+            $diskTotalSpace = Tool::formatSize($diskTotalSpace);
+        }else{
+            $diskTotalSpace = '未知';
+        }
+        $this->assign('diskFreeSpace',$diskFreeSpace);
+        $this->assign('diskTotalSpace',$diskTotalSpace);
+
+        $this->display();
     }
 }
