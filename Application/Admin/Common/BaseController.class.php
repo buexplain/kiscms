@@ -84,20 +84,20 @@ class BaseController extends Controller{
     /**
      * 注入分页
      */
-    public function assignPage(\Think\Page $page,$page_size) {
-        $this->assign('page_size',$page_size);
+    public function assignPage(\Think\Page $page,$pageSize) {
+        $this->assign('pageSize',$pageSize);
         $this->assign('page',$page->show());
         $this->assign('totalrows',$page->totalRows);
         $html = '';
-        $page_size_arr = C('page_size');
-        foreach ($page_size_arr as $key => $value) {
-            if($value == $page_size) {
-                $html .= '<option class="hand" selected="selected" onclick="page_size('.$key.')" value="'.$value.'">'.$value.'页</option>';
+        $pageSizeArr = C('pageSizeArr');
+        foreach ($pageSizeArr as $key => $value) {
+            if($value == $pageSize) {
+                $html .= '<option class="hand" selected="selected" onclick="pageSize('.$key.')" value="'.$value.'">'.$value.'页</option>';
             }else{
-                $html .= '<option class="hand" onclick="page_size('.$key.')" value="'.$value.'">'.$value.'页</option>';
+                $html .= '<option class="hand" onclick="pageSize('.$key.')" value="'.$value.'">'.$value.'页</option>';
             }
         }
-        $this->assign('page_size_html',$html);
+        $this->assign('pageSize_html',$html);
     }
     /*配置文件写入*/
     public function insertConfig($filename,$config,$desc='说明：'){

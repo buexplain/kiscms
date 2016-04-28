@@ -28,8 +28,8 @@ class DocExtController extends BaseController {
         }
 
         $counter = D('DocExt')->where($where)->count();
-        $page_size = pageSize();
-        $page = new Page($counter,$page_size);
+        $pageSize = pageSize();
+        $page = new Page($counter,$pageSize);
 
         $result  = D('DocExt')->limit($page->firstRow.','.$page->listRows)->order('sort asc')->where($where)->select();
         //echo D('DocExt')->getLastSql();
@@ -39,7 +39,7 @@ class DocExtController extends BaseController {
             $result[$key]['handle'] .= '<a href="javascript:;" data-url="'.U('DocExt/delDocExt',array('doc_ext_id'=>$value['doc_ext_id'])).'" class="deltips">删除</a>';
         }
 
-        $this->assignPage($page,$page_size);
+        $this->assignPage($page,$pageSize);
         $this->assign('result',$result);
 
         $btn_arr = array();

@@ -52,7 +52,7 @@ class HomeController extends BaseController{
      * 友情链接
      */
     public function friend() {
-        $result = C('site.friend_url');
+        $result = C('site.friendUrl');
         return $result;
     }
 }

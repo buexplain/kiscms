@@ -143,8 +143,8 @@ class AuthController extends BaseController {
         }
 
         $counter = D('Role')->where($where)->count();
-        $page_size = pageSize();
-        $page = new Page($counter,$page_size);
+        $pageSize = pageSize();
+        $page = new Page($counter,$pageSize);
         $result = D('Role')->limit($page->firstRow.','.$page->listRows)->where($where)->select();
         //echo D('Role')->getLastSql();
         foreach ($result as $key => $value) {
@@ -160,7 +160,7 @@ class AuthController extends BaseController {
         }
 
         $this->assign('result',$result);
-        $this->assignPage($page,$page_size);
+        $this->assignPage($page,$pageSize);
         $btn_arr = array();
         $btn_arr[] = array('添加角色',U('Auth/addRole'));
         $this->assign('btn_arr',$btn_arr);

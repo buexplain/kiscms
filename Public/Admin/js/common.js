@@ -15,7 +15,7 @@ function init_if_wh() {
 	$("#ifman").css({'margin-top':$("#ifheader").height()});
 }
 /**
- * 自动生成固定的表头 
+ * 自动生成固定的表头
  */
 function fixed_table_header() {
     $(".fixedboxtablehead").each(function(){
@@ -53,8 +53,8 @@ function fixed_table_header() {
 /**
  * 选择每页条数
  */
-function page_size(num) {
-    cookie.set('page_size',num,24*30,'/');
+function pageSize(num) {
+    cookie.set('pageSize',num,24*30,'/');
     window.location.href = window.location.href;
 }
 /**

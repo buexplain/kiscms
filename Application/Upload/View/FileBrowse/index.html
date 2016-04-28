@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<include file="Common:meta" />
-<include file="Common:css" />
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<meta name="renderer" content="webkit">
+<meta name="Generator" content="EditPlus®">
+<meta name="Author" content="buexplain">
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+<title>浏览文件</title>
+<link rel="stylesheet" href="__PUBLIC__/{$Think.MODULE_NAME}/css/init.css">
+<link rel="stylesheet" href="__PUBLIC__/Common/bootstrap/bootstrap.css">
+<link rel="stylesheet" href="__PUBLIC__/{$Think.MODULE_NAME}/css/style.css">
 </head>
 <body>
 	<!--整个大容器-->
-	<div class="container-fluid" id="backtop">
+	<div class="container-fluid">
 		<!--固定在顶部的容器-->
-		<div class="ifheader" id="ifheader">
+		<div class="header">
 			<!--左侧的查找栏-->
-			<div class="boxsearch l h50 lh50">
+			<div class="h50 lh50">
 				<form action="" method="get">
 					<!--关键词检索-->
 					<div class="rowoption l">
@@ -42,13 +53,11 @@
 					</div>
 				</form>
 			</div>
-			<!--右侧的操作按钮栏-->
-			<include file="Common:btn" />
 		</div>
 		<!--内容容器-->
-		<div class="ifman clear" id="ifman">
+		<div class="ifman clear">
 			<div class="h300 aty">
-				<table class="table table-hover table-condensed fixedboxtablehead">
+				<table class="table table-hover table-condensed">
 					<tr>
 					    <th>
 					        名称

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<include file="Common:meta" />
+<include file="Common:css" />
+</head>
+<body>
+	<!--整个大容器-->
+	<div class="container-fluid" id="backtop">
+		<!--固定在顶部的容器-->
+		<div class="ifheader" id="ifheader">
+			<!--右侧的操作按钮栏-->
+			<include file="Common:btn" />
+		</div>
+		<!--内容容器-->
+		<div class="ifman clear" id="ifman">
+			<div class="alert alert-{$yesNo} alert-dismissible" role="alert">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			  	<span aria-hidden="true">&times;</span>
+			  </button>
+			  <strong>{$msg}</strong>
+			</div>
+		</div>
+	</div>
+	<include file="Common:javascript" />
+</body>
+</html>

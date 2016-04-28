@@ -12,7 +12,7 @@ class DocModel extends BaseModel{
         $result = S($cacheKey);
         if(empty($result)) {
             $field = 'doc_id,title,createtime';
-            $result = D('Doc')->field($field)->order('createtime desc')->where(array('state'=>$this->state))->limit(0,C('site.page_size'))->select();
+            $result = D('Doc')->field($field)->order('createtime desc')->where(array('state'=>$this->state))->limit(0,C('site.pageSize'))->select();
             S($cacheKey,$result,$this->expire/8);
         }
         return $result;

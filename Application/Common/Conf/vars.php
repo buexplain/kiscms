@@ -7,7 +7,7 @@ if(!defined('THINK_PATH')) exit('非法调用');//防止被外部系统调用
  */
 return array(
 	/*列表每页大小*/
-	'page_size'=>array(10,15,25,40,60,100),
+	'pageSizeArr'=>array(10,15,25,40,60,100),
 	/*用户的帐号禁封*/
 	'user_ban'=>array(1=>'正常',2=>'禁止',3=>'邮箱未激活'),
 	/*用户性别*/

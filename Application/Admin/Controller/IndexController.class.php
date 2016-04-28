@@ -11,7 +11,7 @@ class IndexController extends BaseController {
     	$right_top_menu = array();
         $callname = session('callname');
         if($callname) $right_top_menu[] = array("welcome：{$callname}",'','_self');
-    	$right_top_menu[] = array('首页',C('site.http_host'),'_blank');
+    	$right_top_menu[] = array('首页',C('site.httpHost'),'_blank');
     	$right_top_menu[] = array('退出',U('Sign/loginOut'),'_self');
     	$this->assign('right_top_menu',$right_top_menu);
         //获取菜单导航

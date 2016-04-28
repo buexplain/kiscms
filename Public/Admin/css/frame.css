@@ -1,7 +1,7 @@
 @charset "utf-8";
 /*头部*/
 .boxheader{
-	background: rgba(0, 0, 0, 0) url("images/header.jpg") repeat-x scroll 0 -1px;
+	background: rgba(0, 0, 0, 0) url("../images/header.jpg") repeat-x scroll 0 -1px;
 	height: 50px;
     overflow: hidden;
 }
@@ -50,7 +50,7 @@
 }
 /*主体右边iframe容器*/
 .boxcontent{
-    
+
     height: 100%;
     margin: 0;
     padding: 0;

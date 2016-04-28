@@ -58,8 +58,8 @@ class UserController extends BaseController {
         }
 
         $counter = D('Ucenter')->where($where)->count();
-        $page_size = pageSize();
-        $page = new Page($counter,$page_size);
+        $pageSize = pageSize();
+        $page = new Page($counter,$pageSize);
 
         $result  = D('Ucenter')->limit($page->firstRow.','.$page->listRows)->where($where)->select();
         //echo D('Ucenter')->getLastSql();
@@ -69,7 +69,7 @@ class UserController extends BaseController {
             $result[$key]['handle'] .= '<a href="'.U('User/listLoginLog',array('uid'=>$value['uid'])).'">日志</a>';
         }
 
-        $this->assignPage($page,$page_size);
+        $this->assignPage($page,$pageSize);
         $this->assign('result',$result);
         $this->assign('user_ban',C('user_ban'));
 
@@ -85,11 +85,11 @@ class UserController extends BaseController {
         $uid = I('get.uid',0,'intval');
         $where = array('uid'=>$uid);
         $counter = D('Usign')->where($where)->count();
-        $page_size = pageSize();
-        $page = new Page($counter,$page_size);
+        $pageSize = pageSize();
+        $page = new Page($counter,$pageSize);
         $result = D('Usign')->limit($page->firstRow.','.$page->listRows)->where($where)->order('sign_time desc')->select();
         $this->assign('result',$result);
-        $this->assignPage($page,$page_size);
+        $this->assignPage($page,$pageSize);
         $this->assign('sign_api',C('sign_api'));
         $this->display();
     }
@@ -185,15 +185,15 @@ class UserController extends BaseController {
         }
 
         $counter = D('Uinfo')->where($where)->count();
-        $page_size = pageSize();
-        $page = new Page($counter,$page_size);
+        $pageSize = pageSize();
+        $page = new Page($counter,$pageSize);
 
         $result  = D('Uinfo')->limit($page->firstRow.','.$page->listRows)->where($where)->select();
         //echo D('Uinfo')->getLastSql();
         foreach ($result as $key => $value) {
             $result[$key]['handle'] = '<a href="'.U('User/addUinfo',array('uid'=>$value['uid'])).'">编辑</a>';
         }
-        $this->assignPage($page,$page_size);
+        $this->assignPage($page,$pageSize);
         $this->assign('result',$result);
         $this->assign('user_utype',C('user_utype'));
         $this->display();

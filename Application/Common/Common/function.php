@@ -4,10 +4,10 @@ if(!defined('THINK_PATH')) exit('非法调用');//防止被外部系统调用
  * 获取分页大小
  */
 function pageSize() {
-    $size = I('cookie.page_size',0,'intval');
-    $page_size = C('page_size');
-    if(isset($page_size[$size])) return $page_size[$size];
-    return $page_size[1];
+    $size = I('cookie.pageSize',0,'intval');
+    $pageSizeArr = C('pageSizeArr');
+    if(isset($pageSizeArr[$size])) return $pageSizeArr[$size];
+    return $pageSizeArr[1];
 }
 /**
  * 输出一个select下拉
@@ -41,7 +41,7 @@ function unsetArrayByvalue($array,$mixed,$keep_key=false) {
 }
 /**
  * 隐藏字符串的中间部分
- * 例：hideCenterStr('刘备'); // 刘* 
+ * 例：hideCenterStr('刘备'); // 刘*
  */
 function hideCenterStr($str) {
     preg_match_all("/./u", $str, $arr);

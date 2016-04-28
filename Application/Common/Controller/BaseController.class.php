@@ -34,13 +34,13 @@ class BaseController extends Controller{
         return array(
             'code'=> $code,
             'msg' => $msg,
-            'data'=> $data 
+            'data'=> $data
         );
     }
     /**
      * 注入分页
      */
-    public function assignPage(\Think\Page $page,$page_size) {
+    public function assignPage(\Think\Page $page,$pageSize) {
         $this->assign('page',$page->show());
         $this->assign('totalrows',$page->totalRows);
     }

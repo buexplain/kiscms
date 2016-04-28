@@ -93,8 +93,8 @@ class DocController extends BaseController {
         }
 
         $counter = D('Doc')->join($join)->field($field)->where($where)->count();
-        $page_size = pageSize();
-        $page = new Page($counter,$page_size);
+        $pageSize = pageSize();
+        $page = new Page($counter,$pageSize);
         $result  = D('Doc')->order('doc_id desc')->join($join)->field($field)->limit($page->firstRow.','.$page->listRows)->where($where)->select();
         //echo D('Doc')->getLastSql();
         foreach ($result as $key => $value) {
@@ -104,7 +104,7 @@ class DocController extends BaseController {
             $result[$key]['handle'] .= '<a href="javascript:;" data-url="'.U('Doc/logicDelDoc',array('doc_id'=>$value['doc_id'])).'" class="deltips">删除</a>';
         }
 
-        $this->assignPage($page,$page_size);
+        $this->assignPage($page,$pageSize);
         $this->assign('result',$result);
 
         $btn_arr = array();
@@ -318,8 +318,8 @@ class DocController extends BaseController {
 
         $field = "*";
         $counter = D('Doc')->field($field)->where($where)->count();
-        $page_size = pageSize();
-        $page = new Page($counter,$page_size);
+        $pageSize = pageSize();
+        $page = new Page($counter,$pageSize);
         $result  = D('Doc')->order('doc_id desc')->field($field)->limit($page->firstRow.','.$page->listRows)->where($where)->select();
         //echo D('Doc')->getLastSql();
         foreach ($result as $key => $value) {
@@ -327,7 +327,7 @@ class DocController extends BaseController {
             $result[$key]['handle'] .= '<a href="javascript:;" data-url="'.U('Doc/delDoc',array('doc_id'=>$value['doc_id'])).'" class="deltips">删除</a>';
         }
 
-        $this->assignPage($page,$page_size);
+        $this->assignPage($page,$pageSize);
         $this->assign('result',$result);
 
         $this->display();
