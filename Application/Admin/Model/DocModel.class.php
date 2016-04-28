@@ -14,20 +14,4 @@ class DocModel extends BaseModel{
 		$where = array('doc_id'=>$mixed);
 		return $this->where($where)->field($field)->find();
     }
-    /**
-     * 更新文档状态
-     */
-    public function setState($doc_id) {
-        $where = array('doc_id'=>$doc_id);
-        $state = $this->where($where)->getField('state');
-        if(empty($state)) return false;
-        $data = array();
-        if($state == 1) {
-            $data['state'] = 2;
-            $data['pushtime'] = date('Y-m-d H:i:s');
-        }else{
-            $data['state'] = 1;
-        }
-        return $this->where($where)->data($data)->save();
-    }
 }

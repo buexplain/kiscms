@@ -205,10 +205,10 @@ class UserController extends BaseController {
         if(IS_POST) {
             $data = D('Uinfo')->create();
             if(!$data) $this->error(D('Uinfo')->getError());
-            $this->startTrans();
             $uid = I('post.uid',0,'intval');
             if(!empty($data['mobile']) && !D('Uinfo')->mobileIsNotRepeat($data['mobile'],$uid)) $this->error('手机号已存在');
             if(!empty($data['email']) && !D('Uinfo')->emailIsNotRepeat($data['email'],$uid)) $this->error('邮箱号已存在');
+            $this->startTrans();
             $result = D('Uinfo')->save();
             if($result !== false) {
                 $role_id_array = filterNumStr(I('post.role_ids',''),true);
@@ -234,6 +234,50 @@ class UserController extends BaseController {
             unset($tmp[C('super_role_id')]);
             $this->assign('role_ids',implode(',',array_keys($tmp)));
             $this->assign('role_names',implode(',',array_values($tmp)));
+            $this->display();
+        }
+    }
+    /**
+     * 个人管理
+     */
+    public function addMeInfo() {
+        $uid = session(C('USER_AUTH_KEY'));
+        if(IS_POST) {
+            $passwd = I('post.passwd','');
+            if(!empty($passwd) && !CheckForm::passwd($passwd)) $this->error('密码太短，密码长度请大于六');
+
+            $rules = array();
+            $rules[] = array('mobile',"isMobile",'请填写正确格式的手机号码',2,'callback');
+            $rules[] = array('email',"isEmail",'请填写正确格式的邮箱地址',2,'callback');
+            $rules[] = array('sex',array(1,2,3),'请选择性别',1,'in');
+
+            $data = D('Uinfo')->validate($rules)->create();
+            if(!$data) $this->error(D('Uinfo')->getError());
+
+            if(!empty($data['mobile']) && !D('Uinfo')->mobileIsNotRepeat($data['mobile'],$uid)) $this->error('手机号已存在');
+            if(!empty($data['email']) && !D('Uinfo')->emailIsNotRepeat($data['email'],$uid)) $this->error('邮箱号已存在');
+
+            $this->startTrans();
+            $result = D('Uinfo')->where(array('uid'=>$uid))->save($data);
+            if(!empty($passwd) && $result !== false) {
+                $result = D('Ucenter')->setPasswd($passwd,$uid);
+            }
+            if($result === false) {
+                $this->rollback();
+                $this->error();
+            }
+            $this->commit();
+
+            $url = '';
+            if(!empty($passwd)) {
+                $url = U('Sign/loginOut');
+            }
+
+            $this->success($url);
+        }else{
+            $result = D('Uinfo')->get($uid);
+            $this->assign('result',$result);
+            $this->assign('user_sex',C('user_sex'));
             $this->display();
         }
     }

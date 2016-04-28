@@ -25,7 +25,7 @@ class IndexController extends BaseController {
         $uid = session(C('USER_AUTH_KEY'));
         $role_ids = D('RoleUser')->getRoleIdByUid($uid,true);
         if(empty($role_ids)) $this->error('你的帐号没有角色！请联系管理员',U('Sign/loginOut'));
-        $result = D('Node')->getNodeByRoleId($role_ids,array('is_nav'=>1),'en_name,zh_name,pid');
+        $result = D('Node')->getNodeByRoleId($role_ids,array('is_nav'=>1),'en_name,zh_name,pid,type');
         $result = CategoryArray::child($result,2,'node_id'); //只支持单个模块的菜单显示
         $new_result = array();
         foreach ($result as $key => $value) {
@@ -41,7 +41,11 @@ class IndexController extends BaseController {
                     $tmp['id'] = $value2['node_id'];
                     $tmp['pId'] = $value2['pid'];
                     $tmp['name'] = $value2['zh_name'];
-                    $tmp['url'] = U($value['en_name'].'/'.$value2['en_name']);
+                    if($value2['type'] == 2) {
+                        $tmp['url'] = U($value2['en_name'].'/list'.$value2['en_name']);
+                    }else{
+                        $tmp['url'] = U($value['en_name'].'/'.$value2['en_name']);
+                    }
                     $tmp['target'] = 'boxcontent';
                     $new_result[] = $tmp;
                 }

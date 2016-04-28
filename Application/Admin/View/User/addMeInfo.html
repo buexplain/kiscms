@@ -14,12 +14,18 @@
 		</div>
 		<!--内容容器-->
 		<div class="ifman clear" id="ifman">
-			<form action="{:U('User/addUinfo')}" method="post" id="set">
+			<form action="{:U('User/addMeInfo')}" method="post" id="set">
+				<div class="form-group">
+			        <label>
+			        	密码
+			        </label>
+			        <input type="text" class="form-control input-sm" placeholder="密码" name="passwd" autofocus="autofocus" value="" autocomplete="off">
+			    </div>
 			    <div class="form-group">
 			        <label>
 			            昵称
 			        </label>
-			        <input type="text" class="form-control input-sm" placeholder="昵称" name="nickname" autofocus="autofocus" value="{$result.nickname}" autocomplete="off">
+			        <input type="text" class="form-control input-sm" placeholder="昵称" name="nickname" value="{$result.nickname}" autocomplete="off">
 			    </div>
 			    <div class="form-group">
 			        <label>
@@ -49,26 +55,6 @@
 						</label>
 					</foreach>
 				</div>
-				<div class="form-group">
-			    	<label>
-			            类型
-			        </label>
-					<foreach name="user_utype" item="v">
-					    <label class="radio-inline">
-							<input type="radio" name="utype" value="{$key}" <if condition="$result.utype
-							 eq $key" >checked="checked"</if>>{$v}
-						</label>
-					</foreach>
-				</div>
-				<div class="form-group">
-			        <label>
-			            角色
-			        </label>
-			        <a role="button" href="javascript:void(0);" class="btn btn-default btn-sm openiframe" data-url="{:U('FreeAuth/listRole',array('role_ids'=>$role_ids))}" data-callback="set_role_id" data-all-attr="1">弹出角色列表</a>
-		        	<input type="text" class="form-control input-sm inline" placeholder="角色列表" name="role_names" value="{$role_names}" readonly="readonly">
-		        	<input type="hidden" name="role_ids" value="{$role_ids}">
-			    </div>
-				<input type="hidden" value="{$result.uid}" name="uid">
 			    <button type="submit" class="btn btn-default btn-sm">
 			        提交
 			    </button>
@@ -76,6 +62,5 @@
 		</div>
 	</div>
 	<include file="Common:javascript" />
-	<include file="Common:javascriptAction" />
 </body>
 </html>

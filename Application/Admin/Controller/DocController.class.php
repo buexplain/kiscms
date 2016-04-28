@@ -4,6 +4,7 @@ use Admin\Common\BaseController;
 use \Think\Page;
 use \Org\Tool\Tool;
 class DocController extends BaseController {
+    private $recyState = 3; //逻辑删除状态
     public function listDoc() {
         /*关键词检索*/
         $search_arr = array('关键词类型','ID','标题');
@@ -87,18 +88,20 @@ class DocController extends BaseController {
 
         if($search_doc_state) {
             $where["{$prefix}doc.state"] = $search_doc_state;
+        }else{
+            $where["{$prefix}doc.state"] = array('NEQ',$this->recyState);
         }
 
         $counter = D('Doc')->join($join)->field($field)->where($where)->count();
         $page_size = pageSize();
         $page = new Page($counter,$page_size);
-        $result  = D('Doc')->join($join)->field($field)->limit($page->firstRow.','.$page->listRows)->where($where)->select();
+        $result  = D('Doc')->order('doc_id desc')->join($join)->field($field)->limit($page->firstRow.','.$page->listRows)->where($where)->select();
         //echo D('Doc')->getLastSql();
         foreach ($result as $key => $value) {
-            $result[$key]['handle'] = '<a href="javascript:;" data-url="'.U('Doc/setState',array('doc_id'=>$value['doc_id'])).'" class="deltips">状态</a>';
+            $result[$key]['handle'] = '<a href="javascript:;" data-url="'.U('Doc/setState',array('doc_id'=>$value['doc_id'],'state'=>$value['state'])).'" class="deltips">状态</a>';
             $result[$key]['handle'] .= '<a href="'.U('Doc/addDoc',array('doc_id'=>$value['doc_id'])).'">编辑</a>';
             $result[$key]['handle'] .= '<a href="'.U('Doc/addDocExtData',array('doc_id'=>$value['doc_id'])).'">扩展</a>';
-            $result[$key]['handle'] .= '<a href="javascript:;" data-url="'.U('Doc/delDoc',array('doc_id'=>$value['doc_id'])).'" class="deltips">删除</a>';
+            $result[$key]['handle'] .= '<a href="javascript:;" data-url="'.U('Doc/logicDelDoc',array('doc_id'=>$value['doc_id'])).'" class="deltips">删除</a>';
         }
 
         $this->assignPage($page,$page_size);
@@ -158,19 +161,18 @@ class DocController extends BaseController {
         }
     }
     /**
-     * 删除文档
+     * 逻辑删除文档
      */
-    public function delDoc() {
-        $doc_id = I('get.doc_id',0,'intval');
+    public function logicDelDoc() {
+        $doc_id = filterNumStr(I('get.doc_id'));
+        if(empty($doc_id)) {
+            $this->error('缺省参数');
+        }
         $Doc = D('Doc');
+        $where = array();
+        $where['doc_id'] = array('IN',$doc_id);
         $this->startTrans();
-        $result = $Doc->delete($doc_id);
-        if($result !== false) {
-            $result = D('DocCategoryRelation')->delCidByDocId($doc_id);
-        }
-        if($result !== false) {
-            $result = D('DocExtValue')->delByDocId($doc_id);
-        }
+        $result = $Doc->data(array('state'=>$this->recyState))->where($where)->save();
         if($result === false) {
             $this->rollback();
             $this->error();
@@ -182,9 +184,29 @@ class DocController extends BaseController {
      * 更新文档状态
      */
     public function setState() {
-        $doc_id = I('get.doc_id',0);
-        $result = D('Doc')->setState($doc_id);
-        if($result === false) $this->error();
+        $doc_id = filterNumStr(I('get.doc_id'));
+        $state = I('get.state',0,'intval');
+        if(empty($doc_id) || !in_array($state,array(1,2))) {
+            $this->error('缺省参数');
+        }
+
+        $where = array();
+        $where['doc_id'] = array('IN',$doc_id);
+
+        $data = array();
+        if($state == 1) {
+            $data['state'] = 2;
+            $data['pushtime'] = date('Y-m-d H:i:s');
+        }else{
+            $data['state'] = 1;
+        }
+        $this->startTrans();
+        $result = D('Doc')->where($where)->data($data)->save();
+        if($result === false) {
+            $this->rollback();
+            $this->error();
+        }
+        $this->commit();
         $this->success(U('Doc/listDoc',I('get.')));
     }
     /**
@@ -268,6 +290,98 @@ class DocController extends BaseController {
         }
         $this->success($html);
     }
+    /**
+     * 文档回收站列表
+     */
+    public function listDocRecy() {
+        /*关键词检索*/
+        $search_arr = array('关键词类型','ID','标题');
+        $search_type = I('get.search_type',0,'intval');
+        $search_keywrod = I('get.search_keywrod','');
+        $this->assign('search_arr',$search_arr);
+        $this->assign('search_type',$search_type);
+        $this->assign('search_keywrod',$search_keywrod);
+
+        $where = array();
+        $where['state'] = $this->recyState;
+
+        if(!empty($search_keywrod)) {
+            switch ($search_type) {
+                case 1:
+                    $where['doc_id'] = $search_keywrod;
+                    break;
+                case 2:
+                    $where['title'] = array('like',$search_keywrod.'%');
+                    break;
+            }
+        }
+
+        $field = "*";
+        $counter = D('Doc')->field($field)->where($where)->count();
+        $page_size = pageSize();
+        $page = new Page($counter,$page_size);
+        $result  = D('Doc')->order('doc_id desc')->field($field)->limit($page->firstRow.','.$page->listRows)->where($where)->select();
+        //echo D('Doc')->getLastSql();
+        foreach ($result as $key => $value) {
+            $result[$key]['handle'] .= '<a href="javascript:;" data-url="'.U('Doc/resetDoc',array('doc_id'=>$value['doc_id'])).'" class="deltips">还原</a>';
+            $result[$key]['handle'] .= '<a href="javascript:;" data-url="'.U('Doc/delDoc',array('doc_id'=>$value['doc_id'])).'" class="deltips">删除</a>';
+        }
+
+        $this->assignPage($page,$page_size);
+        $this->assign('result',$result);
+
+        $this->display();
+    }
+    /**
+     * 物理删除文档
+     */
+    public function delDoc() {
+        $doc_id = filterNumStr(I('get.doc_id'));
+        if(empty($doc_id)) {
+            $this->error('缺省参数');
+        }
+        $Doc = D('Doc');
+        $where = array();
+        $where['state'] = $this->recyState;
+        $where['doc_id'] = array('IN',$doc_id);
+        $this->startTrans();
+        $result = $Doc->where($where)->delete($doc_id);
+        if($result !== false) {
+            $result = D('DocCategoryRelation')->delCidByDocId($doc_id);
+        }
+        if($result !== false) {
+            $result = D('DocExtValue')->delByDocId($doc_id);
+        }
+        if($result === false) {
+            $this->rollback();
+            $this->error();
+        }
+        $this->commit();
+        $this->success();
+    }
+    /**
+     * 还原文档
+     */
+    public function resetDoc() {
+        $doc_id = filterNumStr(I('get.doc_id'));
+        if(empty($doc_id)) {
+            $this->error('缺省参数');
+        }
+        $Doc = D('Doc');
+        $where = array();
+        $where['doc_id'] = array('IN',$doc_id);
+        $this->startTrans();
+        $result = $Doc->data(array('state'=>1))->where($where)->save();
+        if($result === false) {
+            $this->rollback();
+            $this->error();
+        }
+        $this->commit();
+        $this->success();
+    }
+    /**
+     * 扩展表单生成
+     */
     private function ExtForm($data) {
         $html = '';
         if(!isset($data['form_value_def'])) $data['form_value_def'] = '';

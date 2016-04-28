@@ -62,6 +62,9 @@ class AuthController extends BaseController {
             if(!$node->create()) $this->error($node->getError());
             $this->startTrans();
             $node_id = I('post.node_id',0,'intval');
+            if($node->type == 2) { //如果是控制器，那么将每个单词首字母改为大写
+                $node->en_name = ucwords($node->en_name);
+            }
             if(empty($node_id)) {
                 $url = U('Auth/addNode',I('post.'));
                 $result = $node->add();

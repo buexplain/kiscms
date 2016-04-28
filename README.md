@@ -12,6 +12,7 @@ Keep it simple！这个是一个简单的便于二次开发的web内容管理系
 后台初始化登录帐号，将其中的#去掉：<br/>
 > admin#@admin.c#om    12345678 <br/>
 > buexplain#@163.c#om  12345678 <br/>
+> author#@author.c#om  12345678 <br/>
 > guest#@guest.c#om    12345678 <br/>
 
 ###Apache服务器的伪静态规则

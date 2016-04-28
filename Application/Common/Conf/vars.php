@@ -24,7 +24,7 @@ return array(
         'textarea'=>'文本域',
     ),
     /*文档状态*/
-    'doc_state'=>array(1=>'草稿',2=>'已发布'),
+    'doc_state'=>array(1=>'草稿',2=>'已发布',3=>'已删除'),
     /*登录入口*/
     'sign_api'=>array(1=>'管理后台',2=>'前台登录'),
 );
