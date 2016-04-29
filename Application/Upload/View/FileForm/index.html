@@ -95,6 +95,11 @@
             line-height:25px;
             margin-left: 20px;
         }
+        /*文件列表容器*/
+        .files{
+            max-height: 200px;
+            overflow: auto;
+        }
     </style>
 </head>
 <body>
@@ -108,7 +113,9 @@
             </notempty>
         </div>
     </div>
-    <table class="gridtable" id="file-list"></table>
+    <div class="files">
+        <table class="gridtable" id="file-list"></table>
+    </div>
     <script>
         var uploader = WebUploader.create({
             //swf文件路径

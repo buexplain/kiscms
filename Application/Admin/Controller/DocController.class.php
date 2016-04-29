@@ -39,6 +39,8 @@ class DocController extends BaseController {
         $search_doc_state = I('get.search_doc_state',0,'intval');
         $this->assign('search_doc_state',$search_doc_state);
         $search_doc_state_arr = C('doc_state');
+        unset($search_doc_state_arr[$this->recyState]);
+        if($search_doc_state && !isset($search_doc_state_arr[$search_doc_state])) $this->error();
         $search_doc_state_arr[0] = '文档状态';
         ksort($search_doc_state_arr);
         $this->assign('search_doc_state_arr',$search_doc_state_arr);
@@ -119,6 +121,7 @@ class DocController extends BaseController {
     public function addDoc() {
         if(IS_POST) {
             $doc_id = I('post.doc_id',0,'intval');
+            if($doc_id != session('doc_id')) $this->error();
             $cid = I('post.cid','','filterNumStr');
             if(empty($cid)) $this->error('请选择分类');
             $Doc = D('Doc');
@@ -143,11 +146,13 @@ class DocController extends BaseController {
                 $this->error();
             }
             $this->commit();
+            session('doc_id',null);
             $this->success($url);
         }else{
             $doc_id = I('get.doc_id',0,'intval');
             //获取文档数据
-            $result = D('Doc')->get($doc_id);
+            $result = D('Doc')->where(array('state'=>array('NEQ',$this->recyState)))->get($doc_id);
+            session('doc_id',$doc_id); //登记doc_id
             //获取分类
             $result['cid'] = D('DocCategoryRelation')->getCidByDocId($doc_id);
             $result['cid_txt'] = D('DocCategory')->getCnameByCid($result['cid']);

@@ -101,6 +101,7 @@ class SignController extends BaseController {
      * 退出登录
      */
     public function loginOut() {
+        session(null);
     	setcookie(session_name(), '', time() - 3600, '/');
         session_destroy();
         $this->success(U('Sign/index'));

@@ -61,7 +61,7 @@ class UserController extends BaseController {
         $pageSize = pageSize();
         $page = new Page($counter,$pageSize);
 
-        $result  = D('Ucenter')->limit($page->firstRow.','.$page->listRows)->where($where)->select();
+        $result  = D('Ucenter')->order('uid desc')->limit($page->firstRow.','.$page->listRows)->where($where)->select();
         //echo D('Ucenter')->getLastSql();
         foreach ($result as $key => $value) {
             $result[$key]['handle'] = '<a href="javascript:;" data-url="'.U('User/setBan',array('uid'=>$value['uid'])).'" class="deltips">状态</a>';
@@ -188,7 +188,7 @@ class UserController extends BaseController {
         $pageSize = pageSize();
         $page = new Page($counter,$pageSize);
 
-        $result  = D('Uinfo')->limit($page->firstRow.','.$page->listRows)->where($where)->select();
+        $result  = D('Uinfo')->order('uid desc')->limit($page->firstRow.','.$page->listRows)->where($where)->select();
         //echo D('Uinfo')->getLastSql();
         foreach ($result as $key => $value) {
             $result[$key]['handle'] = '<a href="'.U('User/addUinfo',array('uid'=>$value['uid'])).'">编辑</a>';
