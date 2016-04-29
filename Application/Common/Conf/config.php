@@ -7,7 +7,7 @@ if(!defined('THINK_PATH')) exit('非法调用');//防止被外部系统调用
  */
 return array(
 	/*'配置项'=>'配置值'*/
-	'LOAD_EXT_CONFIG'=>'db,vars,site',//加载配置文件
+	'LOAD_EXT_CONFIG'=>'db,cache,vars,site',//加载配置文件
 	/*跳转提示*/
     'TMPL_ACTION_ERROR' => 'Public/Jump/index.html',
     'TMPL_ACTION_SUCCESS' => 'Public/Jump/index.html',
