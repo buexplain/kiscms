@@ -61,7 +61,7 @@ class SignController extends BaseController {
      */
     private function setLoginInfo($ucenter) {
         //变幻session_id
-        session_regenerate_id();
+        session('regenerate');
         //写入登录标识
         session(C('USER_AUTH_KEY'),$ucenter['uid']);
         /*写入用户类型标识*/
@@ -101,9 +101,8 @@ class SignController extends BaseController {
      * 退出登录
      */
     public function loginOut() {
-        session(null);
+        session('destroy');
     	setcookie(session_name(), '', time() - 3600, '/');
-        session_destroy();
         $this->success(U('Sign/index'));
     }
     /**
