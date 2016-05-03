@@ -24,5 +24,7 @@ $result = array(
     ),
 );
 //友情链接配置
-$result['site']['friendUrl'][] = array('name'=>'fgreen','url'=>'http://www.fgreen.org');
+$result['site']['friendUrl'][] = array('title'=>'fgreen','name'=>'fgreen','url'=>'http://www.fgreen.org');
+$result['site']['friendUrl'][] = array('title'=>'nginx中文站','name'=>'nginx','url'=>'http://www.nginx.cn');
+
 return $result;
