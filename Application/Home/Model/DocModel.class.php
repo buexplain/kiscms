@@ -60,7 +60,7 @@ class DocModel extends BaseModel{
         $cacheKey = "Doc-timeFile";
         $result = S($cacheKey);
         if(empty($result)) {
-            $result = $this->field("from_unixtime(unix_timestamp(createtime),'%Y-%m-%d') as t")->order('createtime desc')->group('t')->select();
+            $result = $this->field("from_unixtime(unix_timestamp(createtime),'%Y-%m') as t")->order('createtime desc')->group('t')->select();
             S($cacheKey,$result,$this->expire*20);
         }
         return $result;

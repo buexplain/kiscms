@@ -7,7 +7,7 @@ class TimeFileController extends HomeController {
         $time = I('get.time','');
         $time = strtotime($time);
         if(!$time) $this->error();
-        $time_end = date('Y-m-d H:i:s',$time + 86399);
+        $time_end = date('Y-m-d H:i:s',mktime(0, 0, 0, date("m",$time)+1, date("d",$time),   date("Y",$time)));
         $time = date('Y-m-d H:i:s',$time);
         $where = array();
         $where['state'] = 2;
