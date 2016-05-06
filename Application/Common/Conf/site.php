@@ -1,5 +1,10 @@
 <?php
 if(!defined('THINK_PATH')) exit('非法调用');//防止被外部系统调用
+
+$m = C('VAR_MODULE');
+$c = C('VAR_CONTROLLER');
+$a = C('VAR_ACTION');
+
 /**
  * 站点配置
  * @author buexplain
@@ -16,10 +21,10 @@ $result = array(
         'friendUrl'=>array(),
         'pageSize'=>10, //Home模块的列表分页大小
         'staticUrl'=>'/', //静态文件地址 必须以斜杠结尾
-        'fileHasUrl'=>'/Upload/FileUpload/has.html', //判断文件是否存在
-        'fileUploadUrl'=>'/Upload/FileUpload/index.html', //上传地址
-        'fileBrowseUrl'=>'/Upload/FileBrowse/index.html', //浏览地址
-        'fileFormUrl'=>'/Upload/FileForm/index.html', //上传表单
+        'fileHasUrl'=>"/index.php?{$m}=Upload&{$c}=FileUpload&{$a}=has", //判断文件是否存在
+        'fileUploadUrl'=>"/index.php?{$m}=Upload&{$c}=FileUpload&{$a}=index", //上传地址
+        'fileBrowseUrl'=>"/index.php?{$m}=Upload&{$c}=FileBrowse&{$a}=index", //浏览地址
+        'fileFormUrl'=>"/index.php?{$m}=Upload&{$c}=FileForm&{$a}=index", //上传表单
         'fileUploadExt'=>'gif,jpg,jpeg,png,bmp,pdf,txt',//文件上传类型限制
     ),
 );
