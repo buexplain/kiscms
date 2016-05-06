@@ -53,7 +53,8 @@ function fixed_table_header() {
 /**
  * 选择每页条数
  */
-function pageSize(num) {
+function pageSize(obj) {
+    var num = obj.options[obj.selectedIndex].value;
     cookie.set('pageSize',num,24*30,'/');
     window.location.href = window.location.href;
 }

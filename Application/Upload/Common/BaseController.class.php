@@ -64,7 +64,7 @@ class BaseController extends Controller{
     /**
      * 注入分页
      */
-    public function assignPage(\Think\Page $page,$pageSize) {
+    protected function assignPage(\Think\Page $page,$pageSize) {
         $this->assign('pageSize',$pageSize);
         $this->assign('page',$page->show());
         $this->assign('totalrows',$page->totalRows);
@@ -72,9 +72,9 @@ class BaseController extends Controller{
         $pageSizeArr = C('pageSizeArr');
         foreach ($pageSizeArr as $key => $value) {
             if($value == $pageSize) {
-                $html .= '<option class="hand" selected="selected" onclick="pageSize('.$key.')" value="'.$value.'">'.$value.'页</option>';
+                $html .= '<option class="hand" selected="selected" value="'.$key.'">'.$value.'页</option>';
             }else{
-                $html .= '<option class="hand" onclick="pageSize('.$key.')" value="'.$value.'">'.$value.'页</option>';
+                $html .= '<option class="hand" value="'.$key.'">'.$value.'页</option>';
             }
         }
         $this->assign('pageSize_html',$html);
