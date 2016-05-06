@@ -4,13 +4,14 @@ use Upload\Common\BaseController;
 use \Think\Upload;
 class FileUploadController extends BaseController {
     /**
-     * 上传文件
+     * 单文件上传
      */
     public function index(){
         $fileVal = I('post.fileVal','file');
         $fileArr = isset($_FILES[$fileVal])?$_FILES[$fileVal]:array();
         if(empty($fileArr)) $this->error('$_FILES key 不存在');
         $folder = $this->getFolder(strtolower(pathinfo($fileArr['name'],PATHINFO_EXTENSION)));
+        if($folder === false) $this->error('mimetypes错误!');
         $upload = new upload();
         $upload->exts = $this->getExt();
         $upload->subName = array('date', 'Ymd');
@@ -92,7 +93,10 @@ class FileUploadController extends BaseController {
     protected function error($msg) {
         $this->ajaxReturn($this->ajaxData(1,$msg,''));
     }
-    public function getExt() {
+    /**
+     * 允许上传的文件后缀
+     */
+    protected function getExt() {
         $fileUploadExt = C('site.fileUploadExt');
         if(empty($fileUploadExt)) {
             return array();
@@ -104,7 +108,7 @@ class FileUploadController extends BaseController {
     /**
      * 根据文件后缀获取分类文件夹名
      */
-    public function getFolder($ext) {
+    protected function getFolder($ext) {
         //mimetypes
         $extArr = array(
             'ez' => 'application',
