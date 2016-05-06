@@ -13,7 +13,7 @@
             <h4 class="h-divider">标签</h4>
             <div class="tag">
                 <foreach name="tag" item="v">
-                    <a class="btn btn-default <if condition="$v['cid'] eq $cid">active</if>" href="/Home/List/index/cid/{$v.cid}.html" role="button">{$v.cname}</a>
+                    <a class="btn btn-default <if condition="$v['cid'] eq $cid">active</if>" href="{:U('List/index',array('cid'=>$v['cid']))}" role="button">{$v.cname}</a>
                 </foreach>
             </div>
         </div>
@@ -23,7 +23,7 @@
             <h4 class="h-divider">归档</h4>
             <div class="tag timeFile">
                 <foreach name="timeFile" item="v">
-                    <a class="<if condition="$time eq $v['t']">active</if>" href="/Home/TimeFile/index/time/{$v.t}.html">
+                    <a class="<if condition="$time eq $v['t']">active</if>" href="{:U('TimeFile/index',array('time'=>$v['t']))}">
                         {$v.t}
                     </a>
                 </foreach>

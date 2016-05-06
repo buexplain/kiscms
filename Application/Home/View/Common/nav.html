@@ -25,7 +25,7 @@
         <ul class="nav navbar-nav">
             <foreach name="nav" item="v">
                 <li class="<if condition="$v['cid'] eq $cid">active</if>">
-                    <a href="/Home/{$v.route}/index/cid/{$v.cid}.html">
+                    <a href="{:U($v['route'].'/index',array('cid'=>$v['cid']))}">
                         {$v.cname}
                     </a>
                 </li>
