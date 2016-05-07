@@ -28,7 +28,7 @@ class FileUploadController extends BaseController {
         $dir = "StaticData/{$folder}/{$result['savepath']}{$result['savename']}";
 
         $return = array(
-            'url'=>C('site.staticUrl').$dir,
+            'url'=>C('fileStaticUrl').$dir,
             'oname'=>trim(substr($result['name'],0,0-strlen($result['ext'])-1)),
             'ext'=>$result['ext'],
         );
@@ -73,13 +73,12 @@ class FileUploadController extends BaseController {
             $result[$value['md5']] = $value;
             unset($result[$key]);
         }
-        $staticUrl = C('site.staticUrl');
         foreach ($md5Arr as $key => $value) {
             if(isset($result[$value])) {
                 $md5Arr[$key] = array();
                 $md5Arr[$key]['md5'] = $value;
                 $md5Arr[$key]['data'] = $result[$value];
-                $md5Arr[$key]['data']['url'] = $staticUrl.$md5Arr[$key]['data']['url'];
+                $md5Arr[$key]['data']['url'] = C('fileStaticUrl').$md5Arr[$key]['data']['url'];
                 unset($md5Arr[$key]['data']['md5']);
             }else{
                 unset($md5Arr[$key]);
@@ -97,7 +96,7 @@ class FileUploadController extends BaseController {
      * 允许上传的文件后缀
      */
     protected function getExt() {
-        $fileUploadExt = C('site.fileUploadExt');
+        $fileUploadExt = C('fileUploadExt');
         if(empty($fileUploadExt)) {
             return array();
         }else{

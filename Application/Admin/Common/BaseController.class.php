@@ -9,7 +9,6 @@ use \Org\Tool\Tool;
  */
 class BaseController extends Controller{
     private $tVar = array();
-    protected $realModule = 'Admin';
     public function _initialize() {
         if(!Tool::isAdminLogin()) $this->redirect('Sign/index');
         /*检查权限*/
@@ -25,12 +24,25 @@ class BaseController extends Controller{
         $this->assign('site',C('site'));
         $this->assign('controller_name',CONTROLLER_NAME);
         $this->assign('action_name',ACTION_NAME);
-        /*读取映射模块名*/
+        /*注入js变量*/
+        $this->assignJS();
+
+    }
+    /**
+     * 注入js变量
+     */
+    private function assignJS() {
+        /*注入映射模块名*/
         $tmp = array_flip(C('URL_MODULE_MAP'));
+        $realModule = 'Admin';
         if(!empty($tmp) && isset($tmp[strtolower(MODULE_NAME)])) {
-            $this->realModule = ucwords($tmp[strtolower(MODULE_NAME)]);
+            $realModule = ucwords($tmp[strtolower(MODULE_NAME)]);
         }
-        $this->assign('realModule',$this->realModule);
+        $this->assign('realModule',$realModule);
+        /*注入模块，控制器，方法的key值*/
+        $this->assign('module',C('VAR_MODULE'));
+        $this->assign('controller',C('VAR_CONTROLLER'));
+        $this->assign('action',C('VAR_ACTION'));
     }
     /**
      * 操作错误跳转的快捷方法

@@ -163,3 +163,14 @@ function return_pop_layer_checked(data_checkbox_target) {
     var index = window.parent.layer.getFrameIndex(window.name); //获取窗口索引
     window.parent.layer.close(index);
 }
+/**
+ * js版U方法
+ */
+function U(controller,action,params) {
+    if(!params) params = {};
+    var url = '/index.php?'+moduleKey+'='+realModule+'&'+controllerKey+'='+controller+'&'+actionKey+'='+action;
+    for(var i in params) {
+        url += '&' + i+'='+params[i];
+    }
+    return url;
+}

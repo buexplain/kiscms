@@ -39,7 +39,7 @@ function showRenameBtn(treeId, treeNode) {
  * 编辑
  */
 function beforeEditName(treeId, treeNode) {
-    window.location.href = realModule+'/DocCategory/addDocCategory/cid/'+treeNode.id+'.html';
+    window.location.href = U('DocCategory','addDocCategory',{"cid":treeNode.id})
 }
 /**
  * 删除节点之前
@@ -52,7 +52,7 @@ function beforeRemove(treeId, treeNode) {
  * 删除节点
  */
 function delNode(node_id) {
-	var url = realModule+'/DocCategory/delDocCategory/';
+	var url = U('DocCategory','delDocCategory');
 	var data = {"cid":node_id};
 	var s = false;
 	$.ajax({
@@ -82,7 +82,7 @@ function addHoverDom(treeId, treeNode) {
     sObj.after(addStr);
     var btn = $("#addBtn_" + treeNode.tId);
     if (btn) btn.bind("click",function() {
-        window.location.href = realModule+'/DocCategory/addDocCategory/pid/'+treeNode.id+'.html';
+        window.location.href = U('DocCategory','addDocCategory',{"pid":treeNode.id});
         return false;
     });
 }

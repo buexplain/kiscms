@@ -22,9 +22,9 @@ class FileFormController extends BaseController {
         $extensions = I('get.extensions','');
         $this->assign('extensions',$extensions);
         //上传接口地址
-        $this->assign('fileUploadUrl',C('site.fileUploadUrl'));
+        $this->assign('fileUploadUrl',C('fileUploadUrl'));
         //判断文件是否存在的接口地址
-        $this->assign('fileHasUrl',C('site.fileHasUrl'));
+        $this->assign('fileHasUrl',C('fileHasUrl'));
         $this->display();
     }
     /**

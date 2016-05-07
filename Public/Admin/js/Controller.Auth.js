@@ -41,7 +41,7 @@ function showRenameBtn(treeId, treeNode) {
  * 编辑
  */
 function beforeEditName(treeId, treeNode) {
-    window.location.href = realModule+'/Auth/addNode/node_id/'+treeNode.id+'.html';
+    window.location.href = U('Auth','addNode',{"node_id":treeNode.id});
 }
 /**
  * 删除节点之前
@@ -54,7 +54,7 @@ function beforeRemove(treeId, treeNode) {
  * 删除节点
  */
 function delNode(node_id) {
-	var url = realModule+'/Auth/delNode/';
+	var url = U('Auth','delNode');
 	var data = {"node_id":node_id};
 	var s = false;
 	$.ajax({
@@ -84,7 +84,7 @@ function addHoverDom(treeId, treeNode) {
     sObj.after(addStr);
     var btn = $("#addBtn_" + treeNode.tId);
     if (btn) btn.bind("click",function() {
-        window.location.href = realModule+'/Auth/addNode/pid/'+treeNode.id+'.html';
+        window.location.href = U('Auth','addNode',{"pid":treeNode.id});
         return false;
     });
 }

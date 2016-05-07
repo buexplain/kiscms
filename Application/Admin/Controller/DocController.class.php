@@ -160,8 +160,8 @@ class DocController extends BaseController {
             $result['cid_tree'] = D('DocCategory')->getCategoryZtree($result['cid']);
             $result['cid'] = implode(',', $result['cid']);
             $this->assign('result',$result);
-            $this->assign('fileBrowseUrl',C('site.fileBrowseUrl'));
-            $this->assign('fileFormUrl',C('site.fileFormUrl'));
+            $this->assign('fileBrowseUrl',C('fileBrowseUrl'));
+            $this->assign('fileFormUrl',C('fileFormUrl'));
             $this->display();
         }
     }

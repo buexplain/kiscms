@@ -17,7 +17,7 @@ class FileBrowseController extends BaseController {
         $this->assign('search_keywrod',$search_keywrod);
 
         /*文件类型检索*/
-        $fileUploadExt = C('site.fileUploadExt');
+        $fileUploadExt = C('fileUploadExt');
         $search_ext_arr = array();
         if(!empty($fileUploadExt)) {
             $search_ext_arr = explode(',',$fileUploadExt);
@@ -68,10 +68,9 @@ class FileBrowseController extends BaseController {
         $page = new Page($counter,$pageSize);
         $result = D('File')->limit($page->firstRow.','.$page->listRows)->order('createtime desc')->where($where)->select();
         //echo D('File')->getLastSql();
-        $staticUrl = C('site.staticUrl');
         $imgArr = array('jpg','jpeg','gif','png','bmp');
         foreach($result as $key=>$value) {
-            $result[$key]['url'] = $staticUrl.$value['dir'];
+            $result[$key]['url'] = C('fileStaticUrl').$value['dir'];
 
             $result[$key]['size'] = Tool::formatSize($value['size']);
 
