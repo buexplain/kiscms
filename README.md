@@ -3,11 +3,11 @@ Keep it simple！这个是一个简单的便于二次开发的web内容管理系
 建议安装环境： Linux + Apache + PHP or Linux + Nginx + PHP<br/>
 
 安装步骤：<br/>
-1、建立一个utf-8编码的数据库
+1、建立一个utf-8编码的数据库<br/>
 2、将 kiscms.sql 导入到新建立的库中<br/>
-2、配置数据库连接文件 Application/Common/Conf/db.php<br/>
-3、进入后台更改密码，后台地址：http://域名/admin/Sign/index.html<br/>
-4、如果要保护后台地址，可以更改 Application/Common/Conf/config.php 中的 URL_MODULE_MAP 进行模块映射，配置完毕后，清空Runtime文件夹<br/>
+3、配置数据库连接文件 Application/Common/Conf/db.php<br/>
+4、进入后台更改密码，后台地址：http://域名/admin/Sign/index.html<br/>
+5、如果要保护后台地址，可以更改 Application/Common/Conf/config.php 中的 URL_MODULE_MAP 进行模块映射，配置完毕后，清空Runtime文件夹<br/>
 
 后台初始化登录帐号，将其中的#去掉：<br/>
 > admin#@admin.c#om    12345678 <br/>
