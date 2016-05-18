@@ -74,10 +74,12 @@ class FileBrowseController extends BaseController {
 
             $result[$key]['size'] = Tool::formatSize($value['size']);
 
-            $tmp = D('Uinfo')->getUinfoByUid($value['uid']);
             $result[$key]['realname'] = '未知';
-            if(!empty($tmp)) {
-                $result[$key]['realname'] = $tmp['realname'];
+            if($value['uid'] > 0) {
+                $tmp = D('Uinfo')->getUinfoByUid($value['uid']);
+                if(!empty($tmp)) {
+                    $result[$key]['realname'] = $tmp['realname'];
+                }
             }
 
             $result[$key]['isImg'] = in_array(strtolower($value['ext']),$imgArr);

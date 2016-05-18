@@ -25,6 +25,10 @@ class FileFormController extends BaseController {
         $this->assign('fileUploadUrl',C('fileUploadUrl'));
         //判断文件是否存在的接口地址
         $this->assign('fileHasUrl',C('fileHasUrl'));
+        //注入表单令牌
+        $this->assign('token',$this->createToken());
+        //注入用户id
+        $this->assign('uid',$this->getUid());
         $this->display();
     }
     /**

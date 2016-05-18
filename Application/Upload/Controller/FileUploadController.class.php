@@ -7,11 +7,17 @@ class FileUploadController extends BaseController {
      * 单文件上传
      */
     public function index(){
+        $result = $this->verifyToken(I('post.token',''));
+        if($result === false) {
+            $this->error('上传令牌错误，请刷新上传框！');
+        }
+
         $fileVal = I('post.fileVal','file');
         $fileArr = isset($_FILES[$fileVal])?$_FILES[$fileVal]:array();
         if(empty($fileArr)) $this->error('$_FILES key 不存在');
         $folder = $this->getFolder(strtolower(pathinfo($fileArr['name'],PATHINFO_EXTENSION)));
         if($folder === false) $this->error('mimetypes错误!');
+
         $upload = new upload();
         $upload->exts = $this->getExt();
         $upload->subName = array('date', 'Ymd');
@@ -33,9 +39,12 @@ class FileUploadController extends BaseController {
             'ext'=>$result['ext'],
         );
 
+        //如果当前上传模块部署到了静态服务器上，那么session没有做共享，则无法获取uid
+        $uid = $this->getUid();
+
         $fileArr = array(
             'md5'=>$result['md5'],
-            'uid'=>session(C('USER_AUTH_KEY')),
+            'uid'=>$uid,
             'oname'=>$return['oname'],
             'dir'=>$dir,
             'ext'=>$result['ext'],
@@ -46,7 +55,7 @@ class FileUploadController extends BaseController {
         $result = D('File')->data($fileArr)->add();
         if(empty($result)) {
             unlink($dir);
-            $this->error('Register file failed');
+            $this->error('写入数据库失败！');
         }
 
         $this->success($return);
@@ -73,6 +82,7 @@ class FileUploadController extends BaseController {
             $result[$value['md5']] = $value;
             unset($result[$key]);
         }
+        $tokenNum = 0; //表单令牌可用次数
         foreach ($md5Arr as $key => $value) {
             if(isset($result[$value])) {
                 $md5Arr[$key] = array();
@@ -81,9 +91,17 @@ class FileUploadController extends BaseController {
                 $md5Arr[$key]['data']['url'] = C('fileStaticUrl').$md5Arr[$key]['data']['url'];
                 unset($md5Arr[$key]['data']['md5']);
             }else{
+                $tokenNum++;
                 unset($md5Arr[$key]);
             }
         }
+
+        if($tokenNum > 0) {
+            $this->setTokenNum($tokenNum,$this->getToken());
+        }else{
+            $this->destroyToken();
+        }
+
         $this->success($md5Arr);
     }
     protected function success($data='',$msg='success') {

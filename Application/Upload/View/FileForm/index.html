@@ -117,6 +117,8 @@
         <table class="gridtable" id="file-list"></table>
     </div>
     <script>
+        var token = '{$token}';
+        var uid = '{$uid}';
         var uploader = WebUploader.create({
             //swf文件路径
             swf: '__PUBLIC__/Common/webuploader/Uploader.swf',
@@ -129,6 +131,8 @@
             },
             //不压缩上传图片
             compress: false,
+            //并发上传数，必须设置为 1 ，否则令牌使用次数校验可能不准确。
+            threads: 1,
             //单个文件限制大小
             <notempty name="fileSingleSizeLimit">
             fileSingleSizeLimit: parseSize('{$fileSingleSizeLimit}'),
@@ -139,6 +143,8 @@
             </notempty>
             //input name
             fileVal: 'file',
+            //上传表单令牌
+            formData: {'token':token,'uid':uid},
         });
 
         //文件加入队列时触发的事件
@@ -163,6 +169,7 @@
         });
         //上传过程中触发的事件
         uploader.on('uploadProgress',function(file,percentage){
+            //console.log(percentage);
             progress(file.id,percentage);
         });
         //文件上传成功触发的事件
@@ -206,6 +213,7 @@
             };
             if(md5Str) {
                 $.post('{$fileHasUrl}',{md5Str:md5Str},function(json){
+
                     try{
                         var json = $.json_decode(json);
                     }catch(error){
@@ -214,10 +222,8 @@
                     }finally{
 
                     }
-                    var len = json.data.length;
-                    var len2 = files.length;
-                    for(var i=0; i<len; i++) {
-                        for(var j=0; j<len2; j++) {
+                    for(var i in json.data) {
+                        for(var j in files) {
                             if(json.data[i].md5 == files[j].md5) {
                                 progress(files[j].id,1);
                                 upSuccess(files[j].id,json.data[i].data);
@@ -246,11 +252,12 @@
         }
         //清空上传列表
         function clearFileList() {
-            $("#file-list").find('tr').each(function(){
-                removeFile($(this).attr('id'));
-                $(this).remove();
-            });
-            uploader.reset();
+            window.location.reload();
+            // $("#file-list").find('tr').each(function(){
+            //     removeFile($(this).attr('id'));
+            //     $(this).remove();
+            // });
+            // uploader.reset();
         }
         //单个文件上传成功后的回调函数
         function upSuccess(id,data) {
