@@ -8,7 +8,7 @@ class ListController extends HomeController {
         $where = array();
         $prefix = C('DB_PREFIX');
         $join = "{$prefix}doc INNER JOIN {$prefix}doc_category_relation ON {$prefix}doc.doc_id={$prefix}doc_category_relation.doc_id";
-        $field = "{$prefix}doc_category_relation.cid,{$prefix}doc.title,{$prefix}doc.createtime";
+        $field = "{$prefix}doc_category_relation.cid,{$prefix}doc.doc_id,{$prefix}doc.title,{$prefix}doc.createtime";
         $where["{$prefix}doc_category_relation.cid"] = $cid;
         $where['state'] = 2;
         $counter = D('Doc')->join($join)->field($field)->where($where)->count();
