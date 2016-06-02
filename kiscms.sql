@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50547
 File Encoding         : 65001
 
-Date: 2016-04-28 17:25:43
+Date: 2016-06-02 11:04:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -418,7 +418,7 @@ INSERT INTO `kis_ucenter` VALUES ('4', 'guest@guest.com', '2d1a88375b19a26013c3a
 -- ----------------------------
 DROP TABLE IF EXISTS `kis_uinfo`;
 CREATE TABLE `kis_uinfo` (
-  `uid` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+  `uid` int(10) unsigned NOT NULL COMMENT '用户ID',
   `utype` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '用户类型 1=会员 2=员工',
   `email` varchar(50) NOT NULL DEFAULT '' COMMENT '邮箱',
   `mobile` char(11) NOT NULL DEFAULT '' COMMENT '手机号',
@@ -426,7 +426,7 @@ CREATE TABLE `kis_uinfo` (
   `realname` varchar(4) NOT NULL DEFAULT '' COMMENT '姓名',
   `sex` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '性别 1=未知 2=女 3=男',
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='用户信息表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户信息表';
 
 -- ----------------------------
 -- Records of kis_uinfo
