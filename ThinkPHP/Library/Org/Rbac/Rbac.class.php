@@ -1,5 +1,6 @@
 <?php
 namespace Org\Rbac;
+use Org\Arrayhelps\CategoryArray;
 /**
  * 基于角色的权限控制类
  *  @author  buexplain
@@ -57,9 +58,11 @@ class Rbac {
 		$uid = session(C('USER_AUTH_KEY'));
 		if(empty($uid)) return false;
 		$role_user_node = self::getUserRoleNode($uid);
+
         $MODULE_NAME = strtolower(MODULE_NAME);
         $CONTROLLER_NAME = strtolower(CONTROLLER_NAME);
         $ACTION_NAME = strtolower(ACTION_NAME);
+
 		if(isset($role_user_node[$MODULE_NAME][$CONTROLLER_NAME][$ACTION_NAME])) return true;
 		return false;
 	}
@@ -79,12 +82,13 @@ class Rbac {
 	 * 获取用户节点
 	 */
 	public static function getUserRoleNode($uid) {
+        $prefix = C('DB_PREFIX');
 		/*角色表*/
-		$role_table = C('DB_PREFIX').'role';
+		$role_table = "{$prefix}role";
 		/*用户角色表*/
-		$role_user_table = C('DB_PREFIX').'role_user';	
+		$role_user_table = "{$prefix}role_user";
 		/*角色权限节点表*/
-		$role_node_table = C('DB_PREFIX').'role_node';
+		$role_node_table = "{$prefix}role_node";
 		/*权限节点表*/
 		$node_table = C('DB_PREFIX').'node';
 		/*找出用户的角色*/
@@ -105,34 +109,29 @@ class Rbac {
 		$field = "{$node_table}.node_id,pid,type,en_name";
 		$result = M('Role_node')->join($join)->where($where)->field($field)->select();
 		//echo M('Role_node')->getLastSql();
+
 		if(empty($result)) return false;
-		/*生成一个数组引用*/
-		$new_result = array();
+
 		foreach ($result as $key => $value) {
-            $new_result[$value['node_id']] =& $result[$key];
+            $result[$key]['en_name'] = strtolower($value['en_name']);
         }
-        /*所有节点*/
+
         $node = array();
-        /*找到模块*/
-		foreach ($result as $key => $value) {
-			if($value['type'] == 1) {
-				$node[strtolower($value['en_name'])] = array();
-				unset($result[$key]);
-			}
-		}
-		/*找到控制器*/
-		foreach ($result as $key => $value) {
-			if($value['type'] == 2) {
-				$node[strtolower($new_result[$value['pid']]['en_name'])][strtolower($value['en_name'])] = array();
-				unset($result[$key]);
-			}
-		}
-		/*找到动作*/
-		foreach ($result as $key => $value) {
-			if($value['type'] == 3) {
-				$node[strtolower($new_result[$new_result[$value['pid']]['pid']]['en_name'])][strtolower($new_result[$value['pid']]['en_name'])][strtolower($value['en_name'])] = 1;
-			}
-		}
+        foreach ($result as $key => $value) {
+            if($value['type'] == 1) {
+                $node[$value['en_name']] = CategoryArray::sons($result,$value['node_id'],'node_id','pid');
+                foreach ($node[$value['en_name']] as $key2 => $value2) {
+                    if($value2['type'] == 2) {
+                        $node[$value['en_name']][$value2['en_name']] = CategoryArray::sons($result,$value2['node_id'],'node_id','pid');
+                        foreach ($node[$value['en_name']][$value2['en_name']] as $key3 => $value3) {
+                            $node[$value['en_name']][$value2['en_name']][$value3['en_name']] = $value3['node_id'];
+                            unset($node[$value['en_name']][$value2['en_name']][$key3]);
+                        }
+                    }
+                    unset($node[$value['en_name']][$key2]);
+                }
+            }
+        }
 		return $node;
 	}
 }

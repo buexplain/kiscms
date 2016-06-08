@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50547
 File Encoding         : 65001
 
-Date: 2016-06-02 11:04:53
+Date: 2016-06-08 17:35:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -93,6 +93,25 @@ INSERT INTO `kis_doc_category_relation` VALUES ('2', '3');
 INSERT INTO `kis_doc_category_relation` VALUES ('3', '3');
 INSERT INTO `kis_doc_category_relation` VALUES ('4', '3');
 INSERT INTO `kis_doc_category_relation` VALUES ('5', '3');
+
+-- ----------------------------
+-- Table structure for kis_doc_discuss
+-- ----------------------------
+DROP TABLE IF EXISTS `kis_doc_discuss`;
+CREATE TABLE `kis_doc_discuss` (
+  `discuss_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '文档ID',
+  `uid` int(10) unsigned NOT NULL COMMENT '用户ID',
+  `doc_id` int(10) unsigned NOT NULL COMMENT '文档ID',
+  `pid` int(10) unsigned NOT NULL COMMENT '父ID',
+  `content` text NOT NULL COMMENT '内容',
+  `state` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '评论状态 1=已发布 2=逻辑删除',
+  `createtime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  PRIMARY KEY (`discuss_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文档讨论表';
+
+-- ----------------------------
+-- Records of kis_doc_discuss
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for kis_doc_ext
@@ -180,7 +199,7 @@ CREATE TABLE `kis_node` (
   `remark` varchar(100) NOT NULL DEFAULT '' COMMENT '备注',
   `ban` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否禁止 0=否 1=是',
   PRIMARY KEY (`node_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8 COMMENT='权限节点表';
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8 COMMENT='权限节点表';
 
 -- ----------------------------
 -- Records of kis_node
@@ -227,6 +246,8 @@ INSERT INTO `kis_node` VALUES ('41', '30', '还原文档', 'resetDoc', '3', '0',
 INSERT INTO `kis_node` VALUES ('42', '11', '个人管理', 'addMeInfo', '3', '1', '个人管理', '0');
 INSERT INTO `kis_node` VALUES ('43', '2', '站点管理', 'Site', '2', '1', '站点管理', '0');
 INSERT INTO `kis_node` VALUES ('44', '43', '刷新缓存', 'listCache', '3', '1', '刷新缓存', '0');
+INSERT INTO `kis_node` VALUES ('45', '2', '文档评论', 'DocDiscuss', '2', '1', '文档评论', '0');
+INSERT INTO `kis_node` VALUES ('46', '45', '评论列表', 'listDocDiscuss', '3', '1', '评论列表', '0');
 
 -- ----------------------------
 -- Table structure for kis_role
@@ -370,6 +391,8 @@ INSERT INTO `kis_role_node` VALUES ('4', '31');
 INSERT INTO `kis_role_node` VALUES ('4', '39');
 INSERT INTO `kis_role_node` VALUES ('4', '43');
 INSERT INTO `kis_role_node` VALUES ('4', '44');
+INSERT INTO `kis_role_node` VALUES ('1', '45');
+INSERT INTO `kis_role_node` VALUES ('1', '46');
 
 -- ----------------------------
 -- Table structure for kis_role_user

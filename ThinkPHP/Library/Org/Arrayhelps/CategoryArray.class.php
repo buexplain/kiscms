@@ -75,6 +75,18 @@ class CategoryArray {
         return $son;
     }
     /**
+     * 取分类的所有子分类，返回平级
+     */
+    public static function sons($array, $id, $idname='id',$pidname='pid',&$planeArr = array()) {
+        foreach ($array as $key => $value) {
+            if($id == $value[$pidname]) {
+                $planeArr[] = $value;
+                self::sons($array, $value[$idname], $idname,$pidname,$planeArr);
+            }
+        }
+        return $planeArr;
+    }
+    /**
      *  $result = CategoryArray::child($result,0,'id','pid');
      *  $a =  CategoryArray::option($result,'id','title');
      *  echo '<select>';

@@ -44,4 +44,11 @@ class BaseController extends Controller{
         $this->assign('page',$page->show());
         $this->assign('totalrows',$page->totalRows);
     }
+    /**
+     * 手动开启session
+     */
+    protected function sessionStart() {
+        C('SESSION_AUTO_START',true);
+        session(array());
+    }
 }

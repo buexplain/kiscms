@@ -1,0 +1,63 @@
+<p class="p10"></p>
+<p class="p10"></p>
+<div class="panel panel-default margin0"><div class="panel-heading">留下回复</div></div>
+<p class="p10"></p>
+<!-- 评论表单 -->
+<div class="margin0" id="discussDoc"></div>
+<p class="p10"></p>
+<!-- 评论列表 -->
+<div id="discussContainer">
+    <div class="panel panel-default margin0"><div class="panel-heading">回复列表</div></div>
+    <p class="p10"></p>
+    <div id="discussList"></div>
+</div>
+<!-- 定义评论模板 -->
+<script id="discussTpl" type="text/html">
+    {{#
+        var result = d.result;
+        var doc_id = d.doc_id;
+        for(var i = 0, len = result.length; i < len; i++){
+    }}
+        <div class="discuss">
+            <div class="discuss-user">
+                <div class="discuss-header">
+                    <img src="{{= result[i].avatar }}">
+                </div>
+                <div class="discuss-wrap">
+                    <a class="discuss-nickname">{{= result[i].nickname }}</a>
+                    <span class="discuss-date">
+                        {{= result[i].createtime }}
+                    </span>
+                </div>
+            </div>
+            {{# if(typeof result[i].parentData.length != 'number') { }}
+                <div class="discuss-quote">
+                    <div class="discuss-user">
+                        <div class="discuss-header">
+                            <img src="{{= result[i].avatar }}">
+                        </div>
+                        <div class="discuss-wrap">
+                            <a class="discuss-nickname">{{= result[i].parentData.nickname }}</a>
+                            <span class="discuss-date">
+                                {{= result[i].parentData.createtime }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="discuss-content">
+                        {{= result[i].parentData.content }}
+                    </div>
+                </div>
+            {{# } }}
+            <div class="discuss-content">
+                {{= result[i].content }}
+            </div>
+            <div class="discuss-reply">
+                <a href="javascript:;" onclick="addReplyForm(this,{{ result[i].discuss_id }},{{ doc_id }})">回复</a>
+            </div>
+        </div>
+    {{# } }}
+</script>
+<script>
+    var doc_id  = <?php echo $doc_id;?>; //当前文档id
+    var discuss = <?php echo $discuss;?>; //当前文档的评论数据
+</script>

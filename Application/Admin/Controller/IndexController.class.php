@@ -25,33 +25,28 @@ class IndexController extends BaseController {
         $uid = session(C('USER_AUTH_KEY'));
         $role_ids = D('RoleUser')->getRoleIdByUid($uid,true);
         if(empty($role_ids)) $this->error('你的帐号没有角色！请联系管理员',U('Sign/loginOut'));
-        $result = D('Node')->getNodeByRoleId($role_ids,array('is_nav'=>1),'en_name,zh_name,pid,type');
-        $result = CategoryArray::child($result,2,'node_id'); //只支持单个模块的菜单显示
-        $new_result = array();
+        $tmp = D('Node')->getNodeByRoleId($role_ids,array('is_nav'=>1),'en_name,zh_name,pid,type');
+        foreach ($tmp as $key => $value) {
+            $result[$value['node_id']] = $value;
+        }
+        $sidebar = array();
         foreach ($result as $key => $value) {
             $tmp = array();
             $tmp['id'] = $value['node_id'];
             $tmp['pId'] = $value['pid'];
             $tmp['name'] = $value['zh_name'];
-            $tmp['open'] = true;
-            $new_result[] = $tmp;
-            if(count($value['son']) > 0) {
-                foreach ($value['son'] as $key2 => $value2) {
-                    $tmp = array();
-                    $tmp['id'] = $value2['node_id'];
-                    $tmp['pId'] = $value2['pid'];
-                    $tmp['name'] = $value2['zh_name'];
-                    if($value2['type'] == 2) {
-                        $tmp['url'] = U($value2['en_name'].'/list'.$value2['en_name']);
-                    }else{
-                        $tmp['url'] = U($value['en_name'].'/'.$value2['en_name']);
-                    }
-                    $tmp['target'] = 'boxcontent';
-                    $new_result[] = $tmp;
-                }
+            $tmp['target'] = 'boxcontent';
+
+            if($value['type'] == 2) {
+                $tmp['open'] = true;
+            }elseif($value['type'] == 3){
+                $tmp['url'] = U($result[$value['pid']]['en_name'].'/'.$value['en_name']);
             }
+
+            $sidebar[] = $tmp;
         }
-        $this->assign('sidebartree',json_encode($new_result));
+        //print_r($sidebar);exit;
+        $this->assign('sidebartree',json_encode($sidebar));
     }
     /**
      * 后台主页

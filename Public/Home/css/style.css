@@ -6,7 +6,7 @@ font-weight: 400;
 font-style: normal;
 font-size-adjust: none;
 color: #333;
-line-height: 30px;
+line-height: 25px;
 text-align: justify;
 }
 ul{
@@ -54,6 +54,12 @@ a:hover,a:active {
 }
 .h300 {
     height:300px;
+}
+.mt {
+    margin-top:50px;
+}
+.margin0{
+    margin:0;
 }
 .ncpy {
     -moz-user-select:none;

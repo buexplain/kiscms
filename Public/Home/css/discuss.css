@@ -1,0 +1,62 @@
+.discuss {
+    border-left: 2px solid #ccc;
+    margin-bottom: 30px;
+    padding-left: 10px;
+}
+.discuss-user{
+    clear: both;
+    height: 35px;
+    margin-bottom: 5px;
+}
+.discuss-header{
+    width: 35px;
+    height: 35px;
+    float: left;
+    margin-right: 10px;
+}
+.discuss-header img{
+    border-radius: 500rem;
+    height: 100%;
+    width: 100%;
+}
+.discuss-wrap{
+    float: left;
+}
+.discuss-date{
+    color: #777;
+    display: inline-block;
+    margin-left: 5px;
+}
+@media (max-width: 960px) {
+    .discuss-date{
+        display: block;
+        margin-left: 0px;
+    }
+}
+
+.discuss-quote{
+    background: #fafafa none repeat scroll 0 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    clear: both;
+    font-size: 14px;
+    line-height: 23px;
+    margin: 0 20px 5px;
+    padding: 5px;
+}
+.discuss-content{
+    clear: both;
+}
+.discuss-reply{
+    color: #777;
+}
+.discuss-form{
+
+}
+.discuss-form input{
+    width: 200px;
+}
+.discuss-form img {
+    cursor: pointer;
+    height: 32px;
+}

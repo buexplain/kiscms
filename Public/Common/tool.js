@@ -64,7 +64,7 @@ var load = {
  * 规范化的请求
  */
 var require = {
-    callback_set: function(json) {
+    callback_set: function(json,obj) {
         if(json.code == 0) {
             layer.msg(json.msg, {
                 icon: 1,
@@ -90,11 +90,11 @@ var require = {
         load.wait();
         $.post(url,data,function(json){
             load.close();
-            require.callback_set(json);
+            require.callback_set(json,obj);
             submit.allow();
         });
     },
-    callback_del: function(json) {
+    callback_del: function(json,obj) {
         if(json.code == 0) {
             layer.msg(json.msg, {
                 icon: 1,
@@ -130,7 +130,7 @@ var require = {
             load.wait();
             $.get(url,{},function(json){
                 load.close();
-                require.callback_del(json);
+                require.callback_del(json,obj);
                 submit.allow();
                 layer.close(index);
             });
@@ -142,7 +142,7 @@ var form = {
     /**
      * 获取表单数据
      * onclick="xxx(this);return false;"
-     * 注意表单内不能有与 函数名 xxx 相同的name的元素 
+     * 注意表单内不能有与 函数名 xxx 相同的name的元素
      */
     get: function(formid,is_obj) {
         var is_obj = is_obj || 0;

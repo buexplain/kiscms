@@ -11,7 +11,7 @@
 namespace Think\Model;
 use Think\Model;
 /**
- * ThinkPHP关联模型扩展 
+ * ThinkPHP关联模型扩展
  */
 class RelationModel extends Model {
 
@@ -149,7 +149,7 @@ class RelationModel extends Model {
                                 $relationData   =  $model->where($mappingCondition)->field($mappingFields)->find();
                                 if (!empty($val['relation_deep'])){
                                     $model->getRelation($relationData,$val['relation_deep']);
-                                }                                
+                                }
                                 break;
                             case self::BELONGS_TO:
                                 if(strtoupper($mappingClass)==strtoupper($this->name)) {
@@ -163,7 +163,7 @@ class RelationModel extends Model {
                                 $relationData   =  $model->where($mappingCondition)->field($mappingFields)->find();
                                 if (!empty($val['relation_deep'])){
                                     $model->getRelation($relationData,$val['relation_deep']);
-                                }                                
+                                }
                                 break;
                             case self::HAS_MANY:
                                 $pk   =  $result[$mappingKey];
@@ -173,10 +173,10 @@ class RelationModel extends Model {
                                 // 延时获取关联记录
                                 $relationData   =  $model->where($mappingCondition)->field($mappingFields)->order($mappingOrder)->limit($mappingLimit)->select();
                                 if (!empty($val['relation_deep'])){
-                                    foreach($relationData as $key=>$data){                                    
+                                    foreach($relationData as $key=>$data){
                                         $model->getRelation($data,$val['relation_deep']);
                                         $relationData[$key]     =   $data;
-                                    }                                      
+                                    }
                                 }
                                 break;
                             case self::MANY_TO_MANY:
@@ -203,11 +203,11 @@ class RelationModel extends Model {
                                 }
                                 $relationData   =   $this->query($sql);
                                 if (!empty($val['relation_deep'])){
-                                    foreach($relationData as $key=>$data){                                    
+                                    foreach($relationData as $key=>$data){
                                         $model->getRelation($data,$val['relation_deep']);
                                         $relationData[$key]     =   $data;
-                                    }                                      
-                                }                                
+                                    }
+                                }
                                 break;
                         }
                         if(!$return){
@@ -333,7 +333,7 @@ class RelationModel extends Model {
                                         $mappingRelationTable   =   preg_replace_callback("/__([A-Z_-]+)__/sU", function($match) use($prefix){ return $prefix.strtolower($match[1]);}, $val['relation_table']);
                                     }else{
                                         $mappingRelationTable   =   $this->getRelationTableName($model);
-                                    }                                    
+                                    }
                                     if(is_array($mappingData)) {
                                         $ids   = array();
                                         foreach ($mappingData as $vo)
@@ -354,7 +354,7 @@ class RelationModel extends Model {
                                                     // 事务回滚
                                                     $this->rollback();
                                             }
-                                            break;                                        
+                                            break;
                                         case 'SAVE':    // 更新关联数据
                                             if(isset($relationId)) {
                                                 $this->startTrans();
@@ -379,7 +379,7 @@ class RelationModel extends Model {
                             }
                             if (!empty($val['relation_deep'])){
                                 $model->opRelation($opType,$mappingData,$val['relation_deep']);
-                            }                               
+                            }
                     }
                 }
             }

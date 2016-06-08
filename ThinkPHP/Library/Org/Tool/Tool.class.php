@@ -152,4 +152,36 @@ class Tool {
         }
         return $dev;
     }
+    /**
+     * 发送邮件
+     */
+    public static function sendMail($address,$subject,$body) {
+        vendor('phpMailer.PHPMailerAutoload');
+        PHPMailerAutoload('phpmailer');
+        $mail = new \PHPMailer();
+
+        $mail->isSMTP();
+        $mail->Host = C('MAIL_HOST');
+        $mail->Port = C('MAIL_PORT');
+        $mail->Username = C('MAIL_USERNAME');
+        $mail->Password = C('MAIL_PWD');
+
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = 'tls';
+        $mail->CharSet = 'UTF-8';
+
+        $mail->setFrom(C('MAIL_FROM'), C('site.title'));
+        $mail->addAddress($address);
+
+        $mail->isHTML(true);
+
+        $mail->Subject = $subject;
+        $mail->Body    = $body;
+
+        if(!$mail->send()) {
+            return $mail->ErrorInfo;
+        }else{
+            return '';
+        }
+    }
 }

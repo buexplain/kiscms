@@ -16,6 +16,14 @@ class BaseModel extends Model{
         return false;
     }
     /**
+     * 验证大于等于零的整型数
+     */
+    public function egtZeroInt($data) {
+        $pattern = "~^[1-9]{1,1}[0-9]*$~";
+        if(preg_match($pattern,$data)) return true;
+        return false;
+    }
+    /**
      * 验证是否为邮箱
      */
     public function isEmail($data) {
