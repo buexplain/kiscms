@@ -12,6 +12,7 @@
 			<!--左侧的查找栏-->
 			<div class="boxsearch l h50 lh50">
 				<form action="" method="get">
+					<!--关键词检索-->
 					<div class="rowoption l">
 						<select class="form-control input-sm l" name="search_type">
 							{$search_arr|htmlSelectOption=$search_type,###}
@@ -19,6 +20,19 @@
 					</div>
 					<div class="rowoption l">
 						<input type="text" class="form-control input-sm l" name="search_keywrod" placeholder="请输入关键词" value="{$search_keywrod}">
+					</div>
+					<!--时间检索-->
+					<div class="rowoption l">
+						<input type="text" class="form-control input-sm l laydatebox" name="search_start_time" placeholder="开始创建时间" value="{$search_start_time}" readonly="readonly">
+					</div>
+					<div class="rowoption l">
+						<input type="text" class="form-control input-sm l laydatebox" name="search_end_time" placeholder="结束创建时间" value="{$search_end_time}" readonly="readonly">
+					</div>
+					<!--状态检索-->
+					<div class="rowoption l">
+						<select class="form-control input-sm l" name="state_cur">
+							{$state|htmlSelectOption=$state_cur,###}
+						</select>
 					</div>
 					<div class="lh50 l">
 						<button type="submit" class="btn btn-default btn-sm">搜索</button>
@@ -42,7 +56,10 @@
 				        评论内容
 				    </th>
 				    <th>
-				        评论者
+				        用户
+				    </th>
+				    <th>
+				        创建时间
 				    </th>
 				    <th>
 				        状态
@@ -53,9 +70,12 @@
 				</tr>
 				<foreach name='result' item='v'>
 				    <tr>
-					    <td>{$v.doc_ext_id}</td>
-					    <td>{$v.ext_name}</td>
-					    <td>{$v.sort}</td>
+					    <td>{$v.discuss_id}</td>
+					    <td>{$v.title}</td>
+					    <td>{$v.content}</td>
+					    <td>{$v.nickname}</td>
+					    <td>{$v.createtime}</td>
+					    <td>{$v.stateTxt}</td>
 					    <td class="handle">{$v.handle}</td>
 				    </tr>
 			    </foreach>

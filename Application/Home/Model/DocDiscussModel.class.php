@@ -14,13 +14,13 @@ class DocDiscussModel extends BaseModel{
                 $result[$key]['parentData'] = $this->getDiscussByDiscussID($value['pid']);
                 $tmp = D('Uinfo')->getUinfoByUid($result[$key]['parentData']['uid']);
                 $result[$key]['parentData']['nickname'] = isset($tmp['nickname']) ? $tmp['nickname'] : '';
-                $result[$key]['parentData']['avatar']   = isset($tmp['avatar'])   ? $tmp['avatar']   : $this->defaultAvatar();
+                $result[$key]['parentData']['avatar']   = !empty($tmp['avatar'])   ? $tmp['avatar']   : $this->defaultAvatar();
             }else{
                 $result[$key]['parentData'] = array();
             }
             $tmp = D('Uinfo')->getUinfoByUid($value['uid']);
             $result[$key]['nickname'] = isset($tmp['nickname']) ? $tmp['nickname'] : '';
-            $result[$key]['avatar']   = isset($tmp['avatar'])   ? $tmp['avatar']   : $this->defaultAvatar();
+            $result[$key]['avatar']   = !empty($tmp['avatar'])   ? $tmp['avatar']   : $this->defaultAvatar();
         }
         return array('doc_id'=>$doc_id,'result'=>$result);
     }
@@ -31,7 +31,7 @@ class DocDiscussModel extends BaseModel{
             if(!empty($tmp)) {
                 $tmp2 = D('Uinfo')->getUinfoByUid($tmp['uid']);
                 $tmp['nickname'] = isset($tmp2['nickname']) ? $tmp2['nickname'] : '';
-                $tmp['avatar']   = isset($tmp2['avatar'])   ? $tmp2['avatar']   : $this->defaultAvatar();
+                $tmp['avatar']   = !empty($tmp2['avatar'])   ? $tmp2['avatar']   : $this->defaultAvatar();
                 $this->discussArr[$discussID] = $tmp;
             }
         }

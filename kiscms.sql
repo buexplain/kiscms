@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50547
 File Encoding         : 65001
 
-Date: 2016-06-08 17:35:09
+Date: 2016-06-11 13:08:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -38,11 +38,11 @@ CREATE TABLE `kis_doc` (
 -- ----------------------------
 -- Records of kis_doc
 -- ----------------------------
-INSERT INTO `kis_doc` VALUES ('1', '2', '0', '2', 'kiscms是什么?', '', '', '&lt;p&gt;Keep it simple!这个是一个简单的便于二次开发的web内容管理系统。大多数情况下，它不能满足您的需求。&lt;/p&gt;\n\n&lt;p&gt;kiscms适合二次开发。它具备基本的模块：&lt;/p&gt;\n\n&lt;p&gt;1、用户模块&lt;/p&gt;\n\n&lt;p&gt;2、权限模块&lt;/p&gt;\n\n&lt;p&gt;3、文档模块&lt;/p&gt;\n', '2016-02-24 15:48:35', '2016-04-24 15:18:21', '2016-04-28 14:32:26', '0');
-INSERT INTO `kis_doc` VALUES ('2', '2', '0', '2', '我们为什么需要它?', '', '', '&lt;p&gt;网站的开发需要做大量的工作，为了加快项目进度，我们通常会用上框架技术，甚至是一些现成的项目，进行二次开发。&lt;/p&gt;\n\n&lt;p&gt;kiscms是一个工作进度介于框架与现成项目之间的产品。用它做二次开发，可以减少我们搭建框架、编写基本模块的工作量，加快项目进度。&lt;/p&gt;\n', '2016-02-24 16:32:50', '2016-04-24 15:18:34', '2016-04-28 17:24:32', '1');
-INSERT INTO `kis_doc` VALUES ('3', '2', '0', '2', '它有什么优势?', '', '', '&lt;p&gt;1、kiscms采用了ThinkPHP、Bootstrap、Layer、Laydate、Jquery、Ckeditor、Webuploader等优秀的框架与库，它们可以极大的提高我们的项目质量。&lt;/p&gt;\n\n&lt;p&gt;2、简明规范的数据库表设计，方便我们在二次开发的时候进行大刀阔斧的增改。&lt;/p&gt;\n\n&lt;p&gt;3、简洁的后台界面，就一个字&amp;ldquo;高颜值&amp;rdquo;!&lt;/p&gt;\n', '2016-02-24 16:35:21', '2016-04-24 15:18:48', '2016-04-28 14:41:15', '1');
-INSERT INTO `kis_doc` VALUES ('4', '1', '0', '2', '如何获取它?', '', '', '&lt;p&gt;kiscms程序完全遵循MIT(The MIT License)开源协议。&lt;a href=&quot;https://github.com/buexplain/kiscms/archive/master.zip&quot; target=&quot;_blank&quot;&gt;下载&lt;/a&gt; or &lt;a href=&quot;https://github.com/buexplain/kiscms&quot; target=&quot;_blank&quot;&gt;github&lt;/a&gt;&lt;/p&gt;\n', '2016-02-28 19:53:25', '2016-04-26 21:33:27', '2016-02-28 19:53:39', '2');
-INSERT INTO `kis_doc` VALUES ('5', '1', '0', '2', '其它', '', '', '&lt;p&gt;kiscms QQ交流群：89292141&lt;/p&gt;\n\n&lt;p&gt;建议安装环境： Linux + Apache + PHP or Linux + Nginx + PHP&lt;/p&gt;\n\n&lt;p&gt;安装步骤：&lt;/p&gt;\n\n&lt;ol&gt;\n	&lt;li&gt;导入(工具：phpmyadmin) kiscms.sql&lt;/li&gt;\n	&lt;li&gt;配置数据库连接文件 Application/Common/Conf/db.php&lt;/li&gt;\n	&lt;li&gt;进入后台更改密码，后台地址：http://域名/admin/Sign/index.html&lt;/li&gt;\n	&lt;li&gt;如果要保护后台地址，可以更改 Application/Common/Conf/config.php 中的 URL_MODULE_MAP 进行模块映射&lt;/li&gt;\n&lt;/ol&gt;\n\n&lt;p&gt;后台登录帐号与密码，将其中的#去掉：&lt;/p&gt;\n\n&lt;p&gt;admin#@admin.c#om 12345678&lt;/p&gt;\n\n&lt;p&gt;buexplain#@163.c#om 12345678&lt;/p&gt;\n\n&lt;p&gt;author#@author.c#om 12345678&lt;/p&gt;\n\n&lt;p&gt;guest#@guest.c#om 12345678&lt;/p&gt;\n', '2016-02-28 19:54:15', '2016-04-28 16:28:00', '2016-04-28 13:37:45', '5');
+INSERT INTO `kis_doc` VALUES ('1', '3', '0', '2', 'kiscms是什么?', '', '', '&lt;p&gt;Keep it simple!这个是一个简单的便于二次开发的web内容管理系统。大多数情况下，它不能满足您的需求。&lt;/p&gt;\n\n&lt;p&gt;kiscms适合二次开发。它具备基本的模块：&lt;/p&gt;\n\n&lt;p&gt;1、用户模块&lt;/p&gt;\n\n&lt;p&gt;2、权限模块&lt;/p&gt;\n\n&lt;p&gt;3、文档模块&lt;/p&gt;\n', '2016-02-24 15:48:35', '2016-04-24 15:18:21', '2016-06-09 20:59:57', '0');
+INSERT INTO `kis_doc` VALUES ('2', '3', '0', '2', '我们为什么需要它?', '', '', '&lt;p&gt;网站的开发需要做大量的工作，为了加快项目进度，我们通常会用上框架技术，甚至是一些现成的项目，进行二次开发。&lt;/p&gt;\n\n&lt;p&gt;kiscms是一个工作进度介于框架与现成项目之间的产品。用它做二次开发，可以减少我们搭建框架、编写基本模块的工作量，加快项目进度。&lt;/p&gt;\n', '2016-02-24 16:32:50', '2016-04-24 15:18:34', '2016-04-28 17:24:32', '1');
+INSERT INTO `kis_doc` VALUES ('3', '3', '0', '2', '它有什么优势?', '', '', '&lt;p&gt;1、kiscms采用了ThinkPHP、Bootstrap、Layer、Laydate、Jquery、Ckeditor、Webuploader等优秀的框架与库，它们可以极大的提高我们的项目质量。&lt;/p&gt;\n\n&lt;p&gt;2、简明规范的数据库表设计，方便我们在二次开发的时候进行大刀阔斧的增改。&lt;/p&gt;\n\n&lt;p&gt;3、简洁的后台界面，就一个字&amp;ldquo;高颜值&amp;rdquo;!&lt;/p&gt;\n', '2016-02-24 16:35:21', '2016-04-24 15:18:48', '2016-04-28 14:41:15', '2');
+INSERT INTO `kis_doc` VALUES ('4', '3', '0', '2', '如何获取它?', '', '', '&lt;p&gt;kiscms程序完全遵循MIT(The MIT License)开源协议。&lt;a href=&quot;https://github.com/buexplain/kiscms/archive/master.zip&quot; target=&quot;_blank&quot;&gt;下载&lt;/a&gt; or &lt;a href=&quot;https://github.com/buexplain/kiscms&quot; target=&quot;_blank&quot;&gt;github&lt;/a&gt;&lt;/p&gt;\n', '2016-02-28 19:53:25', '2016-04-26 21:33:27', '2016-06-09 20:59:42', '3');
+INSERT INTO `kis_doc` VALUES ('5', '3', '0', '2', '其它', '', '', '&lt;p&gt;kiscms QQ交流群：89292141&lt;/p&gt;\n\n&lt;p&gt;建议安装环境： Linux + Apache + PHP or Linux + Nginx + PHP&lt;/p&gt;\n\n&lt;p&gt;安装步骤：&lt;/p&gt;\n\n&lt;ol&gt;\n	&lt;li&gt;导入(工具：phpmyadmin) kiscms.sql&lt;/li&gt;\n	&lt;li&gt;配置数据库连接文件 Application/Common/Conf/db.php&lt;/li&gt;\n	&lt;li&gt;进入后台更改密码，后台地址：http://域名/admin/Sign/index.html&lt;/li&gt;\n	&lt;li&gt;如果要保护后台地址，可以更改 Application/Common/Conf/config.php 中的 URL_MODULE_MAP 进行模块映射&lt;/li&gt;\n&lt;/ol&gt;\n\n&lt;p&gt;后台登录帐号与密码，将其中的#去掉：&lt;/p&gt;\n\n&lt;p&gt;admin#@admin.c#om 12345678&lt;/p&gt;\n\n&lt;p&gt;buexplain#@163.c#om 12345678&lt;/p&gt;\n\n&lt;p&gt;author#@author.c#om 12345678&lt;/p&gt;\n\n&lt;p&gt;guest#@guest.c#om 12345678&lt;/p&gt;\n', '2016-02-28 19:54:15', '2016-04-28 16:28:00', '2016-06-09 20:59:47', '6');
 
 -- ----------------------------
 -- Table structure for kis_doc_category
@@ -199,7 +199,7 @@ CREATE TABLE `kis_node` (
   `remark` varchar(100) NOT NULL DEFAULT '' COMMENT '备注',
   `ban` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否禁止 0=否 1=是',
   PRIMARY KEY (`node_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8 COMMENT='权限节点表';
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8 COMMENT='权限节点表';
 
 -- ----------------------------
 -- Records of kis_node
@@ -234,20 +234,24 @@ INSERT INTO `kis_node` VALUES ('29', '23', '删除字段', 'delField', '3', '0',
 INSERT INTO `kis_node` VALUES ('30', '2', '文档管理', 'Doc', '2', '1', '文档管理', '0');
 INSERT INTO `kis_node` VALUES ('31', '30', '文档列表', 'listDoc', '3', '1', '文档列表', '0');
 INSERT INTO `kis_node` VALUES ('32', '30', '添加文档', 'addDoc', '3', '0', '添加文档', '0');
-INSERT INTO `kis_node` VALUES ('33', '30', '物理删除文档', 'delDoc', '3', '0', '删除文档', '0');
+INSERT INTO `kis_node` VALUES ('33', '47', '物理删除文档', 'delDoc', '3', '0', '删除文档', '0');
 INSERT INTO `kis_node` VALUES ('34', '30', '添加文档扩展数据', 'addDocExtData', '3', '0', '添加文档扩展数据', '0');
 INSERT INTO `kis_node` VALUES ('35', '30', '删除文档扩展数据', 'delDocExtData', '3', '0', '删除文档扩展数据', '0');
 INSERT INTO `kis_node` VALUES ('36', '30', '更新文档状态', 'setState', '3', '0', '更新文档状态', '0');
 INSERT INTO `kis_node` VALUES ('37', '3', '角色管理', 'listRole', '3', '1', '角色管理', '0');
 INSERT INTO `kis_node` VALUES ('38', '11', '登录日志', 'listLoginLog', '3', '0', '登录日志', '0');
-INSERT INTO `kis_node` VALUES ('39', '30', '回收站', 'listDocRecy', '3', '1', '文档回收站', '0');
-INSERT INTO `kis_node` VALUES ('40', '30', '逻辑删除文档', 'logicDelDoc', '3', '0', '逻辑删除文档', '0');
-INSERT INTO `kis_node` VALUES ('41', '30', '还原文档', 'resetDoc', '3', '0', '还原文档', '0');
+INSERT INTO `kis_node` VALUES ('39', '47', '回收站列表', 'listDocRecy', '3', '0', '文档回收站', '0');
+INSERT INTO `kis_node` VALUES ('40', '30', '逻辑删除文档', 'delDoc', '3', '0', '逻辑删除文档', '0');
+INSERT INTO `kis_node` VALUES ('41', '47', '还原文档', 'resetDoc', '3', '0', '还原文档', '0');
 INSERT INTO `kis_node` VALUES ('42', '11', '个人管理', 'addMeInfo', '3', '1', '个人管理', '0');
 INSERT INTO `kis_node` VALUES ('43', '2', '站点管理', 'Site', '2', '1', '站点管理', '0');
 INSERT INTO `kis_node` VALUES ('44', '43', '刷新缓存', 'listCache', '3', '1', '刷新缓存', '0');
-INSERT INTO `kis_node` VALUES ('45', '2', '文档评论', 'DocDiscuss', '2', '1', '文档评论', '0');
-INSERT INTO `kis_node` VALUES ('46', '45', '评论列表', 'listDocDiscuss', '3', '1', '评论列表', '0');
+INSERT INTO `kis_node` VALUES ('45', '30', '文档评论', 'DocDiscuss', '2', '1', '文档评论', '0');
+INSERT INTO `kis_node` VALUES ('46', '45', '评论列表', 'listDocDiscuss', '3', '0', '评论列表', '0');
+INSERT INTO `kis_node` VALUES ('47', '30', '回收站', 'DocRecy', '2', '1', '回收站', '0');
+INSERT INTO `kis_node` VALUES ('48', '45', '更新评论状态', 'setState', '3', '0', '更新评论状态', '0');
+INSERT INTO `kis_node` VALUES ('49', '45', '删除评论', 'delDocDiscuss', '3', '0', '删除评论', '0');
+INSERT INTO `kis_node` VALUES ('50', '45', '回复评论', 'addDiscuss', '3', '0', '回复评论', '0');
 
 -- ----------------------------
 -- Table structure for kis_role
@@ -323,8 +327,13 @@ INSERT INTO `kis_role_node` VALUES ('1', '40');
 INSERT INTO `kis_role_node` VALUES ('1', '41');
 INSERT INTO `kis_role_node` VALUES ('1', '42');
 INSERT INTO `kis_role_node` VALUES ('1', '43');
-INSERT INTO `kis_role_node` VALUES ('1', '43');
 INSERT INTO `kis_role_node` VALUES ('1', '44');
+INSERT INTO `kis_role_node` VALUES ('1', '45');
+INSERT INTO `kis_role_node` VALUES ('1', '46');
+INSERT INTO `kis_role_node` VALUES ('1', '47');
+INSERT INTO `kis_role_node` VALUES ('1', '48');
+INSERT INTO `kis_role_node` VALUES ('1', '49');
+INSERT INTO `kis_role_node` VALUES ('1', '50');
 INSERT INTO `kis_role_node` VALUES ('2', '1');
 INSERT INTO `kis_role_node` VALUES ('2', '2');
 INSERT INTO `kis_role_node` VALUES ('2', '11');
@@ -335,6 +344,7 @@ INSERT INTO `kis_role_node` VALUES ('2', '16');
 INSERT INTO `kis_role_node` VALUES ('2', '17');
 INSERT INTO `kis_role_node` VALUES ('2', '18');
 INSERT INTO `kis_role_node` VALUES ('2', '38');
+INSERT INTO `kis_role_node` VALUES ('2', '42');
 INSERT INTO `kis_role_node` VALUES ('2', '19');
 INSERT INTO `kis_role_node` VALUES ('2', '20');
 INSERT INTO `kis_role_node` VALUES ('2', '21');
@@ -349,27 +359,37 @@ INSERT INTO `kis_role_node` VALUES ('2', '29');
 INSERT INTO `kis_role_node` VALUES ('2', '30');
 INSERT INTO `kis_role_node` VALUES ('2', '31');
 INSERT INTO `kis_role_node` VALUES ('2', '32');
-INSERT INTO `kis_role_node` VALUES ('2', '33');
 INSERT INTO `kis_role_node` VALUES ('2', '34');
 INSERT INTO `kis_role_node` VALUES ('2', '35');
 INSERT INTO `kis_role_node` VALUES ('2', '36');
-INSERT INTO `kis_role_node` VALUES ('2', '39');
 INSERT INTO `kis_role_node` VALUES ('2', '40');
+INSERT INTO `kis_role_node` VALUES ('2', '45');
+INSERT INTO `kis_role_node` VALUES ('2', '46');
+INSERT INTO `kis_role_node` VALUES ('2', '48');
+INSERT INTO `kis_role_node` VALUES ('2', '49');
+INSERT INTO `kis_role_node` VALUES ('2', '50');
+INSERT INTO `kis_role_node` VALUES ('2', '47');
+INSERT INTO `kis_role_node` VALUES ('2', '33');
+INSERT INTO `kis_role_node` VALUES ('2', '39');
 INSERT INTO `kis_role_node` VALUES ('2', '41');
 INSERT INTO `kis_role_node` VALUES ('2', '43');
 INSERT INTO `kis_role_node` VALUES ('2', '44');
 INSERT INTO `kis_role_node` VALUES ('3', '1');
 INSERT INTO `kis_role_node` VALUES ('3', '2');
-INSERT INTO `kis_role_node` VALUES ('3', '11');
-INSERT INTO `kis_role_node` VALUES ('3', '42');
 INSERT INTO `kis_role_node` VALUES ('3', '30');
 INSERT INTO `kis_role_node` VALUES ('3', '31');
 INSERT INTO `kis_role_node` VALUES ('3', '32');
 INSERT INTO `kis_role_node` VALUES ('3', '34');
 INSERT INTO `kis_role_node` VALUES ('3', '35');
 INSERT INTO `kis_role_node` VALUES ('3', '36');
-INSERT INTO `kis_role_node` VALUES ('3', '39');
 INSERT INTO `kis_role_node` VALUES ('3', '40');
+INSERT INTO `kis_role_node` VALUES ('3', '45');
+INSERT INTO `kis_role_node` VALUES ('3', '46');
+INSERT INTO `kis_role_node` VALUES ('3', '48');
+INSERT INTO `kis_role_node` VALUES ('3', '49');
+INSERT INTO `kis_role_node` VALUES ('3', '50');
+INSERT INTO `kis_role_node` VALUES ('3', '47');
+INSERT INTO `kis_role_node` VALUES ('3', '39');
 INSERT INTO `kis_role_node` VALUES ('3', '41');
 INSERT INTO `kis_role_node` VALUES ('3', '43');
 INSERT INTO `kis_role_node` VALUES ('3', '44');
@@ -381,6 +401,7 @@ INSERT INTO `kis_role_node` VALUES ('4', '37');
 INSERT INTO `kis_role_node` VALUES ('4', '11');
 INSERT INTO `kis_role_node` VALUES ('4', '12');
 INSERT INTO `kis_role_node` VALUES ('4', '16');
+INSERT INTO `kis_role_node` VALUES ('4', '38');
 INSERT INTO `kis_role_node` VALUES ('4', '19');
 INSERT INTO `kis_role_node` VALUES ('4', '20');
 INSERT INTO `kis_role_node` VALUES ('4', '23');
@@ -388,11 +409,11 @@ INSERT INTO `kis_role_node` VALUES ('4', '24');
 INSERT INTO `kis_role_node` VALUES ('4', '27');
 INSERT INTO `kis_role_node` VALUES ('4', '30');
 INSERT INTO `kis_role_node` VALUES ('4', '31');
+INSERT INTO `kis_role_node` VALUES ('4', '45');
+INSERT INTO `kis_role_node` VALUES ('4', '46');
+INSERT INTO `kis_role_node` VALUES ('4', '47');
 INSERT INTO `kis_role_node` VALUES ('4', '39');
 INSERT INTO `kis_role_node` VALUES ('4', '43');
-INSERT INTO `kis_role_node` VALUES ('4', '44');
-INSERT INTO `kis_role_node` VALUES ('1', '45');
-INSERT INTO `kis_role_node` VALUES ('1', '46');
 
 -- ----------------------------
 -- Table structure for kis_role_user
@@ -432,8 +453,8 @@ CREATE TABLE `kis_ucenter` (
 -- Records of kis_ucenter
 -- ----------------------------
 INSERT INTO `kis_ucenter` VALUES ('1', 'admin@admin.com', '064d6ea7931d425881fd9216d3317fce', 'DyghWL', '1', '2016-02-24 15:27:55', '127.0.0.1');
-INSERT INTO `kis_ucenter` VALUES ('2', 'buexplain@163.com', '3627b00e5bfd8e6ce11a93f4df1dd805', 'uSWUrc', '1', '2016-02-24 15:27:55', '127.0.0.1');
-INSERT INTO `kis_ucenter` VALUES ('3', 'author@author.com', 'a050e09a819dfe75f2f900c8ab114565', 'zLOmZn', '1', '2016-02-29 17:24:18', '127.0.0.1');
+INSERT INTO `kis_ucenter` VALUES ('2', 'manage@manage.com', '3627b00e5bfd8e6ce11a93f4df1dd805', 'uSWUrc', '1', '2016-02-24 15:27:55', '127.0.0.1');
+INSERT INTO `kis_ucenter` VALUES ('3', 'buexplain@163.com', 'a050e09a819dfe75f2f900c8ab114565', 'zLOmZn', '1', '2016-02-29 17:24:18', '127.0.0.1');
 INSERT INTO `kis_ucenter` VALUES ('4', 'guest@guest.com', '2d1a88375b19a26013c3a394468ef942', 'VCuwKl', '1', '2016-04-28 13:44:51', '127.0.0.1');
 
 -- ----------------------------
@@ -447,6 +468,7 @@ CREATE TABLE `kis_uinfo` (
   `mobile` char(11) NOT NULL DEFAULT '' COMMENT '手机号',
   `nickname` varchar(50) NOT NULL DEFAULT '' COMMENT '昵称',
   `realname` varchar(4) NOT NULL DEFAULT '' COMMENT '姓名',
+  `avatar` varchar(200) NOT NULL DEFAULT '' COMMENT '头像',
   `sex` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '性别 1=未知 2=女 3=男',
   PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户信息表';
@@ -454,10 +476,10 @@ CREATE TABLE `kis_uinfo` (
 -- ----------------------------
 -- Records of kis_uinfo
 -- ----------------------------
-INSERT INTO `kis_uinfo` VALUES ('1', '2', 'admin@admin.com', '', '威震诸魔', '威震诸魔', '2');
-INSERT INTO `kis_uinfo` VALUES ('2', '2', 'buexplain@163.com', '', '威震诸魔-总钻风', '总钻风', '1');
-INSERT INTO `kis_uinfo` VALUES ('3', '2', 'author@author.com', '', '威震诸魔-老司机', '老司机', '2');
-INSERT INTO `kis_uinfo` VALUES ('4', '2', 'guest@guest.com', '', '威震诸魔-小钻风', '小钻风', '1');
+INSERT INTO `kis_uinfo` VALUES ('1', '2', 'admin@admin.com', '', '威震诸魔', '威震诸魔', '', '2');
+INSERT INTO `kis_uinfo` VALUES ('2', '2', 'manage@manage.com', '', '威震诸魔-总钻风', '总钻风', '', '1');
+INSERT INTO `kis_uinfo` VALUES ('3', '2', 'buexplain@163.com', '', '威震诸魔-老司机', '老司机', '', '2');
+INSERT INTO `kis_uinfo` VALUES ('4', '2', 'guest@guest.com', '', '威震诸魔-小钻风', '小钻风', '', '1');
 
 -- ----------------------------
 -- Table structure for kis_usign
@@ -470,7 +492,7 @@ CREATE TABLE `kis_usign` (
   `sign_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '登录时间',
   `sign_api` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '登录入口 1=管理后台',
   PRIMARY KEY (`usign_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='用户登录日志';
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COMMENT='用户登录日志';
 
 -- ----------------------------
 -- Records of kis_usign
@@ -499,3 +521,5 @@ INSERT INTO `kis_usign` VALUES ('21', '3', '127.0.0.1', '2016-04-28 14:44:20', '
 INSERT INTO `kis_usign` VALUES ('22', '4', '127.0.0.1', '2016-04-28 14:45:00', '1');
 INSERT INTO `kis_usign` VALUES ('23', '3', '127.0.0.1', '2016-04-28 14:46:00', '1');
 INSERT INTO `kis_usign` VALUES ('24', '1', '127.0.0.1', '2016-04-28 14:54:26', '1');
+INSERT INTO `kis_usign` VALUES ('25', '1', '127.0.0.1', '2016-06-09 20:09:23', '1');
+INSERT INTO `kis_usign` VALUES ('26', '1', '127.0.0.1', '2016-06-10 20:33:41', '1');

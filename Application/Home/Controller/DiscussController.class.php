@@ -35,44 +35,44 @@ class DiscussController extends HomeController {
             $this->error('验证码错误','',2);
         }
 
-        $title = D('Doc')->where(array('doc_id'=>$data['doc_id'],'state'=>2))->getField('title');
-        if(empty($title)) $this->error('文档ID错误2');
+        $doc = D('Doc')->where(array('doc_id'=>$data['doc_id'],'state'=>2))->find();
+        if(empty($doc)) $this->error('文档ID错误2','',2);
+        $title = $doc['title'];
 
         if(intval($data['pid']) > 0) {
-            $parentContent = D('DocDiscuss')->where(array('discuss_id'=>$data['pid']))->getField('content');
-            if(empty($parentContent)) $this->error('引用ID错误2');
+            $oldDiscuss = D('DocDiscuss')->where(array('discuss_id'=>$data['pid']))->find();
+            if(empty($oldDiscuss)) $this->error('引用ID错误2','',2);
+            $parentContent = $oldDiscuss['content'];
+            $sendEmail = D('Ucenter')->where(array('uid'=>$oldDiscuss['uid']))->getField('email');
         }else{
             $parentContent = '';
+            $sendEmail = D('Ucenter')->where(array('uid'=>$doc['create_id']))->getField('email');
         }
 
-        $uid = session(C('USER_AUTH_KEY'));
-        if(empty($uid)) {
-            $uinfo = D('Ucenter')->getUinfoByEmail($email);
-            if(empty($uinfo)) {
-                $uid = D('Ucenter')->addUser($email,'',3,$nickname);
-                if(empty($uid)) {
-                    $this->error('抱歉，程序运行错误');
-                }
-            }else{
-                if($uinfo['utype'] == 2) { //内部员工
-                    $this->error('邮箱不对');
-                }elseif($uinfo['nickname'] != $nickname){
-                    $this->error('昵称不对');
-                }
-                $uid = $uinfo['uid'];
+        $uinfo = D('Ucenter')->getUinfoByEmail($email);
+        if(empty($uinfo)) {
+            $uid = D('Ucenter')->addUser($email,'',3,$nickname);
+            if(empty($uid)) {
+                $this->error('抱歉，程序运行错误','',2);
             }
         }else{
-            $email = D('Ucenter')->getEmailByUid($uid);
+            $utype = session(C('USER_TYPE_KEY'));
+            if($uinfo['utype'] == 2 && (empty($utype) || $utype !=2 )) {
+                $this->error('邮箱不对','',2);
+            }elseif($uinfo['nickname'] != $nickname){
+                $this->error('昵称不对','',2);
+            }
+            $uid = $uinfo['uid'];
         }
 
         $data['uid'] = $uid;
         $data['createtime'] = date('Y-m-d H:i:s');
         $result = D('DocDiscuss')->data($data)->add();
 
-        if(empty($result)) $this->error('抱歉，回复失败');
+        if(empty($result)) $this->error('抱歉，回复失败','',2);
 
         $url = U('Home/Desc/index',array('doc_id'=>$data['doc_id']));
-        $result = $this->sendMail($email,$title,$url,$data['content'],$parentContent);
+        $result = $this->sendMail($sendEmail,$title,$url,$data['content'],$parentContent);
 
         $this->success('','恭喜，回复成功');
     }

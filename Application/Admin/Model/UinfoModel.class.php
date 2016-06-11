@@ -2,6 +2,7 @@
 namespace Admin\Model;
 use Admin\Common\BaseModel;
 class UinfoModel extends BaseModel{
+    private $nicknameUidArr = array();
     protected $_validate = array(
         array('mobile',"isMobile",'请填写正确格式的手机号码',2,'callback'),
         array('email',"isEmail",'请填写正确格式的邮箱地址',2,'callback'),
@@ -53,5 +54,17 @@ class UinfoModel extends BaseModel{
         if(empty($tmp)) $uid = 0;
         $uid = $tmp['uid'];
         return $uid;
+    }
+    /**
+     * 根据uid获取昵称
+     */
+    public function getNicknameByUid($uid) {
+        if(!isset($this->nicknameUidArr[$uid])) {
+            $tmp = $this->where(array('uid'=>$uid))->getField('nickname');
+            if($tmp) {
+                $this->nicknameUidArr[$uid] = $tmp;
+            }
+        }
+        return isset($this->nicknameUidArr[$uid]) ? $this->nicknameUidArr[$uid] : false;
     }
 }

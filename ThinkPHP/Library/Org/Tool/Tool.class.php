@@ -167,7 +167,7 @@ class Tool {
         $mail->Password = C('MAIL_PWD');
 
         $mail->SMTPAuth = true;
-        $mail->SMTPSecure = 'tls';
+        $mail->SMTPSecure = C('MAIL_SECURE');
         $mail->CharSet = 'UTF-8';
 
         $mail->setFrom(C('MAIL_FROM'), C('site.title'));

@@ -6,9 +6,10 @@ if(!defined('THINK_PATH')) exit('非法调用');//防止被外部系统调用
  * @return array
  */
 return array(
-    'MAIL_HOST'=>'smtp.163.com',
+    'MAIL_HOST'=>'', //发件服务器
     'MAIL_PORT'=>25,
-    'MAIL_USERNAME'=>'njm7d34wd8id',
-    'MAIL_PWD'=>'zyfnjm7d',
-    'MAIL_FROM'=>'njm7d34wd8id@163.com', //发送者
+    'MAIL_USERNAME'=>'',
+    'MAIL_PWD'=>'',
+    'MAIL_FROM'=>'', //发送者
+    'MAIL_SECURE'=>'tls',
 );

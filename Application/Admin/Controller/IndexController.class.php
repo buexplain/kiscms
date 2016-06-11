@@ -38,7 +38,13 @@ class IndexController extends BaseController {
             $tmp['target'] = 'boxcontent';
 
             if($value['type'] == 2) {
-                $tmp['open'] = true;
+                $son = CategoryArray::son($result,$value['node_id'],'node_id','pid');
+                if(count($son) == 0) {
+                    //如果没有子级菜单栏，那么如下走默认方法
+                    $tmp['url'] = U($value['en_name'].'/'.'list'.$value['en_name']);
+                }else{
+                    $tmp['open'] = true;
+                }
             }elseif($value['type'] == 3){
                 $tmp['url'] = U($result[$value['pid']]['en_name'].'/'.$value['en_name']);
             }
