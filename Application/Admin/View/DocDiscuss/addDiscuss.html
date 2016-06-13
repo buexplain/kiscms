@@ -27,6 +27,7 @@
 			            <span class="red">*&nbsp;&nbsp;</span>评论
 			        </label>
 			        <textarea required="required" placeholder="说点什么吧……" name="content" rows="3" class="form-control"></textarea>
+			        <a href="javascript:;" onclick="addCodeTag(this)">插入代码</a>
 			    </div>
 			    <input type="hidden" name="discuss_id" value="{$discuss.discuss_id}">
 			    <button type="submit" class="btn btn-default btn-sm">
@@ -36,5 +37,6 @@
 		</div>
 	</div>
 	<include file="Common:javascript" />
+	<include file="Common:javascriptController" />
 </body>
 </html>

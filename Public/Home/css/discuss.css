@@ -33,7 +33,6 @@
         margin-left: 0px;
     }
 }
-
 .discuss-quote{
     background: #fafafa none repeat scroll 0 0;
     border: 1px solid #ccc;
@@ -46,6 +45,9 @@
 }
 .discuss-content{
     clear: both;
+}
+.discuss-content pre{
+    margin: 0;
 }
 .discuss-reply{
     color: #777;

@@ -28,6 +28,8 @@ class DiscussController extends HomeController {
         $data = $DocDiscuss->validate($rules)->create();
         if(!$data) $this->error($DocDiscuss->getError());
 
+        $data['content'] = $this->getDiscuss();
+
         $email = I('post.email','');
         $nickname = I('post.nickname','');
 
@@ -43,10 +45,10 @@ class DiscussController extends HomeController {
             $oldDiscuss = D('DocDiscuss')->where(array('discuss_id'=>$data['pid']))->find();
             if(empty($oldDiscuss)) $this->error('引用ID错误2','',2);
             $parentContent = $oldDiscuss['content'];
-            $sendEmail = D('Ucenter')->where(array('uid'=>$oldDiscuss['uid']))->getField('email');
+            $emailUid = $oldDiscuss['uid'];
         }else{
             $parentContent = '';
-            $sendEmail = D('Ucenter')->where(array('uid'=>$doc['create_id']))->getField('email');
+            $emailUid = $doc['create_id'];
         }
 
         $uinfo = D('Ucenter')->getUinfoByEmail($email);
@@ -71,10 +73,28 @@ class DiscussController extends HomeController {
 
         if(empty($result)) $this->error('抱歉，回复失败','',2);
 
-        $url = U('Home/Desc/index',array('doc_id'=>$data['doc_id']));
-        $result = $this->sendMail($sendEmail,$title,$url,$data['content'],$parentContent);
+        if(C('MAIL_HOST')) {
+            $url = U('Home/Desc/index',array('doc_id'=>$data['doc_id']));
+            $sendEmail = D('Ucenter')->where(array('uid'=>$emailUid))->getField('email');
+            $result = $this->sendMail($sendEmail,$title,$url,$data['content'],$parentContent);
+        }
 
         $this->success('','恭喜，回复成功');
+    }
+    /**
+     * 获取提交的评论
+     */
+    private function getDiscuss() {
+        $content = isset($_POST['content']) ? $_POST['content'] : '';
+        $content = Tool::filter($content,'pre');
+        $search  = array("\r",'</pre><br>',"<br>\n<pre>");
+        $replace = array('<br>','</pre>','<pre>');
+        $content = str_replace($search, $replace, $content);
+        $pattern = "~<pre>([\w\W]*?)</pre>~";
+        $content = preg_replace_callback($pattern,function($matches){
+            return str_replace('<br>','',$matches[0]);
+        },$content);
+        return $content;
     }
     /**
      * 评论成功，发送邮件
@@ -113,4 +133,8 @@ class DiscussController extends HomeController {
         $this->verify->useCurve = false;
         $this->verify->entry($this->verification_id);
     }
+}
+
+function replace($a) {
+    return 'aaa';
 }

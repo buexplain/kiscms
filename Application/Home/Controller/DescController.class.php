@@ -16,6 +16,7 @@ class DescController extends HomeController {
         $page = 1;
         $pagesize = 200; //默认取两百条数据出来 先不做分页
         $discuss = D('DocDiscuss')->getDiscussByDocID($doc_id,$page,$pagesize);
+
         $this->assign('discuss',json_encode($discuss));
 
         $this->display();

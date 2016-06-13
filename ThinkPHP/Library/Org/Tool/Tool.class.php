@@ -184,4 +184,33 @@ class Tool {
             return '';
         }
     }
+    /**
+     * 过滤数据
+     */
+    public static function filter($mixed,$tag='',$callback='') {
+        if($tag) {
+            $tagArr = explode(',', $tag);
+            $tag = '';
+            $search = $replace = array();
+            foreach ($tagArr as $key => $value) {
+                $tag .= "<{$value}>";
+                $search[] = "&lt;{$value}&gt;";
+                $search[] = "&lt;/{$value}&gt;";
+                $replace[] = "<{$value}>";
+                $replace[] = "</{$value}>";
+            }
+            $mixed = strip_tags($mixed,$tag);
+            $mixed = htmlspecialchars($mixed,ENT_QUOTES);
+            $mixed = str_replace($search,$replace,$mixed);
+        }else{
+            $mixed = strip_tags($mixed);
+            $mixed = htmlspecialchars($mixed,ENT_QUOTES);
+        }
+
+        if(function_exists($callback)) {
+            $mixed = $callback($mixed);
+        }
+
+        return $mixed;
+    }
 }

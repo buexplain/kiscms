@@ -76,3 +76,9 @@ margin: 0;
 .tree-select{
 background:#eee;overflow-y: auto;margin-top:1px;border:1px solid #ccc;max-height: 350px;border-radius:3px;min-width: 210px;
 }
+/*列表超出高度显示优化*/
+.betterShow{
+    height: 20px;
+    cursor: pointer;
+    overflow: hidden;
+}

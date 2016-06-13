@@ -139,7 +139,7 @@ class DocDiscussController extends BaseController {
         if(empty($discuss)) $this->error('缺省参数');
 
         if(IS_POST) {
-            $content = I('post.content','');
+            $content = $this->getDiscuss();
             if(empty($content)) $this->error('请填写评论');
 
             $data = array();
@@ -160,12 +160,14 @@ class DocDiscussController extends BaseController {
 
             $this->commit();
 
-            $sendEmail = D('Ucenter')->where(array('uid'=>$discuss['uid']))->getField('email');
-            $title = D('Doc')->where(array('doc_id'=>$discuss['doc_id']))->getField('title');
-            $url = U('Home/Desc/index',array('doc_id'=>$data['doc_id']));
-            $parentContent = $discuss['content'];
+            if(C('MAIL_HOST')) {
+                $sendEmail = D('Ucenter')->where(array('uid'=>$discuss['uid']))->getField('email');
+                $title = D('Doc')->where(array('doc_id'=>$discuss['doc_id']))->getField('title');
+                $url = U('Home/Desc/index',array('doc_id'=>$data['doc_id']));
+                $parentContent = $discuss['content'];
 
-            $result = $this->sendMail($sendEmail,$title,$url,$content,$parentContent);
+                $result = $this->sendMail($sendEmail,$title,$url,$content,$parentContent);
+            }
 
             $this->success(U('DocDiscuss/listDocDiscuss'));
 
@@ -174,6 +176,21 @@ class DocDiscussController extends BaseController {
             $this->assign('discuss',$discuss);
             $this->display();
         }
+    }
+    /**
+     * 获取提交的评论
+     */
+    private function getDiscuss() {
+        $content = isset($_POST['content']) ? $_POST['content'] : '';
+        $content = Tool::filter($content,'pre');
+        $search  = array("\r",'</pre><br>',"<br>\n<pre>");
+        $replace = array('<br>','</pre>','<pre>');
+        $content = str_replace($search, $replace, $content);
+        $pattern = "~<pre>([\w\W]*?)</pre>~";
+        $content = preg_replace_callback($pattern,function($matches){
+            return str_replace('<br>','',$matches[0]);
+        },$content);
+        return $content;
     }
     /**
      * 评论成功，发送邮件

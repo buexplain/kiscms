@@ -7,7 +7,28 @@ $(function(){
     openiframe();
     checkbox_all();
     checkbox_one();
+    betterTD();
 });
+/**
+ * 列表超出高度显示优化
+ */
+function betterTD() {
+    $('.betterTD').each(function(){
+        var o = $(this);
+        o.html('<div class="betterShow" title="点击显示隐藏">'+o.html()+'</div>');
+    });
+    $(".betterShow").on('click',function(){
+        var o = $(this);
+        var lock = o.attr('lock');
+        if(!lock || lock == '0') {
+            o.attr('lock',1);
+            $(this).css('height','auto');
+        }else{
+            $(this).attr('style','');
+            o.attr('lock',0);
+        }
+    });
+}
 /**
  * 初始化框架宽高
  */

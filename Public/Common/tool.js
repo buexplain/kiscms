@@ -220,3 +220,38 @@ function get_checked_attr(all_attr,data_checkbox_target) {
     if(all_attr) return array;
     return value;
 }
+/**
+ * 光标位置
+ */
+var cursor = {
+    /**
+     * 设置 光标位置
+     */
+    set: function(o, pos) {
+        if (o.setSelectionRange) {
+            o.focus();
+            o.setSelectionRange(pos, pos);
+        } else if (o.createTextRange) {
+            var range = o.createTextRange();
+            range.collapse(true);
+            range.moveEnd('character', pos);
+            range.moveStart('character', pos);
+            range.select();
+        }
+    },
+    /**
+     * 获取 光标所在位置
+     */
+    get: function(o) {
+        var CaretPos = 0; // IE Support
+        if (document.selection) {
+            o.focus();
+            var Sel = document.selection.createRange();
+            Sel.moveStart('character', -o.value.length);
+            CaretPos = Sel.text.length;
+        }else if (o.selectionStart || o.selectionStart == '0') { // Firefox support
+            CaretPos = o.selectionStart;
+        }
+        return CaretPos;
+    }
+};

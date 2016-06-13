@@ -44,12 +44,12 @@
                         </div>
                     </div>
                     <div class="discuss-content">
-                        {{= result[i].parentData.content }}
+                        {{ result[i].parentData.content }}
                     </div>
                 </div>
             {{# } }}
             <div class="discuss-content">
-                {{= result[i].content }}
+                {{ result[i].content }}
             </div>
             <div class="discuss-reply">
                 <a href="javascript:;" onclick="addReplyForm(this,{{ result[i].discuss_id }},{{ doc_id }})">回复</a>
