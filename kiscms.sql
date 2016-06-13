@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50547
 File Encoding         : 65001
 
-Date: 2016-06-11 13:08:56
+Date: 2016-06-13 17:42:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -42,7 +42,7 @@ INSERT INTO `kis_doc` VALUES ('1', '3', '0', '2', 'kiscms是什么?', '', '', '&
 INSERT INTO `kis_doc` VALUES ('2', '3', '0', '2', '我们为什么需要它?', '', '', '&lt;p&gt;网站的开发需要做大量的工作，为了加快项目进度，我们通常会用上框架技术，甚至是一些现成的项目，进行二次开发。&lt;/p&gt;\n\n&lt;p&gt;kiscms是一个工作进度介于框架与现成项目之间的产品。用它做二次开发，可以减少我们搭建框架、编写基本模块的工作量，加快项目进度。&lt;/p&gt;\n', '2016-02-24 16:32:50', '2016-04-24 15:18:34', '2016-04-28 17:24:32', '1');
 INSERT INTO `kis_doc` VALUES ('3', '3', '0', '2', '它有什么优势?', '', '', '&lt;p&gt;1、kiscms采用了ThinkPHP、Bootstrap、Layer、Laydate、Jquery、Ckeditor、Webuploader等优秀的框架与库，它们可以极大的提高我们的项目质量。&lt;/p&gt;\n\n&lt;p&gt;2、简明规范的数据库表设计，方便我们在二次开发的时候进行大刀阔斧的增改。&lt;/p&gt;\n\n&lt;p&gt;3、简洁的后台界面，就一个字&amp;ldquo;高颜值&amp;rdquo;!&lt;/p&gt;\n', '2016-02-24 16:35:21', '2016-04-24 15:18:48', '2016-04-28 14:41:15', '2');
 INSERT INTO `kis_doc` VALUES ('4', '3', '0', '2', '如何获取它?', '', '', '&lt;p&gt;kiscms程序完全遵循MIT(The MIT License)开源协议。&lt;a href=&quot;https://github.com/buexplain/kiscms/archive/master.zip&quot; target=&quot;_blank&quot;&gt;下载&lt;/a&gt; or &lt;a href=&quot;https://github.com/buexplain/kiscms&quot; target=&quot;_blank&quot;&gt;github&lt;/a&gt;&lt;/p&gt;\n', '2016-02-28 19:53:25', '2016-04-26 21:33:27', '2016-06-09 20:59:42', '3');
-INSERT INTO `kis_doc` VALUES ('5', '3', '0', '2', '其它', '', '', '&lt;p&gt;kiscms QQ交流群：89292141&lt;/p&gt;\n\n&lt;p&gt;建议安装环境： Linux + Apache + PHP or Linux + Nginx + PHP&lt;/p&gt;\n\n&lt;p&gt;安装步骤：&lt;/p&gt;\n\n&lt;ol&gt;\n	&lt;li&gt;导入(工具：phpmyadmin) kiscms.sql&lt;/li&gt;\n	&lt;li&gt;配置数据库连接文件 Application/Common/Conf/db.php&lt;/li&gt;\n	&lt;li&gt;进入后台更改密码，后台地址：http://域名/admin/Sign/index.html&lt;/li&gt;\n	&lt;li&gt;如果要保护后台地址，可以更改 Application/Common/Conf/config.php 中的 URL_MODULE_MAP 进行模块映射&lt;/li&gt;\n&lt;/ol&gt;\n\n&lt;p&gt;后台登录帐号与密码，将其中的#去掉：&lt;/p&gt;\n\n&lt;p&gt;admin#@admin.c#om 12345678&lt;/p&gt;\n\n&lt;p&gt;buexplain#@163.c#om 12345678&lt;/p&gt;\n\n&lt;p&gt;author#@author.c#om 12345678&lt;/p&gt;\n\n&lt;p&gt;guest#@guest.c#om 12345678&lt;/p&gt;\n', '2016-02-28 19:54:15', '2016-04-28 16:28:00', '2016-06-09 20:59:47', '6');
+INSERT INTO `kis_doc` VALUES ('5', '3', '0', '2', '其它', '', '', '&lt;p&gt;kiscms QQ交流群：89292141&lt;/p&gt;\n\n&lt;p&gt;建议安装环境： Linux + Apache + PHP or Linux + Nginx + PHP&lt;/p&gt;\n\n&lt;p&gt;安装步骤：&lt;/p&gt;\n\n&lt;ol&gt;\n	&lt;li&gt;导入(工具：phpmyadmin) kiscms.sql&lt;/li&gt;\n	&lt;li&gt;配置数据库连接文件 Application/Common/Conf/db.php&lt;/li&gt;\n	&lt;li&gt;进入后台更改密码，后台地址：http://域名/admin/Sign/index.html&lt;/li&gt;\n	&lt;li&gt;如果要保护后台地址，可以更改 Application/Common/Conf/config.php 中的 URL_MODULE_MAP 进行模块映射&lt;/li&gt;\n&lt;/ol&gt;\n\n&lt;p&gt;后台登录帐号与密码，将其中的#去掉：&lt;/p&gt;\n\n&lt;table style=&quot;width:100%&quot;&gt;\n	&lt;tbody&gt;\n		&lt;tr&gt;\n			&lt;td&gt;帐号&lt;/td&gt;\n			&lt;td&gt;密码&lt;/td&gt;\n		&lt;/tr&gt;\n		&lt;tr&gt;\n			&lt;td&gt;admin#@admin.c#om&lt;/td&gt;\n			&lt;td&gt;12345678&lt;/td&gt;\n		&lt;/tr&gt;\n		&lt;tr&gt;\n			&lt;td&gt;manage#@manage.c#om&lt;/td&gt;\n			&lt;td&gt;12345678&lt;/td&gt;\n		&lt;/tr&gt;\n		&lt;tr&gt;\n			&lt;td&gt;buexplain#@163.c#om&lt;/td&gt;\n			&lt;td&gt;12345678&lt;/td&gt;\n		&lt;/tr&gt;\n		&lt;tr&gt;\n			&lt;td&gt;guest#@guest.c#om&lt;/td&gt;\n			&lt;td&gt;12345678&lt;/td&gt;\n		&lt;/tr&gt;\n	&lt;/tbody&gt;\n&lt;/table&gt;\n', '2016-02-28 19:54:15', '2016-06-13 17:39:49', '2016-06-09 20:59:47', '6');
 
 -- ----------------------------
 -- Table structure for kis_doc_category
@@ -248,7 +248,7 @@ INSERT INTO `kis_node` VALUES ('43', '2', '站点管理', 'Site', '2', '1', '站
 INSERT INTO `kis_node` VALUES ('44', '43', '刷新缓存', 'listCache', '3', '1', '刷新缓存', '0');
 INSERT INTO `kis_node` VALUES ('45', '30', '文档评论', 'DocDiscuss', '2', '1', '文档评论', '0');
 INSERT INTO `kis_node` VALUES ('46', '45', '评论列表', 'listDocDiscuss', '3', '0', '评论列表', '0');
-INSERT INTO `kis_node` VALUES ('47', '30', '回收站', 'DocRecy', '2', '1', '回收站', '0');
+INSERT INTO `kis_node` VALUES ('47', '30', '文档回收站', 'DocRecy', '2', '1', '回收站', '0');
 INSERT INTO `kis_node` VALUES ('48', '45', '更新评论状态', 'setState', '3', '0', '更新评论状态', '0');
 INSERT INTO `kis_node` VALUES ('49', '45', '删除评论', 'delDocDiscuss', '3', '0', '删除评论', '0');
 INSERT INTO `kis_node` VALUES ('50', '45', '回复评论', 'addDiscuss', '3', '0', '回复评论', '0');
