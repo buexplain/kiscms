@@ -62,3 +62,7 @@
     cursor: pointer;
     height: 32px;
 }
+
+.discuss-tool a{
+    margin-right: 10px;
+}

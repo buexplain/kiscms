@@ -48,7 +48,10 @@ function createReplyFormHTML(pid,doc_id) {
     html += '<div class="form-group">';
     html += '    <label>评论</label>';
     html += '    <textarea class="form-control" placeholder="说点什么吧……" name="content" rows="3"></textarea>';
-    html += '    <span class="discuss-date"><a href="javascript:;" onclick="addCodeTag(this)">插入代码</a></span>';
+    html += '    <span class="discuss-tool">';
+    html += '    <a href="javascript:;" onclick="addCodeTag(this)">插入代码</a>';
+    html += '    <a href="javascript:;" onclick="autoTxtH(this)">放大框子</a>';
+    html += '    </span>';
     html += '</div>';
     html += '<div class="form-group">';
     html += '    <label>验证码</label>';
@@ -132,6 +135,33 @@ function addCodeTag(o) {
 
     cursor.set(txtO[0],pos+6);
     //console.log(con);
+}
+
+/**
+ * 调整输入框高度
+ */
+function autoTxtH(o) {
+    var o = $(o);
+    var txtO = o.parent().parent().find('textarea').eq(0);
+    var h = parseInt(txtO.css('height'));
+
+    var originalH = parseInt(txtO.attr('originalH'));
+
+    if(!originalH) {
+        originalH = h;
+        txtO.attr('originalH',h);
+    }
+
+    var multiple = 5;
+    if(h >= originalH*multiple) {
+        h = h / multiple;
+        o.html('放大框子');
+    }else{
+        o.html('缩小框子');
+        h = h * multiple;
+    }
+
+    txtO.css('height',h+'px');
 }
 
 $(function(){
