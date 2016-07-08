@@ -14,7 +14,7 @@
 		</div>
 		<!--内容容器-->
 		<div class="ifman clear" id="ifman">
-			<form action="{:U('Doc/addDoc')}" method="post" id="set">
+			<form action="{:U('Doc/addDoc')}" method="post">
 				<ul class="nav nav-tabs">
 				    <li class="active">
 				        <a href="#article" data-toggle="tab">
@@ -68,7 +68,7 @@
 					    </div>
 				    </div>
 				</div>
-				<button type="submit" class="btn btn-default btn-sm">
+				<button type="submit" class="btn btn-default btn-sm" data-getData="getFormData">
 			        提交
 			    </button>
 			    <input type="hidden" name="doc_id" value="{$result.doc_id}">
@@ -116,13 +116,13 @@
 			    config.filebrowserBrowseUrl = fileBrowseUrl;
 			};
 			editor = CKEDITOR.replace('content');
-			/*自定义提交数据方法*/
-			require.data_set = function(id) {
-			    var data = form.get(id);
-			    data.content = editor.getData();
-			    return data;
-			}
 		});
+		/*自定表单数据获取*/
+		function getFormData(formO) {
+			var data = requireDispatch.getFormData(formO);
+		    data.content = editor.getData();
+		    return data;
+		}
 	</script>
 </body>
 </html>

@@ -50,6 +50,9 @@
 					<!-- 提交按钮 -->
 					<div class="lh50 l">
 						<input type="hidden" value="{$callBackId}" name="CKEditorFuncNum">
+					    <foreach name="routeParam" item="v" key="k">
+					        <input type="hidden" value="{$v}" name="{$k}">
+					    </foreach>
 						<button type="submit" class="btn btn-default btn-sm">搜索</button>
 					</div>
 				</form>

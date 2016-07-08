@@ -64,7 +64,7 @@ class UserController extends BaseController {
         $result  = D('Ucenter')->order('uid desc')->limit($page->firstRow.','.$page->listRows)->where($where)->select();
         //echo D('Ucenter')->getLastSql();
         foreach ($result as $key => $value) {
-            $result[$key]['handle'] = '<a href="javascript:;" data-url="'.U('User/setBan',array('uid'=>$value['uid'])).'" class="deltips">状态</a>';
+            $result[$key]['handle'] = '<a href="javascript:;" data-url="'.U('User/setBan',array('uid'=>$value['uid'])).'" class="batch">状态</a>';
             $result[$key]['handle'] .= '<a href="'.U('User/setPasswd',array('uid'=>$value['uid'])).'">密码</a>';
             $result[$key]['handle'] .= '<a href="'.U('User/listLoginLog',array('uid'=>$value['uid'])).'">日志</a>';
         }

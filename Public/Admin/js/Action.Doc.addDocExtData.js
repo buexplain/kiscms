@@ -69,7 +69,7 @@ function del_ext(obj) {
     });
 }
 /*自定义提交数据*/
-require.data_set = function(id) {
+function getFormData(formO) {
     var data = {};
     $('.tab-pane').each(function(i){
         var formid = $(this).data('formid');

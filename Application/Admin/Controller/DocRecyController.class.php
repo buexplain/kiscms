@@ -37,8 +37,8 @@ class DocRecyController extends BaseController {
         $result  = D('Doc')->order('doc_id desc')->field($field)->limit($page->firstRow.','.$page->listRows)->where($where)->select();
         //echo D('Doc')->getLastSql();
         foreach ($result as $key => $value) {
-            $result[$key]['handle'] .= '<a href="javascript:;" data-url="'.U('DocRecy/resetDoc',array('doc_id'=>$value['doc_id'])).'" class="deltips">还原</a>';
-            $result[$key]['handle'] .= '<a href="javascript:;" data-url="'.U('DocRecy/delDoc',array('doc_id'=>$value['doc_id'])).'" class="deltips">删除</a>';
+            $result[$key]['handle'] .= '<a href="javascript:;" data-url="'.U('DocRecy/resetDoc',array('doc_id'=>$value['doc_id'])).'" class="batch">还原</a>';
+            $result[$key]['handle'] .= '<a href="javascript:;" data-url="'.U('DocRecy/delDoc',array('doc_id'=>$value['doc_id'])).'" class="batch">删除</a>';
         }
 
         $this->assignPage($page,$pageSize);

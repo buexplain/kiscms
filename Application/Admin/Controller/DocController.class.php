@@ -100,10 +100,10 @@ class DocController extends BaseController {
         $result  = D('Doc')->order('doc_id desc')->join($join)->field($field)->limit($page->firstRow.','.$page->listRows)->where($where)->select();
         //echo D('Doc')->getLastSql();
         foreach ($result as $key => $value) {
-            $result[$key]['handle'] = '<a href="javascript:;" data-url="'.U('Doc/setState',array('doc_id'=>$value['doc_id'],'state'=>$value['state'])).'" class="deltips">状态</a>';
+            $result[$key]['handle'] = '<a href="javascript:;" data-url="'.U('Doc/setState',array('doc_id'=>$value['doc_id'],'state'=>$value['state'])).'" class="batch">状态</a>';
             $result[$key]['handle'] .= '<a href="'.U('Doc/addDoc',array('doc_id'=>$value['doc_id'])).'">编辑</a>';
             $result[$key]['handle'] .= '<a href="'.U('Doc/addDocExtData',array('doc_id'=>$value['doc_id'])).'">扩展</a>';
-            $result[$key]['handle'] .= '<a href="javascript:;" data-url="'.U('Doc/delDoc',array('doc_id'=>$value['doc_id'])).'" class="deltips">删除</a>';
+            $result[$key]['handle'] .= '<a href="javascript:;" data-url="'.U('Doc/delDoc',array('doc_id'=>$value['doc_id'])).'" class="batch">删除</a>';
         }
 
         $this->assignPage($page,$pageSize);

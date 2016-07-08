@@ -36,7 +36,7 @@ class DocExtController extends BaseController {
         foreach ($result as $key => $value) {
             $result[$key]['handle'] = '<a href="'.U('DocExt/listField',array('doc_ext_id'=>$value['doc_ext_id'])).'">字段</a>';
             $result[$key]['handle'] .= '<a href="'.U('DocExt/addDocExt',array('doc_ext_id'=>$value['doc_ext_id'])).'">编辑</a>';
-            $result[$key]['handle'] .= '<a href="javascript:;" data-url="'.U('DocExt/delDocExt',array('doc_ext_id'=>$value['doc_ext_id'])).'" class="deltips">删除</a>';
+            $result[$key]['handle'] .= '<a href="javascript:;" data-url="'.U('DocExt/delDocExt',array('doc_ext_id'=>$value['doc_ext_id'])).'" class="batch">删除</a>';
         }
 
         $this->assignPage($page,$pageSize);
@@ -107,7 +107,7 @@ class DocExtController extends BaseController {
         $result = $DocExtField->getBydocExtId($doc_ext_id);
         foreach ($result as $key => $value) {
             $result[$key]['handle'] = '<a href="'.U('DocExt/addField',array('doc_ext_field_id'=>$value['doc_ext_field_id'])).'">编辑</a>';
-            $result[$key]['handle'] .= '<a href="javascript:void(0)" class="deltips" data-url="'.U('DocExt/delField',array('doc_ext_field_id'=>$value['doc_ext_field_id'])).'">删除</a>';
+            $result[$key]['handle'] .= '<a href="javascript:void(0)" class="batch" data-url="'.U('DocExt/delField',array('doc_ext_field_id'=>$value['doc_ext_field_id'])).'">删除</a>';
         }
         $this->assign('result',$result);
         $this->assign('form_type',C('form_type'));

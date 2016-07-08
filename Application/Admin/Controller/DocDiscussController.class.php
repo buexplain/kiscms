@@ -65,9 +65,9 @@ class DocDiscussController extends BaseController {
             $value['nickname'] = D('Uinfo')->getNicknameByUid($value['uid']);
             $value['stateTxt'] = $this->state[$value['state']];
 
-            $value['handle'] = '<a href="javascript:;" data-url="'.U('DocDiscuss/setState',array('discuss_id'=>$value['discuss_id'],'state'=>$value['state'])).'" class="deltips">状态</a>';
+            $value['handle'] = '<a href="javascript:;" data-url="'.U('DocDiscuss/setState',array('discuss_id'=>$value['discuss_id'],'state'=>$value['state'])).'" class="batch">状态</a>';
             $value['handle'] .= '<a href="'.U('DocDiscuss/addDiscuss',array('discuss_id'=>$value['discuss_id'])).'">回复</a>';
-            $value['handle'] .= '<a href="javascript:;" data-url="'.U('DocDiscuss/delDocDiscuss',array('discuss_id'=>$value['discuss_id'])).'" class="deltips">删除</a>';
+            $value['handle'] .= '<a href="javascript:;" data-url="'.U('DocDiscuss/delDocDiscuss',array('discuss_id'=>$value['discuss_id'])).'" class="batch">删除</a>';
         }
 
         //dump($result);

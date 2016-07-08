@@ -1,14 +1,89 @@
 $(function(){
 	init_if_wh();
 	fixed_table_header();
-    deltips();
-    set();
     laydatebox();
     openiframe();
     checkbox_all();
     checkbox_one();
     betterTD();
+    bindRequire();
 });
+
+/**
+ * 绑定请求
+ */
+function bindRequire() {
+    requireDispatch.batch.setAutoSubmit('',{'data-tips':'batchTips','data-ajaxSuccess':'batchSuccess'});
+    requireDispatch.form.setAutoSubmit('',{'data-ajaxSuccess':'formSuccess'});
+}
+
+/**
+ * 表单提交回调
+ */
+function formSuccess(result,formO,buttonO) {
+    if(result.code == 0) {
+        layer.msg(result.msg, {
+            icon: 1,
+            time: 700
+        },function(){
+            if(result.data) window.location.href = result.data;
+        });
+    }else{
+        layer.msg(result.msg, {
+            icon: 2,
+            time: 1300
+        });
+    }
+}
+
+/**
+ * 批量操作，或单个操作，回调
+ */
+function batchSuccess(json,buttonO) {
+    if(json.code == 0) {
+        layer.msg(json.msg, {
+            icon: 1,
+            time: 700
+        },function(){
+            json.data = json.data || window.location.href;
+            if(json.data) window.location.href = json.data;
+        });
+    }else{
+        json.msg = '<span class="error">'+json.msg+'</span>';
+        layer.msg(json.msg, {
+            icon: 2,
+            time: 700
+        });
+        if(buttonO.attr("data-tipsBak")) buttonO.attr("data-tips",buttonO.attr("data-tipsBak"));
+    }
+}
+
+/**
+ * 批量操作，或单个操作，提示
+ */
+function batchTips(buttonO) {
+    var msg = buttonO.attr("data-msg");
+    if(!msg) msg = '您确定要执行吗？';
+    var yesbtn = buttonO.attr("data-yesbtn");
+    if(!yesbtn) yesbtn = '确定';
+    var nobtn = buttonO.attr("data-nobtn");
+    if(!nobtn) nobtn = '取消';
+
+    buttonO.attr("data-tipsBak",buttonO.attr("data-tips"));
+
+    layer.confirm(msg, {
+        offset: '5px',
+        shade: 0,
+        btn: [yesbtn,nobtn]
+    }, function(index){
+        buttonO.attr('data-tips','');
+        buttonO.click();
+    },function(index){
+    });
+
+    return false;
+}
+
 /**
  * 列表超出高度显示优化
  */
@@ -78,20 +153,6 @@ function pageSize(obj) {
     var num = obj.options[obj.selectedIndex].value;
     cookie.set('pageSize',num,24*30,'/');
     window.location.href = window.location.href;
-}
-/**
- * 删除前的提示
- */
-function deltips() {
-    $(".deltips").click(function(i) {
-        require.del(this);
-    });
-}
-/**
- * 添加编辑
- */
-function set() {
-    $("#set").find("button[type='submit']").attr('onclick',"require.set(this);return false;");
 }
 /**
  * 日期

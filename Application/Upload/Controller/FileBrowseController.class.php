@@ -92,6 +92,17 @@ class FileBrowseController extends BaseController {
         $callBackId = I('get.CKEditorFuncNum',0,'intval');
         $this->assign('callBackId',$callBackId);
 
+        //注入路由参数
+        $m = C('VAR_MODULE');
+        $c = C('VAR_CONTROLLER');
+        $a = C('VAR_ACTION');
+        $routeParam = array(
+            "{$m}"=>'Upload',
+            "{$c}"=>'FileBrowse',
+            "{$a}"=>'index',
+        );
+        $this->assign('routeParam',$routeParam);
+
         $this->display();
     }
 }

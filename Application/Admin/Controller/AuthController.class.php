@@ -150,7 +150,7 @@ class AuthController extends BaseController {
         foreach ($result as $key => $value) {
             $result[$key]['handle'] = '<a href="'.U('Auth/addRole',array('role_id'=>$value['role_id'])).'">编辑</a>';
             $result[$key]['handle'] .= '<a href="'.U('Auth/setRoleNode',array('role_id'=>$value['role_id'])).'">权限</a>';
-            $result[$key]['handle'] .= '<a href="javascript:void(0)" class="deltips" data-url="'.U('Auth/delRole',array('role_id'=>$value['role_id'])).'">删除</a>';
+            $result[$key]['handle'] .= '<a href="javascript:void(0)" class="batch" data-url="'.U('Auth/delRole',array('role_id'=>$value['role_id'])).'">删除</a>';
             $result[$key]['ban_txt'] = $value['ban'] ? '是' : '否';
 
             /*超级管理员禁止操作*/

@@ -32,10 +32,10 @@
 			<div class="tab-content" id="myTabContent">
 				{$result.panes}
 			</div>
-			<form action="{:U('Doc/addDocExtData')}" method="post" id="set">
+			<form action="{:U('Doc/addDocExtData')}" method="post">
 			    <input type="hidden" name="doc_id" value="{$doc_id}">
 			    <script>window.doc_id={$doc_id}</script>
-			    <button type="submit" class="btn btn-default btn-sm">
+			    <button type="submit" class="btn btn-default btn-sm" data-getdata="getFormData">
 			        提交
 			    </button>
 			</form>
