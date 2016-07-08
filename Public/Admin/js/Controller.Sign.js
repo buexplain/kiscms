@@ -1,11 +1,12 @@
 function refresh_verification(src){
     src = src + '?' + Math.random();
-    $("#verification_img").attr('src',src).prev().val('');
+    $("#verification_img").attr('src',src).prev().val('').focus();
+
 }
 /**
  * 登录回调函数
  */
-require.callback_set = function(json) {
+function successCallback(json) {
     if(json.code == 0) {
         layer.msg(json.msg, {
             icon: 1,

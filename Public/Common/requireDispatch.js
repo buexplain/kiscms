@@ -56,8 +56,16 @@ var requireDispatch = {
                 var formO = $(this);
                 formO.addClass('requireDispatchForm-'+i);
                 attr['requireDispatchForm'] = i;
-                formO.find("button[type='submit']").attr(attr);
-                formO.find("input[type='submit']").attr(attr);
+                var button = formO.find("button[type='submit']");
+                var input  = formO.find("input[type='submit']");
+                for(var j in attr) {
+                    if(!button.attr(j)) {
+                        button.attr(j,attr[j]);
+                    }
+                    if(!input.attr(j)) {
+                        input.attr(j,attr[j]);
+                    }
+                }
             });
         },
         submit:function(obj){
@@ -135,7 +143,11 @@ var requireDispatch = {
             attr['onclick'] = 'requireDispatch.batch.submit(this);';
             $(index).each(function(i){
                 var o = $(this);
-                o.attr(attr);
+                for(var j in attr) {
+                    if(!o.attr(j)) {
+                        o.attr(j,attr[j]);
+                    }
+                }
             });
         },
         submit:function(obj){

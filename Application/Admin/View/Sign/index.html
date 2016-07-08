@@ -32,7 +32,7 @@
 		    	<img title="看不清,换一张" alt="验证码" class="r hand" id="verification_img" onclick="refresh_verification('{:U('Sign/verify')}')" src="{:U('Sign/verify')}">
 		    </div>
 		   	<p class="p10 clear"></p>
-		    <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="require.set(this); return false;">
+		    <button class="btn btn-lg btn-primary btn-block" type="submit" data-ajaxSuccess="successCallback">
 		        提交
 		    </button>
 		</form>
