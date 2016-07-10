@@ -76,6 +76,7 @@ class Page{
     public function setUrl($url) {
         $url = rtrim($url,'/');
         $this->url = U($url.'/'.$this->p.'/'.$this->flag);
+        $this->url = str_replace('.'.C('URL_HTML_SUFFIX'),'',$this->url);
     }
     /**
      * 组装分页链接

@@ -4,7 +4,7 @@ use Home\Common\HomeController;
 use \Think\Page;
 class TimeFileController extends HomeController {
     public function index(){
-        $time = I('get.time','');
+        $time = $shortTime = I('get.time','');
         $time = strtotime($time);
         if(!$time) $this->error();
         $time_end = date('Y-m-d H:i:s',mktime(0, 0, 0, date("m",$time)+1, date("d",$time),   date("Y",$time)));
@@ -22,7 +22,7 @@ class TimeFileController extends HomeController {
             $result[$key]['content'] = htmlspecialchars_decode($value['content']);
         }
         $this->assign('result',$result);
-        $this->assign('site_title','归档 - '.C('site.name'));
+        $this->assign('site_title',"{$shortTime}归档 - ".C('site.name'));
         $this->assignPage($page,$pageSize);
         $this->display();
     }
