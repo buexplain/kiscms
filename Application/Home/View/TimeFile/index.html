@@ -14,7 +14,11 @@
                     <ul>
                         <foreach name="result" item="v">
                             <li class="list-item">
-                                <a target="_blank" href="{:U('Desc/index',array('doc_id'=>$v['doc_id']))}" title="{$v.title}">{$v.title}</a>
+                                <if condition="$urlRouterOn">
+                                    <a target="_blank" href="/content/{$v['doc_id']}.html" title="{$v.title}">{$v.title}</a>
+                                <else/>
+                                    <a target="_blank" href="{:U('Desc/index',array('doc_id'=>$v['doc_id']))}" title="{$v.title}">{$v.title}</a>
+                                </if>
                                 <p class="text-muted">{$v.createtime}</p>
                             </li>
                         </foreach>

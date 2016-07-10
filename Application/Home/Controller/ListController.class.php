@@ -14,6 +14,7 @@ class ListController extends HomeController {
         $counter = D('Doc')->join($join)->field($field)->where($where)->count();
         $pageSize = C('site.pageSize');
         $page = new Page($counter,$pageSize);
+        if(C('URL_ROUTER_ON')) $page->setUrl("/list/{$cid}");
         $result  = D('Doc')->order("{$prefix}doc.createtime desc")->join($join)->field($field)->limit($page->firstRow.','.$page->listRows)->where($where)->select();
         //echo D('Doc')->getLastSql();
         foreach ($result as $key => $value) {

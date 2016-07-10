@@ -25,9 +25,15 @@
         <ul class="nav navbar-nav">
             <foreach name="nav" item="v">
                 <li class="<if condition="$v['cid'] eq $cid">active</if>">
-                    <a href="{:U($v['route'].'/index',array('cid'=>$v['cid']))}">
-                        {$v.cname}
-                    </a>
+                    <if condition="$urlRouterOn">
+                        <a href="/{:strtolower($v['route'])}/{$v['cid']}">
+                            {$v.cname}
+                        </a>
+                    <else/>
+                        <a href="{:U($v['route'].'/index',array('cid'=>$v['cid']))}">
+                            {$v.cname}
+                        </a>
+                    </if>
                 </li>
             </foreach>
         </ul>

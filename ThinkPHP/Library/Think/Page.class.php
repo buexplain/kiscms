@@ -22,6 +22,7 @@ class Page{
     private $p       = 'p'; //分页参数名
     private $url     = ''; //当前链接URL
     private $nowPage = 1;
+    private $flag    = 'PAGEFLAG';
 
 	// 分页显示定制
     private $config  = array(
@@ -67,9 +68,15 @@ class Page{
      * @return string
      */
     private function url($page){
-        return str_replace(urlencode('[PAGE]'), $page, $this->url);
+        return str_replace($this->flag, $page, $this->url);
     }
-
+    /**
+     * 设置url
+     */
+    public function setUrl($url) {
+        $url = rtrim($url,'/');
+        $this->url = U($url.'/'.$this->p.'/'.$this->flag);
+    }
     /**
      * 组装分页链接
      * @return string
@@ -78,8 +85,8 @@ class Page{
         if(0 == $this->totalRows) return '';
 
         /* 生成URL */
-        $this->parameter[$this->p] = '[PAGE]';
-        $this->url = U(ACTION_NAME, $this->parameter);
+        $this->parameter[$this->p] = $this->flag;
+        if(!$this->url) $this->url = U(ACTION_NAME, $this->parameter);
         /* 计算分页信息 */
         $this->totalPages = ceil($this->totalRows / $this->listRows); //总页数
         if(!empty($this->totalPages) && $this->nowPage > $this->totalPages) {

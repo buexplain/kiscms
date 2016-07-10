@@ -9,6 +9,7 @@ class HomeController extends BaseController{
     public function _initialize() {
         $this->assign('nav',$this->nav());
         $this->seo();
+        $this->assign('urlRouterOn',C('URL_ROUTER_ON'));
         $this->assign('tag',$this->tag());
         $this->assign('friend',$this->friend());
         $this->assign('cid',I('get.cid',0,'intval'));

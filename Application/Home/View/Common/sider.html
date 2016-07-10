@@ -12,9 +12,15 @@
         <div class="sider-block">
             <h4 class="h-divider">标签</h4>
             <div class="tag">
-                <foreach name="tag" item="v">
-                    <a class="btn btn-default <if condition="$v['cid'] eq $cid">active</if>" href="{:U('List/index',array('cid'=>$v['cid']))}" role="button">{$v.cname}</a>
-                </foreach>
+                <if condition="$urlRouterOn">
+                    <foreach name="tag" item="v">
+                        <a class="btn btn-default <if condition="$v['cid'] eq $cid">active</if>" href="/list/{$v['cid']}">{$v.cname}</a>
+                    </foreach>
+                <else/>
+                    <foreach name="tag" item="v">
+                        <a class="btn btn-default <if condition="$v['cid'] eq $cid">active</if>" href="{:U('List/index',array('cid'=>$v['cid']))}">{$v.cname}</a>
+                    </foreach>
+                </if>
             </div>
         </div>
     </notempty>
@@ -23,9 +29,15 @@
             <h4 class="h-divider">归档</h4>
             <div class="tag timeFile">
                 <foreach name="timeFile" item="v">
-                    <a class="<if condition="$time eq $v['t']">active</if>" href="{:U('TimeFile/index',array('time'=>$v['t']))}">
-                        {$v.t}
-                    </a>
+                    <if condition="$urlRouterOn">
+                        <a class="<if condition="$time eq $v['t']">active</if>" href="/time/{$v['t']}">
+                            {$v.t}
+                        </a>
+                    <else/>
+                        <a class="<if condition="$time eq $v['t']">active</if>" href="{:U('TimeFile/index',array('time'=>$v['t']))}">
+                            {$v.t}
+                        </a>
+                    </if>
                 </foreach>
             </div>
         </div>

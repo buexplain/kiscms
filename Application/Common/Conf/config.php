@@ -23,4 +23,16 @@ return array(
     'DATA_CACHE_TIME'=>1,
     /*模块映射，保护后台*/
     'URL_MODULE_MAP'=>array('admin'=>'admin'),
+    /*分页参数名*/
+    'VAR_PAGE'=>'page',
+    /*开启路由*/
+    'URL_ROUTER_ON'   => true,
+    /*定义路由规则*/
+    'URL_ROUTE_RULES' => array(
+        '/^list\/(\d+)$/' => 'Home/List/index?cid=:1',
+        '/^list\/(\d+)\/page\/(\d+)$/' => 'Home/List/index?cid=:1&page=:2',
+        '/^single\/(\d+)$/' => 'Home/Single/index?cid=:1',
+        '/^content\/(\d+)$/' => 'Home/Desc/index?doc_id=:1',
+        '/^time\/([0-9\-]+)$/' => 'Home/TimeFile/index?time=:1',
+    ),
 );
