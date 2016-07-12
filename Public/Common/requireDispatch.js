@@ -71,6 +71,8 @@ var requireDispatch = {
         submit:function(obj){
             var buttonO = $(obj);
             var formO = $('.requireDispatchForm-'+buttonO.attr('requireDispatchForm')).eq(0);
+			
+			if(buttonO.attr('disabled')) return;
 
             var type = formO.attr('method');
             if(!type) type = buttonO.attr('data-ajaxType');
@@ -101,7 +103,7 @@ var requireDispatch = {
                 }
                 if(!tmp) return;
             }
-
+			buttonO.attr('disabled','disabled');
             $.ajax({
                 type:type,
                 url:url,
@@ -122,6 +124,7 @@ var requireDispatch = {
                     }
                 }
             });
+			buttonO.attr('disabled','');
         },
         success:function(result,formO,buttonO){
             if(typeof result.msg == 'undefined') {
@@ -152,7 +155,8 @@ var requireDispatch = {
         },
         submit:function(obj){
             var buttonO = $(obj);
-
+			if(buttonO.attr('disabled')) return;
+			
             var type = buttonO.attr('data-ajaxType');
             type = type || 'post';
 
@@ -187,7 +191,7 @@ var requireDispatch = {
                 }
                 if(!tmp) return;
             }
-
+			buttonO.attr('disabled','disabled');
             $.ajax({
                 type:type,
                 url:url,
@@ -208,6 +212,7 @@ var requireDispatch = {
                     }
                 }
             });
+			buttonO.attr('disabled','');
         },
         success:function(result,buttonO){
             if(typeof result.msg == 'undefined') {
