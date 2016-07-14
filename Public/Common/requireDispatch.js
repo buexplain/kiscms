@@ -70,9 +70,9 @@ var requireDispatch = {
         },
         submit:function(obj){
             var buttonO = $(obj);
+            if(buttonO.attr('disabled')) return;
+
             var formO = $('.requireDispatchForm-'+buttonO.attr('requireDispatchForm')).eq(0);
-			
-			if(buttonO.attr('disabled')) return;
 
             var type = formO.attr('method');
             if(!type) type = buttonO.attr('data-ajaxType');
@@ -103,13 +103,14 @@ var requireDispatch = {
                 }
                 if(!tmp) return;
             }
-			buttonO.attr('disabled','disabled');
+			buttonO.attr('disabled',true);
             $.ajax({
                 type:type,
                 url:url,
                 data:data,
                 async:false,
                 success:function(result){
+                    buttonO.attr('disabled',false);
                     if(success) {
                         requireDispatch.evalFunc(success,{result:result,formO:formO,buttonO:buttonO});
                     }else{
@@ -117,6 +118,7 @@ var requireDispatch = {
                     }
                 },
                 error:function(ajaxObj, textStatus, errorThrown){
+                    buttonO.attr('disabled',false);
                     if(error) {
                         requireDispatch.evalFunc(error,{formO:formO,buttonO:buttonO,ajaxObj:ajaxObj,textStatus:textStatus,errorThrown:errorThrown});
                     }else{
@@ -124,7 +126,6 @@ var requireDispatch = {
                     }
                 }
             });
-			buttonO.attr('disabled','');
         },
         success:function(result,formO,buttonO){
             if(typeof result.msg == 'undefined') {
@@ -156,7 +157,7 @@ var requireDispatch = {
         submit:function(obj){
             var buttonO = $(obj);
 			if(buttonO.attr('disabled')) return;
-			
+
             var type = buttonO.attr('data-ajaxType');
             type = type || 'post';
 
@@ -191,13 +192,14 @@ var requireDispatch = {
                 }
                 if(!tmp) return;
             }
-			buttonO.attr('disabled','disabled');
+			buttonO.attr('disabled',true);
             $.ajax({
                 type:type,
                 url:url,
                 data:data,
                 async:false,
                 success:function(result){
+                    buttonO.attr('disabled',false);
                     if(success) {
                         requireDispatch.evalFunc(success,{result:result,buttonO:buttonO});
                     }else{
@@ -205,6 +207,7 @@ var requireDispatch = {
                     }
                 },
                 error:function(ajaxObj, textStatus, errorThrown){
+                    buttonO.attr('disabled',false);
                     if(error) {
                         requireDispatch.evalFunc(error,{buttonO:buttonO,ajaxObj:ajaxObj,textStatus:textStatus,errorThrown:errorThrown});
                     }else{
@@ -212,7 +215,6 @@ var requireDispatch = {
                     }
                 }
             });
-			buttonO.attr('disabled','');
         },
         success:function(result,buttonO){
             if(typeof result.msg == 'undefined') {
