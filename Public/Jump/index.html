@@ -18,29 +18,35 @@
 </style>
 </head>
 <body>
+	<?php
+		$url = (isset($_SERVER['REQUEST_SCHEME']) ? $_SERVER['REQUEST_SCHEME'] : 'http').'://'.$_SERVER['HTTP_HOST'];
+	?>
 	<?php if(isset($message)) {?>
 	<div class="tips success">
 		<div class="img"><img src="__PUBLIC__/Jump/success.png" alt="success"/></div>
 		<div class="message"><?php echo($message); ?></div>
 		<div class="sysmsg">系统将会在<b id="wait"><?php echo($waitSecond); ?></b>后自动跳转</div>
-		<div class="jumpurl"><a id="href" href="<?php echo($jumpUrl); ?>">立即跳转</a></div>
+		<div class="jumpurl"><a id="href" data-url="<?php echo($jumpUrl); ?>" href="<?php echo($url); ?>">立即跳转</a></div>
 	</div>
 	<?php }else{?>
 		<div class="tips error">
 		<div class="img"><img src="__PUBLIC__/Jump/error.png" alt="success"/></div>
 		<div class="message"><?php echo($error); ?></div>
 		<div class="sysmsg">系统将会在<b id="wait"><?php echo($waitSecond); ?></b>后自动跳转</div>
-		<div class="jumpurl"><a id="href" href="<?php echo($jumpUrl); ?>">立即跳转</a></div>
+		<div class="jumpurl"><a id="href" data-url="<?php echo($jumpUrl); ?>" href="<?php echo($url); ?>">立即跳转</a></div>
 		</div>
 	<?php }?>
 	<script type="text/javascript">
 		(function(){
-			var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+			var wait = document.getElementById('wait');
 			var interval = setInterval(function(){
 				var time = --wait.innerHTML;
 				if(time <= 0) {
 					clearInterval(interval);
-					location.href = href;
+					setTimeout(function(){
+						location.href = document.getElementById('href').href;
+					},1000);
+					location.href = document.getElementById('href').attributes['data-url'].nodeValue;
 				}
 			}, 1000);
 		})();
