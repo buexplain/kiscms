@@ -47,6 +47,20 @@ var requireDispatch = {
         }
         return result;
     },
+    lockSubmit:function(obj,isLock){
+        if(isLock == undefined) var isLock = 2;
+        if(isLock == 0){
+            setTimeout(function(){
+                obj.attr('disabled',false);
+            },2000);
+            return false;
+        }else if(isLock == 1){
+            obj.attr('disabled',true);
+            return true;
+        }
+        if(obj.attr('disabled')) return true;
+        return false;
+    },
     form:{
         setAutoSubmit:function(index,attr){
             var index = index || 'form';
@@ -70,7 +84,7 @@ var requireDispatch = {
         },
         submit:function(obj){
             var buttonO = $(obj);
-            if(buttonO.attr('disabled')) return;
+            if(requireDispatch.lockSubmit(buttonO)) return;
 
             var formO = $('.requireDispatchForm-'+buttonO.attr('requireDispatchForm')).eq(0);
 
@@ -103,14 +117,14 @@ var requireDispatch = {
                 }
                 if(!tmp) return;
             }
-			buttonO.attr('disabled',true);
+            requireDispatch.lockSubmit(buttonO,1);
             $.ajax({
                 type:type,
                 url:url,
                 data:data,
                 async:false,
                 success:function(result){
-                    buttonO.attr('disabled',false);
+                    requireDispatch.lockSubmit(buttonO,0);
                     if(success) {
                         requireDispatch.evalFunc(success,{result:result,formO:formO,buttonO:buttonO});
                     }else{
@@ -118,7 +132,7 @@ var requireDispatch = {
                     }
                 },
                 error:function(ajaxObj, textStatus, errorThrown){
-                    buttonO.attr('disabled',false);
+                    requireDispatch.lockSubmit(buttonO,0);
                     if(error) {
                         requireDispatch.evalFunc(error,{formO:formO,buttonO:buttonO,ajaxObj:ajaxObj,textStatus:textStatus,errorThrown:errorThrown});
                     }else{
@@ -156,7 +170,7 @@ var requireDispatch = {
         },
         submit:function(obj){
             var buttonO = $(obj);
-			if(buttonO.attr('disabled')) return;
+			if(requireDispatch.lockSubmit(buttonO)) return;
 
             var type = buttonO.attr('data-ajaxType');
             type = type || 'post';
@@ -192,14 +206,14 @@ var requireDispatch = {
                 }
                 if(!tmp) return;
             }
-			buttonO.attr('disabled',true);
+			requireDispatch.lockSubmit(buttonO,1);
             $.ajax({
                 type:type,
                 url:url,
                 data:data,
                 async:false,
                 success:function(result){
-                    buttonO.attr('disabled',false);
+                    requireDispatch.lockSubmit(buttonO,0);
                     if(success) {
                         requireDispatch.evalFunc(success,{result:result,buttonO:buttonO});
                     }else{
@@ -207,7 +221,7 @@ var requireDispatch = {
                     }
                 },
                 error:function(ajaxObj, textStatus, errorThrown){
-                    buttonO.attr('disabled',false);
+                    requireDispatch.lockSubmit(buttonO,0);
                     if(error) {
                         requireDispatch.evalFunc(error,{buttonO:buttonO,ajaxObj:ajaxObj,textStatus:textStatus,errorThrown:errorThrown});
                     }else{
