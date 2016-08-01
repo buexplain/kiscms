@@ -244,7 +244,7 @@ class DocController extends BaseController {
             foreach ($tmp as $key => $value) {
                 $field = D('DocExtField')->getBydocExtId($key);
                 $ext_name = D('DocExt')->getExtNameByDocExtId($key);
-                $panes = '<div class="tab-pane" data-formid="formid_'.$key.'" id="ext_'.$key.'"><form id="formid_'.$key.'"><input type="hidden" name="doc_ext_id" value="'.$key.'">';
+                $panes = '<div class="tab-pane" data-formid="formid_'.$key.'" id="ext_'.$key.'"><form class="bindRequest" id="formid_'.$key.'"><input type="hidden" name="doc_ext_id" value="'.$key.'">';
                 foreach ($field as $key2 => $value2) {
                     $field[$key2]['form_value_def'] = $value2['form_value_def'] = $value[$value2['doc_ext_field_id']];
                     $panes .= $this->ExtForm($value2);

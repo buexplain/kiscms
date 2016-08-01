@@ -1,4 +1,4 @@
-var requireDispatch = {
+var requestDispatch = {
     evalFunc:function(){
         if(arguments.length == 0) {
             alert('eval函数参数错误！');
@@ -65,11 +65,11 @@ var requireDispatch = {
         setAutoSubmit:function(index,attr){
             var index = index || 'form';
             var attr = attr || {};
-            attr['onclick'] = 'requireDispatch.form.submit(this);return false;';
+            attr['onclick'] = 'requestDispatch.form.submit(this);return false;';
             $(index).each(function(i){
                 var formO = $(this);
-                formO.addClass('requireDispatchForm-'+i);
-                attr['requireDispatchForm'] = i;
+                formO.addClass('requestDispatchForm-'+i);
+                attr['requestDispatchForm'] = i;
                 var button = formO.find("button[type='submit']");
                 var input  = formO.find("input[type='submit']");
                 for(var j in attr) {
@@ -84,9 +84,9 @@ var requireDispatch = {
         },
         submit:function(obj){
             var buttonO = $(obj);
-            if(requireDispatch.lockSubmit(buttonO)) return;
+            if(requestDispatch.lockSubmit(buttonO)) return;
 
-            var formO = $('.requireDispatchForm-'+buttonO.attr('requireDispatchForm')).eq(0);
+            var formO = $('.requestDispatchForm-'+buttonO.attr('requestDispatchForm')).eq(0);
 
             var type = formO.attr('method');
             if(!type) type = buttonO.attr('data-ajaxType');
@@ -107,36 +107,36 @@ var requireDispatch = {
             var url = formO.attr('action');
             if(!url) url = buttonO.attr('data-url');
 
-            var data = getData ? requireDispatch.evalFunc(getData,{formO:formO}) : requireDispatch.getFormData(formO);
+            var data = getData ? requestDispatch.evalFunc(getData,{formO:formO}) : requestDispatch.getFormData(formO);
 
             if(tips && tips != '0') {
                 if(isNaN(parseInt(tips))) {
-                    var tmp = requireDispatch.evalFunc(tips);
+                    var tmp = requestDispatch.evalFunc(tips);
                 }else{
                     var tmp = confirm('确定要提交吗？');
                 }
                 if(!tmp) return;
             }
-            requireDispatch.lockSubmit(buttonO,1);
+            requestDispatch.lockSubmit(buttonO,1);
             $.ajax({
                 type:type,
                 url:url,
                 data:data,
                 async:false,
                 success:function(result){
-                    requireDispatch.lockSubmit(buttonO,0);
+                    requestDispatch.lockSubmit(buttonO,0);
                     if(success) {
-                        requireDispatch.evalFunc(success,{result:result,formO:formO,buttonO:buttonO});
+                        requestDispatch.evalFunc(success,{result:result,formO:formO,buttonO:buttonO});
                     }else{
-                        requireDispatch.form.success(result,formO,buttonO);
+                        requestDispatch.form.success(result,formO,buttonO);
                     }
                 },
                 error:function(ajaxObj, textStatus, errorThrown){
-                    requireDispatch.lockSubmit(buttonO,0);
+                    requestDispatch.lockSubmit(buttonO,0);
                     if(error) {
-                        requireDispatch.evalFunc(error,{formO:formO,buttonO:buttonO,ajaxObj:ajaxObj,textStatus:textStatus,errorThrown:errorThrown});
+                        requestDispatch.evalFunc(error,{formO:formO,buttonO:buttonO,ajaxObj:ajaxObj,textStatus:textStatus,errorThrown:errorThrown});
                     }else{
-                        requireDispatch.form.error(formO,buttonO,ajaxObj,textStatus,errorThrown);
+                        requestDispatch.form.error(formO,buttonO,ajaxObj,textStatus,errorThrown);
                     }
                 }
             });
@@ -158,7 +158,7 @@ var requireDispatch = {
         setAutoSubmit:function(index,attr){
             var index = index || '.batch';
             var attr = attr || {};
-            attr['onclick'] = 'requireDispatch.batch.submit(this);';
+            attr['onclick'] = 'requestDispatch.batch.submit(this);';
             $(index).each(function(i){
                 var o = $(this);
                 for(var j in attr) {
@@ -170,7 +170,7 @@ var requireDispatch = {
         },
         submit:function(obj){
             var buttonO = $(obj);
-			if(requireDispatch.lockSubmit(buttonO)) return;
+			if(requestDispatch.lockSubmit(buttonO)) return;
 
             var type = buttonO.attr('data-ajaxType');
             type = type || 'post';
@@ -189,7 +189,7 @@ var requireDispatch = {
             var getData = buttonO.attr('data-getData');
             getData = getData || '';
 
-            var data = getData ? requireDispatch.evalFunc(getData,{buttonO:buttonO}) : requireDispatch.getDataAttr(buttonO);
+            var data = getData ? requestDispatch.evalFunc(getData,{buttonO:buttonO}) : requestDispatch.getDataAttr(buttonO);
 
             delete data['ajaxType'];
             delete data['ajaxSuccess'];
@@ -200,32 +200,32 @@ var requireDispatch = {
 
             if(tips && tips != '0') {
                 if(isNaN(parseInt(tips))) {
-                    var tmp = requireDispatch.evalFunc(tips,{buttonO:buttonO});
+                    var tmp = requestDispatch.evalFunc(tips,{buttonO:buttonO});
                 }else{
                     var tmp = confirm('确定要执行吗？');
                 }
                 if(!tmp) return;
             }
-			requireDispatch.lockSubmit(buttonO,1);
+			requestDispatch.lockSubmit(buttonO,1);
             $.ajax({
                 type:type,
                 url:url,
                 data:data,
                 async:false,
                 success:function(result){
-                    requireDispatch.lockSubmit(buttonO,0);
+                    requestDispatch.lockSubmit(buttonO,0);
                     if(success) {
-                        requireDispatch.evalFunc(success,{result:result,buttonO:buttonO});
+                        requestDispatch.evalFunc(success,{result:result,buttonO:buttonO});
                     }else{
-                        requireDispatch.batch.success(result,buttonO);
+                        requestDispatch.batch.success(result,buttonO);
                     }
                 },
                 error:function(ajaxObj, textStatus, errorThrown){
-                    requireDispatch.lockSubmit(buttonO,0);
+                    requestDispatch.lockSubmit(buttonO,0);
                     if(error) {
-                        requireDispatch.evalFunc(error,{buttonO:buttonO,ajaxObj:ajaxObj,textStatus:textStatus,errorThrown:errorThrown});
+                        requestDispatch.evalFunc(error,{buttonO:buttonO,ajaxObj:ajaxObj,textStatus:textStatus,errorThrown:errorThrown});
                     }else{
-                        requireDispatch.batch.error(buttonO,ajaxObj,textStatus,errorThrown);
+                        requestDispatch.batch.error(buttonO,ajaxObj,textStatus,errorThrown);
                     }
                 }
             });

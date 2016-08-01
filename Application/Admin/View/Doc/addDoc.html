@@ -14,7 +14,7 @@
 		</div>
 		<!--内容容器-->
 		<div class="ifman clear" id="ifman">
-			<form action="{:U('Doc/addDoc')}" method="post">
+			<form class="bindRequest" action="{:U('Doc/addDoc')}" method="post">
 				<ul class="nav nav-tabs">
 				    <li class="active">
 				        <a href="#article" data-toggle="tab">
@@ -119,7 +119,7 @@
 		});
 		/*自定表单数据获取*/
 		function getFormData(formO) {
-			var data = requireDispatch.getFormData(formO);
+			var data = requestDispatch.getFormData(formO);
 		    data.content = editor.getData();
 		    return data;
 		}

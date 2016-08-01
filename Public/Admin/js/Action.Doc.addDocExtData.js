@@ -23,7 +23,7 @@ function add_ext(obj) {
     data.doc_ext_id = value;
     $.post(U('Doc','createExtForm'),data,function(json){
         if(json.code == 0) {
-            panes += '<form id="'+formid+'">';
+            panes += '<form class="bindRequest" id="'+formid+'">';
             panes += json.data;
             panes += '</form></div>';
             $("#myTab").append(nav);

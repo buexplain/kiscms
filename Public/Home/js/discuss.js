@@ -36,7 +36,7 @@ function createReplyFormHTML(pid,doc_id) {
     var formID = 'formID-'+pid;
     var src = url + '?' + Math.random();
 
-    var html = '<form class="requireDispatchForm-'+pid+'" id="'+formID+'" action="'+action+'" method="post">';
+    var html = '<form class="requestDispatchForm-'+pid+'" id="'+formID+'" action="'+action+'" method="post">';
     html += '<div class="form-group">';
     html += '    <label>邮箱</label>';
     html += '    <input type="text" placeholder="邮箱" name="email" class="form-control input-sm" onblur="getNickname(this)">';
@@ -64,7 +64,7 @@ function createReplyFormHTML(pid,doc_id) {
     html += '</div>';
     html += '<input type="hidden" name="pid" value="'+pid+'">';
     html += '<input type="hidden" name="doc_id" value="'+doc_id+'">';
-    html += '<button class="btn btn-default btn-sm" type="submit" data-ajaxSuccess="successCallback" requiredispatchform="'+pid+'" onclick="requireDispatch.form.submit(this);return false;">提交</button>';
+    html += '<button class="btn btn-default btn-sm" type="submit" data-ajaxSuccess="successCallback" requestDispatchform="'+pid+'" onclick="requestDispatch.form.submit(this);return false;">提交</button>';
     html +='</form>';
     return html;
 }

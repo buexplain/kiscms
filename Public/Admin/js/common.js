@@ -6,15 +6,15 @@ $(function(){
     checkbox_all();
     checkbox_one();
     betterTD();
-    bindRequire();
+    bindRequest();
 });
 
 /**
  * 绑定请求
  */
-function bindRequire() {
-    requireDispatch.batch.setAutoSubmit('',{'data-tips':'batchTips','data-ajaxSuccess':'batchSuccess'});
-    requireDispatch.form.setAutoSubmit('',{'data-ajaxSuccess':'formSuccess'});
+function bindRequest() {
+    requestDispatch.batch.setAutoSubmit('',{'data-tips':'batchTips','data-ajaxSuccess':'batchSuccess'});
+    requestDispatch.form.setAutoSubmit('.bindRequest',{'data-ajaxSuccess':'formSuccess'});
 }
 
 /**
