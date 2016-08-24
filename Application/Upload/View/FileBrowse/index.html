@@ -63,6 +63,9 @@
 			<div class="aty">
 				<table class="table table-hover table-condensed">
 					<tr>
+						<th>
+					        md5
+					    </th>
 					    <th>
 					        名称
 					    </th>
@@ -84,6 +87,7 @@
 					</tr>
 					<foreach name='result' item='v'>
 					    <tr>
+					    	<td>{$v.md5}</td>
 						    <td>{$v.oname}</td>
 						    <td>
 						    	<if condition="$v.isImg eq true">
@@ -96,7 +100,7 @@
 						    </td>
 						    <td>{$v.size}</td>
 						    <td>{$v.realname}</td>
-						    <td onclick="showImg()">{$v.createtime}</td>
+						    <td>{$v.createtime}</td>
 						    <td>
 						    	<a href="javascript:;" onclick="returnFile({$callBackId},'{$v.url}');">确定</a>
 						    </td>
