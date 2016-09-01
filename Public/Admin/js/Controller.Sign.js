@@ -7,6 +7,12 @@ function refresh_verification(src){
  * 登录回调函数
  */
 function successCallback(json) {
+	if(typeof(json.code) == 'undefined') {
+		layer.open({
+			content: json
+		});
+		return;
+	}
     if(json.code == 0) {
         layer.msg(json.msg, {
             icon: 1,
