@@ -151,7 +151,7 @@ var requestDispatch = {
             if(skip) window.location.href = skip;
         },
         error:function(formO,buttonO,ajaxObj,textStatus,errorThrown){
-            alert('抱歉，服务器内部错误！');
+            alert(errorThrown+"！\n抱歉，服务器内部错误！");
         }
     },
     batch:{
