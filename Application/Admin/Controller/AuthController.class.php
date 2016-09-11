@@ -21,7 +21,8 @@ class AuthController extends BaseController {
 
             $value['handle'] .= '<a href="'.U('Auth/addNode',array('node_id'=>$value['node_id'])).'">编辑</a>';
 
-            if(!empty(CategoryArray::son($result,$value['node_id'],'node_id'))) { //跳过没有子节点的节点
+            $tmp = CategoryArray::son($result,$value['node_id'],'node_id');
+            if(!empty($tmp)) { //跳过没有子节点的节点
                 $result[$key] = $value;
                 continue;
             }

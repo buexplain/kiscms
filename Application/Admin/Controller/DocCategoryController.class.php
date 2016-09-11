@@ -11,7 +11,8 @@ class DocCategoryController extends BaseController {
 
             $value['handle'] .= '<a href="'.U('DocCategory/addDocCategory',array('cid'=>$value['cid'])).'">编辑</a>';
 
-            if(!empty(CategoryArray::son($result,$value['cid'],'cid'))) { //跳过没有子类的分类类
+            $tmp = CategoryArray::son($result,$value['cid'],'cid');
+            if(!empty($tmp)) { //跳过没有子类的分类类
                 $result[$key] = $value;
                 continue;
             }
