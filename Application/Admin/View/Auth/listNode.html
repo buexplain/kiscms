@@ -14,22 +14,44 @@
 		</div>
 		<!--内容容器-->
 		<div class="ifman clear" id="ifman">
-			<ul id="nodetree" class="ztree"></ul>
-			<p class="h50"></p>
+			<table id="nodetree" class="table table-hover table-condensed fixedboxtablehead">
+				<tr>
+				    <th>
+				        节点中文名
+				    </th>
+				    <th>
+				        节点名英文
+				    </th>
+				    <th>
+				        节点类型
+				    </th>
+				    <th>
+				    	显示类型
+				    </th>
+				    <th>
+				    	是否禁用
+				    </th>
+				    <th>
+				        操作
+				    </th>
+				</tr>
+				<?php
+					\Org\Arrayhelps\CategoryArray::arrayMapTree($result,function($v) use (&$nodeTypeShow) {
+						$tmp = '<tr data-tt-id="'.$v['node_id'].'" data-tt-parent-id="'.$v['pid'].'">';
+							$tmp .= '<td><span class="'.(!empty($v['son']) ? 'folder' : 'file').'">'.$v['zh_name'].'</span></td>';
+						    $tmp .= '<td>'.$v['en_name'].'</td>';
+						    $tmp .= '<td>'.(isset($nodeTypeShow[$v['type']]) ? $nodeTypeShow[$v['type']] : '根').'</td>';
+						    $tmp .= '<td>'.($v['is_nav'] ? '菜单' : '隐藏').'</td>';
+						    $tmp .= '<td>'.($v['ban'] ? '是' : '否').'</td>';
+						    $tmp .= '<td class="handle">'.$v['handle'].'</td>';
+					    $tmp .= '</tr>';
+					    echo $tmp;
+					});
+				?>
+			</table>
 		</div>
 	</div>
 	<include file="Common:javascript" />
 	<include file="Common:javascriptController" />
-	<script type="text/javascript">
-		<!--
-			var zNodes = {$result};
-			/**
-			 * 绑定 树形
-			 */
-			$(document).ready(function() {
-			    $.fn.zTree.init($("#nodetree"), setting, zNodes);
-			});
-		//-->
-	</script>
 </body>
 </html>

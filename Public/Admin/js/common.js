@@ -139,6 +139,7 @@ function fixed_table_header() {
             if(nodeName == 'class') {
                 nodeValue = nodeValue.replace('fixedboxtablehead','boxtablehead');
             }
+            if(nodeName == 'id') continue;
             table += ' ' + nodeName + '=' + '"' + nodeValue + '"';
         }
         table += '>' + col + tr.prop("outerHTML") + '</table>';

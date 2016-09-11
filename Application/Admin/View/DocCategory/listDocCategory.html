@@ -14,22 +14,36 @@
 		</div>
 		<!--内容容器-->
 		<div class="ifman clear" id="ifman">
-			<ul id="nodetree" class="ztree"></ul>
-			<p class="h50"></p>
+			<table id="categorytree" class="table table-hover table-condensed fixedboxtablehead">
+				<tr>
+				    <th>
+				        分类名
+				    </th>
+				    <th>
+				        导航路由
+				    </th>
+				    <th>
+				        排序
+				    </th>
+				    <th>
+				        操作
+				    </th>
+				</tr>
+				<?php
+					\Org\Arrayhelps\CategoryArray::arrayMapTree($result,function($v) {
+						$tmp = '<tr data-tt-id="'.$v['cid'].'" data-tt-parent-id="'.$v['pid'].'">';
+							$tmp .= '<td><span class="'.(!empty($v['son']) ? 'folder' : 'file').'">'.$v['cname'].'</span></td>';
+						    $tmp .= '<td>'.$v['route'].'</td>';
+						    $tmp .= '<td>'.$v['sort'].'</td>';
+						    $tmp .= '<td class="handle">'.$v['handle'].'</td>';
+					    $tmp .= '</tr>';
+					    echo $tmp;
+					});
+				?>
+			</table>
 		</div>
 	</div>
 	<include file="Common:javascript" />
 	<include file="Common:javascriptAction" />
-	<script type="text/javascript">
-		<!--
-			var zNodes = {$result};
-			/**
-			 * 绑定 树形
-			 */
-			$(document).ready(function() {
-			    $.fn.zTree.init($("#nodetree"), setting, zNodes);
-			});
-		//-->
-	</script>
 </body>
 </html>

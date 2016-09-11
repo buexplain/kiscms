@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="Generator" content="EditPlus®">
+<meta name="Author" content="梦想星辰大海">
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+<title>
+    jQuery treetable 演示
+</title>
+<link href="jquery.treetable.theme.default.css" rel="stylesheet" type="text/css"/>
+<link href="jquery.treetable.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://www.kiscms.com/Public/Common/jquery.js"></script>
+<script src="jquery.treetable.js"></script>
+</head>
+
+<body style="padding:20px;">
+    <table class="table table-bordered" id="example-basic">
+        <tr data-tt-id="0">
+            <td>
+                <span class="folder">
+                    app
+                </span>
+            </td>
+        </tr>
+        <tr data-tt-id="1" data-tt-parent-id="0">
+            <td>
+                <span class="folder">
+                    controllers
+                </span>
+            </td>
+        </tr>
+        <tr data-tt-id="2" data-tt-parent-id="1">
+            <td>
+                <span class="file">
+                    testController.php
+                </span>
+            </td>
+        </tr>
+        <tr data-tt-id="4" data-tt-parent-id="0">
+            <td>
+                <span class="folder">
+                    models
+                </span>
+            </td>
+        </tr>
+        <tr data-tt-id="5" data-tt-parent-id="0">
+            <td>
+                <span class="folder">
+                    views
+                </span>
+            </td>
+        </tr>
+        <tr data-tt-id="3" data-tt-parent-id="0">
+            <td>
+                <span class="folder">
+                    helpers
+                </span>
+            </td>
+        </tr>
+    </table>
+    <a onclick="$('#example-basic').treetable('expandAll'); return false;"
+    href="#">
+        展开全部
+    </a>
+    <a onclick="$('#example-basic').treetable('collapseAll'); return false;"
+    href="#">
+        关闭全部
+    </a>
+    <a onclick="$('#example-basic').treetable('reveal', 0); return false;"
+    href="#">
+        打开app
+    </a>
+    <script>
+        //初始化树形表格
+        $("#example-basic").treetable({
+            expandable: true
+        });
+
+        //选中的行高亮
+        $("#example-basic tbody").on("mousedown", "tr",
+        function() {
+            $(".selected").not(this).removeClass("selected");
+            $(this).toggleClass("selected");
+        });
+    </script>
+</body>
+
+</html>

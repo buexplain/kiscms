@@ -7,6 +7,21 @@ namespace Org\Arrayhelps;
  */
 class CategoryArray {
     /**
+     * @author buexplain
+     * @param  child 方法的返回值
+     * @param  回调函数
+     * @param  每个子节点的key值
+     */
+    public static function arrayMapTree($result,$callback,$child='son') {
+        if(!is_callable($callback)) return false;
+        foreach ($result as $key => $value) {
+            call_user_func($callback,$value);
+            if(!empty($value[$child])) {
+                self::arrayMapTree($value['son'],$callback,$child);
+            }
+        }
+    }
+    /**
      * 取分类的所有子分类 返回 树形结构数组
      * @author  buexplain
      * @return array

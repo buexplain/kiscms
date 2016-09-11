@@ -2,57 +2,48 @@
 namespace Admin\Controller;
 use Admin\Common\BaseController;
 use \Think\Page;
+use \Org\Arrayhelps\CategoryArray;
+
 class AuthController extends BaseController {
     /**
      * 权限节点列表
      */
     public function listNode() {
         $result = D('Node')->order('pid asc,node_id asc')->select();
-        $new_result = array();
+
         foreach ($result as $key => $value) {
+            $value['handle'] = '<a href="'.U('Auth/addNode',array('pid'=>$value['node_id'])).'">添加子级</a>';
 
-            $tmp = array(
-                'id'=>$value['node_id'],
-                'pId'=>$value['pid'],'name'=>$value['zh_name'].'（'.$value['en_name'].'）',
-                'open'=>'true'
-            );
-
-            if($value['node_id'] > 1) {
-                $str = '';
-                switch ($value['type']) {
-                    case 1:
-                        $str .= '模块';
-                        break;
-                    case 2:
-                        $str .= '控制器';
-                        break;
-                    case 3:
-                        $str .= '方法';
-                        break;
-                }
-                $str .= '--';
-                if($value['is_nav']) {
-                    $str .= '菜单';
-                }else{
-                    $str .= '隐藏';
-                }
-                $str .= '--';
-                if($value['ban']) {
-                    $str .= '禁止';
-                }else{
-                    $str .= '启用';
-                }
-                $str .= '--->';
-                $tmp['name'] = $str.$tmp['name'];
+            if($value['node_id'] == 1) { //跳过根节点
+                $result[$key] = $value;
+                continue;
             }
 
-            $new_result[] = $tmp;
+            $value['handle'] .= '<a href="'.U('Auth/addNode',array('node_id'=>$value['node_id'])).'">编辑</a>';
+
+            if(!empty(CategoryArray::son($result,$value['node_id'],'node_id'))) { //跳过没有子节点的节点
+                $result[$key] = $value;
+                continue;
+            }
+
+            $value['handle'] .= '<a href="javascript:;" data-url="'.U('Auth/delNode',array('node_id'=>$value['node_id'])).'" class="batch">删除</a>';
+
+            $result[$key] = $value;
         }
-        $new_result = json_encode($new_result);
-        //print_r($new_result);
-        $this->assign('result',$new_result);
+
+        $result = CategoryArray::child($result, 0,'node_id','pid');
+        $this->assign('nodeTypeShow',array(1=>'模块',2=>'控制器',3=>'方法'));
+
+        $btn_arr = array();
+        $btn_arr[] = array('关闭全部',"javascript:collapseAll('nodetree');");
+        $btn_arr[] = array('展开全部',"javascript:expandAll('nodetree');");
+        $this->assign('btn_arr',$btn_arr);
+
+        $this->assign('result',$result);
+
         $this->display();
     }
+
     /**
      * 添加、编辑节点
      */
@@ -96,26 +87,29 @@ class AuthController extends BaseController {
      * 删除节点
      */
     public function delNode() {
-        $node_id = I('post.node_id',0,'intval');
+        $node_id = I('get.node_id',0,'intval');
+
         if($node_id == 1) {
             $this->error('不能删除根节点');
+        }
+
+        if(D('Node')->son($node_id)) {
+            $this->error('请先删除其子级');
+        }
+
+        $this->startTrans();
+
+        $result = D('Node')->del($node_id);
+        if($result !== false) {
+            $result = D('RoleNode')->delRoleIdByNodeId($node_id);
+        }
+
+        if($result === false) {
+            $this->rollback();
+            $this->error();
         }else{
-            if(D('Node')->son($node_id)) {
-                $this->error('请先删除其子级');
-            }else{
-                $this->startTrans();
-                $result = D('Node')->del($node_id);
-                if($result !== false) {
-                    $result = D('RoleNode')->delRoleIdByNodeId($node_id);
-                }
-                if($result === false) {
-                    $this->rollback();
-                    $this->error();
-                }else{
-                    $this->commit();
-                    $this->success();
-                }
-            }
+            $this->commit();
+            $this->success();
         }
     }
     /**
