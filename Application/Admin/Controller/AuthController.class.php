@@ -27,7 +27,7 @@ class AuthController extends BaseController {
                 continue;
             }
 
-            $value['handle'] .= '<a href="javascript:;" data-url="'.U('Auth/delNode',array('node_id'=>$value['node_id'])).'" class="batch">删除</a>';
+            $value['handle'] .= '<a href="javascript:;" data-ajaxsuccess="delNodeSuccess" data-url="'.U('Auth/delNode',array('node_id'=>$value['node_id'])).'" class="batch">删除</a>';
 
             $result[$key] = $value;
         }
@@ -36,8 +36,7 @@ class AuthController extends BaseController {
         $this->assign('nodeTypeShow',array(1=>'模块',2=>'控制器',3=>'方法'));
 
         $btn_arr = array();
-        $btn_arr[] = array('关闭全部',"javascript:collapseAll('nodetree');");
-        $btn_arr[] = array('展开全部',"javascript:expandAll('nodetree');");
+        $btn_arr[] = array('关闭节点',"javascript:;",array('onclick'=>'collapseExpandAll(this)'));
         $this->assign('btn_arr',$btn_arr);
 
         $this->assign('result',$result);

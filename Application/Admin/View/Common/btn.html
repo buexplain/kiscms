@@ -1,3 +1,1 @@
-<div class="boxoperation r h50 lh50">
-	<foreach name="btn_arr" item="v"><a class="btn btn-default btn-sm" href="{$v.1}" role="button">{$v.0}</a></foreach><foreach name="iframe_btn_arr" item="v"><a class="btn btn-default btn-sm" href="{$v.1}" role="button">{$v.0}</a></foreach>
-</div>
+<div class="boxoperation r h50 lh50"><foreach name="btn_arr" item="v"><a class="btn btn-default btn-sm" href="{$v.1}" <if condition="isset($v[2]) && is_array($v[2])"><foreach name="v[2]" item="attrValue" key="attrKey"> {$attrKey}="{$attrValue}" </foreach></if> role="button">{$v.0}</a></foreach><foreach name="iframe_btn_arr" item="v"><a class="btn btn-default btn-sm" href="{$v.1}" role="button">{$v.0}</a></foreach></div>

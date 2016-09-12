@@ -1,21 +1,47 @@
-/**
- * 关闭全部
- */
-function collapseAll(id) {
-    $('#'+id).treetable('collapseAll');
-}
-
-/**
- * 展开全部
- */
-function expandAll(id) {
-    $('#'+id).treetable('expandAll');
-}
-
-/**
- * 初始化树形表格
- */
-$("#categorytree").treetable({expandable: true});
 $(function(){
-    expandAll('categorytree');
+    /**
+     * 初始化树形表格
+     */
+    $("#categorytree").treetable({expandable: true});
+    /**
+     * 初始化展开节点
+     */
+    $('#categorytree').treetable('expandAll');
 });
+
+/**
+ * 关闭展开全部节点
+ */
+function collapseExpandAll(obj) {
+    var o = $(obj);
+    if(parseInt(o.attr('lock'))) {
+        o.attr('lock',0);
+        o.html('关闭节点');
+        $('#categorytree').treetable('expandAll');
+    }else{
+        o.attr('lock',1);
+        o.html('展开节点');
+        $('#categorytree').treetable('collapseAll');
+    }
+}
+
+/**
+ * 删除节点成功后的回调
+ */
+function delDocCategorySuccess(json,buttonO) {
+    if(json.code == 0) {
+        layer.msg(json.msg, {
+            icon: 1,
+            time: 700
+        },function(){
+            buttonO.parent().parent().remove();
+        });
+    }else{
+        json.msg = '<span class="error">'+json.msg+'</span>';
+        layer.msg(json.msg, {
+            icon: 2,
+            time: 700
+        });
+        if(buttonO.attr("data-tipsBak")) buttonO.attr("data-tips",buttonO.attr("data-tipsBak"));
+    }
+}

@@ -17,7 +17,7 @@ class DocCategoryController extends BaseController {
                 continue;
             }
 
-            $value['handle'] .= '<a href="javascript:;" data-url="'.U('DocCategory/delDocCategory',array('cid'=>$value['cid'])).'" class="batch">删除</a>';
+            $value['handle'] .= '<a href="javascript:;" data-ajaxsuccess="delDocCategorySuccess" data-url="'.U('DocCategory/delDocCategory',array('cid'=>$value['cid'])).'" class="batch">删除</a>';
 
             $result[$key] = $value;
         }
@@ -27,6 +27,7 @@ class DocCategoryController extends BaseController {
 
         $btn_arr = array();
         $btn_arr[] = array('添加顶级',U('DocCategory/addDocCategory'));
+        $btn_arr[] = array('关闭节点',"javascript:;",array('onclick'=>'collapseExpandAll(this)'));
         $this->assign('btn_arr',$btn_arr);
     	$this->display();
     }
