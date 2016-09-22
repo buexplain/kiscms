@@ -56,6 +56,9 @@
 				    	类型
 				    </th>
 				    <th>
+				    	角色
+				    </th>
+				    <th>
 				        操作
 				    </th>
 				</tr>
@@ -67,6 +70,7 @@
 					    <td>{$v.mobile}</td>
 					    <td>{$v.email}</td>
 					    <td>{$user_utype[$v['utype']]}</td>
+					    <td>{$v['role']}</td>
 					    <td class="handle">{$v.handle}</td>
 				    </tr>
 			    </foreach>

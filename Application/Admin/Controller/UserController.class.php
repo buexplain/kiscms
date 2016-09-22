@@ -191,6 +191,10 @@ class UserController extends BaseController {
         $result  = D('Uinfo')->order('uid desc')->limit($page->firstRow.','.$page->listRows)->where($where)->select();
         //echo D('Uinfo')->getLastSql();
         foreach ($result as $key => $value) {
+            $result[$key]['role'] = implode('，',array_values(D('RoleUser')->getRoleIdRoleNameByUid($value['uid'])));
+            if(empty($result[$key]['role'])) {
+                $result[$key]['role'] = '无';
+            }
             $result[$key]['handle'] = '<a href="'.U('User/addUinfo',array('uid'=>$value['uid'])).'">编辑</a>';
         }
         $this->assignPage($page,$pageSize);
@@ -211,11 +215,21 @@ class UserController extends BaseController {
             $this->startTrans();
             $result = D('Uinfo')->save();
             if($result !== false) {
-                $role_id_array = filterNumStr(I('post.role_ids',''),true);
-                $role_id_array = unsetArrayByvalue($role_id_array,0);
+                //获取角色id
+                $role_ids = (array)I('post.role_ids','');
+                //过滤角色id
+                $role_ids = array_filter($role_ids,function($var){
+                    $tmp = intval($var);
+                    if($var!=$tmp || $var <= 0) {
+                        return false;
+                    }
+                    return true;
+                });
+                //删除原有的角色id
                 $result = D('RoleUser')->delRoleIdByUid($uid);
-                if(count($role_id_array) > 0 && $result !== false) {
-                    $result = D('RoleUser')->addUserRoleId($uid,$role_id_array);
+                //写入新的角色id
+                if(count($role_ids) > 0 && $result !== false) {
+                    $result = D('RoleUser')->addUserRoleId($uid,$role_ids);
                 }
             }
             if($result === false) {
@@ -230,9 +244,10 @@ class UserController extends BaseController {
             $this->assign('result',$result);
             $this->assign('user_utype',C('user_utype'));
             $this->assign('user_sex',C('user_sex'));
+            $this->assign('role_list',D('Role')->where(array('ban'=>0,'role_id'=>array('GT',1)))->field('role_id,role_name')->select());
             $tmp = D('RoleUser')->getRoleIdRoleNameByUid($uid);
             unset($tmp[C('super_role_id')]);
-            $this->assign('role_ids',implode(',',array_keys($tmp)));
+            $this->assign('role_ids',$tmp);
             $this->assign('role_names',implode(',',array_values($tmp)));
             $this->display();
         }
