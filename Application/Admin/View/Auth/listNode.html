@@ -36,7 +36,7 @@
 				    </th>
 				</tr>
 				<?php
-					\Org\Arrayhelps\CategoryArray::arrayMapTree($result,function($v) use (&$nodeTypeShow) {
+					\Org\Arrayhelps\CategoryArray::treeMap($result,function($v) use (&$nodeTypeShow) {
 						$tmp = '<tr data-tt-id="'.$v['node_id'].'" data-tt-parent-id="'.$v['pid'].'">';
 							$tmp .= '<td><span class="'.(!empty($v['son']) ? 'folder' : 'file').'">'.$v['zh_name'].'</span></td>';
 						    $tmp .= '<td>'.$v['en_name'].'</td>';

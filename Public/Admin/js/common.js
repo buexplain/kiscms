@@ -2,7 +2,6 @@ $(function(){
 	init_if_wh();
 	fixed_table_header();
     laydatebox();
-    openiframe();
     checkbox_all();
     checkbox_one();
     betterTD();
@@ -168,49 +167,7 @@ function laydatebox(params) {
         });
     });
 }
-/**
- * 弹出iframe
- */
-function openiframe() {
-    $(".openiframe").each(function(i){
-        var o = $(this);
-        var title = o.attr('data-title');
-        if(!title) title = '信息';
-        var width = o.attr('data-width');
-        if(!width) width = '700px';
-        var height = o.attr('data-height');
-        if(!height) height = '450px';
-        var url = o.attr('data-url');
-        window.openiframe = {};
-        window.openiframe.obj = this;
-        //设置匿名的回调函数
-        window.openiframe.callback = o.attr('data-callback');
-        if(window.openiframe.callback) {
-            window.openiframe.callback = eval('window.'+window.openiframe.callback);
-        }
-        //设置是否获取全部属性
-        window.openiframe.all_attr = o.attr('data-all-attr');
-        if(!url) return;
-        o.on('click',function(){
-            layer.open({
-                title: title,
-                type: 2,
-                area: [width, height],
-                fix: false, //不固定
-                maxmin: true,
-                content: url
-            });
-        });
-    });
-}
-/**
- * 回调弹出层
- */
-function callback_openiframe(data) {
-    if(typeof window.parent.openiframe.callback == 'function') {
-        window.parent.openiframe.callback(data,window.parent.openiframe.obj);
-    }
-}
+
 /**
  * checkbox 单选
  */
@@ -235,17 +192,7 @@ function checkbox_all() {
         $('.'+target).prop('checked',$(this).prop('checked'));
     });
 }
-/**
- * 返回弹出层的选中项
- */
-function return_pop_layer_checked(data_checkbox_target) {
-    var target = data_checkbox_target || 'checkbox-one'; //input的父级class或其本身class
-    var all_attr = window.parent.openiframe.all_attr || 0;
-    var data = get_checked_attr(all_attr,target);
-    callback_openiframe(data);
-    var index = window.parent.layer.getFrameIndex(window.name); //获取窗口索引
-    window.parent.layer.close(index);
-}
+
 /**
  * js版U方法
  */

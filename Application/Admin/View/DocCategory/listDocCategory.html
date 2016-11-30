@@ -30,7 +30,7 @@
 				    </th>
 				</tr>
 				<?php
-					\Org\Arrayhelps\CategoryArray::arrayMapTree($result,function($v) {
+					\Org\Arrayhelps\CategoryArray::treeMap($result,function($v) {
 						$tmp = '<tr data-tt-id="'.$v['cid'].'" data-tt-parent-id="'.$v['pid'].'">';
 							$tmp .= '<td><span class="'.(!empty($v['son']) ? 'folder' : 'file').'">'.$v['cname'].'</span></td>';
 						    $tmp .= '<td>'.$v['route'].'</td>';

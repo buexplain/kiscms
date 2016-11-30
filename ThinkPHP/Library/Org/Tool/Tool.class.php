@@ -200,11 +200,11 @@ class Tool {
                 $replace[] = "</{$value}>";
             }
             $mixed = strip_tags($mixed,$tag);
-            $mixed = htmlspecialchars($mixed,ENT_QUOTES);
+            $mixed = htmlspecialchars($mixed,ENT_QUOTES,'UTF-8',false);
             $mixed = str_replace($search,$replace,$mixed);
         }else{
             $mixed = strip_tags($mixed);
-            $mixed = htmlspecialchars($mixed,ENT_QUOTES);
+            $mixed = htmlspecialchars($mixed,ENT_QUOTES,'UTF-8',false);
         }
 
         if(function_exists($callback)) {
